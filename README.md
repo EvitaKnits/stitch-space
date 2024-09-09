@@ -34,10 +34,9 @@ To visit the deployed Stitch Space site [click here](https://stitch-space-f65c36
     - [React with Vite Set Up](#react-with-vite-set-up)
     - [Deployment](#deployment)
 8. [Agile Methodology](#8-agile-methodology)
-    - [Sprint One](#sprint-one-0209-to-0809)
-    - [Sprint Two](#sprint-two-0909-to-1509)
-    - [Sprint Three](#sprint-three-1609-to-2209)
-    - [Sprint Four](#sprint-four-2309-to-2909)
+    - [Sprint One](#sprint-one-0909-to-1509)
+    - [Sprint Two](#sprint-two-1609-to-2209)
+    - [Sprint Three](#sprint-three-2309-to-2909)
 9. [Future Development](#9-future-development)
 10. [Credits](#10-credits)
 
@@ -59,13 +58,6 @@ When analyzing competitors in the realm of online portfolio platforms for artist
 - Behance and DeviantArt are also widely recognized in the art community for portfolio presentation, but their generalist approach encompasses all art forms, which can make it harder for fibre artists to find a targeted audience and community.
 
 In this landscape, Stitch Space aims to carve out a unique niche by offering a dedicated platform specifically for fibre artists. It focuses on providing a community-driven environment where artists can not only showcase their portfolios but also interact with peers, gain inspiration, and receive feedback. The goal is to foster a specialized community that supports and celebrates the work of fibre artists, making Stitch Space an ideal platform for those looking to share their craft in a more targeted and supportive setting.
-
-### Epics and User Stories
-My user stories can be seen in full in the associated GitHub Project on my repo. This is where all the details, including tasks and acceptance criteria can be seen. These user stories have been assigned to Epics.
-
-| Epic | Stories |
-|---| ---|
-
 
 ### User Journeys
 These are the core user journeys, it is not an exhaustive list of all possible user journeys, just the most important ones:
@@ -357,23 +349,65 @@ This project was deployed to [Heroku](https://id.heroku.com/login): a hosting pl
 
 ## 8. Agile Methodology
 
-I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added the high level epics, then created the user stories as issues within them, then created the four one-week sprints I intended to complete this project in, and populated the first sprint to begin with. 
+After getting both repositories set up and all planning carried out, both READMEs in both repositories were updated with as much information as possible up front, to have a strong basis from which to develop. I then set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added the high level epics, created the user stories as issues within them, created the three one-week sprints I intended to complete the development portion of this project in, and populated the first sprint. 
 
-### Sprint One: 02/09 to 08/09
-This sprint involved getting both repositories set up and all planning carried out. Both READMEs in both repositories were updated with as much information as possible up front, to have a strong basis from which to develop. Therefore once story development started, there were only very few stories included:
+### Epics and User Stories
+My user stories can be seen in full in the associated GitHub Project on my repo. This is where all the details, including tasks and acceptance criteria can be seen. These user stories have been assigned to Epics.
 
+| Epic | Stories |
+|---| ---|
+| User Management | Connect placeholder front-end and back-end |
+| | User registration |
+| | User login and logout |
+| | Password reset |
+| | Create user details page |
+| Piece Management | Create piece |
+| | Edit piece |
+| | Delete piece |
+| Social Interactions | Comment on a piece |
+| | Rate a piece |
+| | Follow a user |
+| | View following/followers |
+| | Receive notifications for interactions |
+| Browsing Pieces | Create basic home page |
+| | Create basic feed page |
+| | Create basic explore page |
+| | Create 'My Stitch Space' page |
 
-### Sprint Two: 09/09 to 15/09
+### Sprint One: 09/09 to 15/09
 
-### Sprint Three: 16/09 to 22/09
+![Sprint One Screenshot](documentation/sprint1.png)
 
-### Sprint Four: 23/09 to 29/09
+- Sprint Planning: this involved taking the highest priority issues and assigning them to the first sprint. The highest priority story involves wiring up the front and back ends so may take up the whole sprint. This was the only one marked as must have. The next two were should haves and the final one a could have. This gave me a breakdown of 25% for must, 50% for should and 25% for could. 
+- Sprint Retrospective: 
+    - Achievements: 
+    - Progress: 
+    - Challenges: 
+    - Action Next Sprint: 
+
+### Sprint Two: 16/09 to 22/09
+
+- Sprint Planning: 
+- Sprint Retrospective: 
+    - Achievements: 
+    - Progress: 
+    - Challenges: 
+    - Action Next Sprint: 
+
+### Sprint Three: 23/09 to 29/09
+
+- Sprint Planning: 
+- Sprint Retrospective: 
+    - Achievements: 
+    - Progress: 
+    - Challenges: 
 
 ## 9. Future Development 
 
 - Add filters to uploaded images.
 - Expand to more obscure fibre arts
 - Allow users to indicate where a piece belongs to more than one art type
+- Allow users to be included on the same piece where they've collaborated
 
 ## 10. Credits
 
