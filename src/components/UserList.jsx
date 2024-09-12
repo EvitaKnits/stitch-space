@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import {axiosClient} from '../api/axiosDefaults';
 
 // Get CSRF token from the cookie
 const getCSRFToken = () => {
@@ -12,7 +12,7 @@ const UserList = () => {
 
   // Fetch users when the component mounts
   useEffect(() => {
-    axios.get('https://8000-evitaknits-stitchspacea-7teiu88dgwp.ws.codeinstitute-ide.net/users/')
+    axiosClient.get('/users')
     .then(response => {
       console.log('Fetched data:', response.data);  // Log the fetched data
       setUsers(response.data);  // Update the state with fetched user data
