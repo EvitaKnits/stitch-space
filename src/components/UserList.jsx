@@ -12,7 +12,7 @@ const UserList = () => {
 
   // Fetch users when the component mounts
   useEffect(() => {
-    axiosClient.get('/users')
+    axiosClient.get('/users/')
     .then(response => {
       console.log('Fetched data:', response.data);  // Log the fetched data
       setUsers(response.data);  // Update the state with fetched user data
