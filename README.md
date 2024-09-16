@@ -224,7 +224,7 @@ Followers/Following View:
 ![Sign Up Wireframe](documentation/signup.png)
 
 ### Colour Scheme
-I wanted to pick a fun and energetic palette to reflect the creative nature of this application. I chose a peachy-beige colour for the majority of the visuals, with some accent colours to provide pops of interest throughout. 
+I wanted to pick a fun and energetic palette to reflect the creative nature of this application. My original choices looked great next to each other in theory but when I came to implementing them, they didn't quite work. So after some finessing, I ended up with the following colour scheme: 
 
 ![Colour Scheme Image](documentation/colours.png)
 
@@ -302,7 +302,7 @@ To ensure the front end of my program was accessible I used Lighthouse and recor
 
 **Colour Contrast** 
 
-I checked black text against my colour palette prior to development and found that all colours apart from the green had sufficient contrast to meet the highest contrast requirements. This informed my design choices, so that I never used the green as a background to text.
+
 
 ## 6. Bugs
 
@@ -380,14 +380,16 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 
 - Sprint Planning: this involved taking the highest priority issues and assigning them to the first sprint. The highest priority story involves wiring up the front and back ends so may take up the whole sprint. This was the only one marked as must have. The next two were should haves and the final one a could have. This gave me a breakdown of 25% for must, 50% for should and 25% for could. 
 - Sprint Retrospective: 
-    - Achievements: 
-    - Progress: 
-    - Challenges: 
-    - Action Next Sprint: 
+    - Achievements: Completing the thin slice and connecting the placeholder front-end and back-end. 
+    - Progress: A stable, deployed base on which to develop the rest of the project.  
+    - Challenges: There was less time than anticipated to work on my project and the thin slice proved more difficult to complete too. The Cross-Origin Resource Sharing (CORS) element needed specific configuration that took a while to figure out for example. 
+    - Action Next Sprint: The goal for next sprint is to get the basic page structure created with dummy data, to provide a basis from which to develop the back-end further in future sprints. 
 
 ### Sprint Two: 16/09 to 22/09
 
-- Sprint Planning: 
+![Sprint Two Screenshot](documentation/sprint2.png)
+
+- Sprint Planning: Creating the basic home page and the user details page are must haves this sprint, then the remaining stories from Epic 4: Browsing Pieces are distributed between should haves and could haves. The breakdown for this sprint is 40% must have, 40% should have and 20% could have. 
 - Sprint Retrospective: 
     - Achievements: 
     - Progress: 
