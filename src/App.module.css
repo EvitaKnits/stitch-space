@@ -1,0 +1,16 @@
+.App {
+  background-color: #F4EDE4;
+}
+
+.App-header {
+  text-align: left;
+  padding: 20px;
+}
+
+.App-header h1,
+.App-header h2 {
+  display: inline; 
+  margin: 10px;
+  color: #225372;
+}
+

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {axiosClient} from '../api/axiosDefaults';
-
-// Get CSRF token from the cookie
-const getCSRFToken = () => {
-  const cookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='));
-  return cookie ? cookie.split('=')[1] : null;
-};
+import { useEffect, useState } from 'react';
+import {axiosClient} from '../../api/axiosDefaults';
+import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);  // State to hold the user data
@@ -25,6 +21,9 @@ const UserList = () => {
   return (
     <div>
       <h1>User List</h1>
+      <Badge bg="danger" as={Button}>
+          New
+        </Badge>
       {users.length === 0 ? (
         <p>No users available</p>
       ) : (
