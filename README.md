@@ -416,7 +416,8 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 - I built my flowcharts using [Mermaid](https://mermaid.js.org/syntax/flowchart.html) in my readme.
 - I visually represented my colour palette using [Adobe Colour](https://color.adobe.com/create/color-wheel).
 - I sourced my icons from [Font Awesome](https://fontawesome.com/).
-- I created all my favicons with [Real Favicon Generator](https://realfavicongenerator.net/)
+- I turned my icon from Font Awesome into a favicon with [Fonticon](https://gauger.io/fonticon/)
+- I generated all my different favicons with [Real Favicon Generator](https://realfavicongenerator.net/)
 - I used [ChatGPT](https://chatgpt.com) to explain error messages, advise on set up and research the best way to go about my implementation.
 - Reference for using Vite instead of Create React App: https://www.freecodecamp.org/news/how-to-create-a-react-app-in-2024/
 - This helped me figure out the mistake I made in the Vite setup where I put `express` in the wrong dependencies section: [Heroku troubleshooting docs](https://devcenter.heroku.com/articles/troubleshooting-node-deploys) 
