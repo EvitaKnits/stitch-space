@@ -17,7 +17,7 @@ const About = () => {
                         network of artists dedicated to the art of fibre.
                     </Card.Text>
                     <div className="d-flex justify-content-center">
-                        <Button>Sign Up</Button>
+                        <Button className={styles.SignUpButton}>Sign Up</Button>
                     </div>
                 </Card.Body>
             </Card>

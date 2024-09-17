@@ -1,5 +1,5 @@
 import About from '../../components/About/About';
-import FeaturedArtists from '../../components/ExampleCarouselImage/ExampleCarouselImage';
+import FeaturedArtists from '../../components/FeaturedArtists/FeaturedArtists';
 import { Fragment } from 'react';
 
 const Home = () => {

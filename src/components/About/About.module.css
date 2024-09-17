@@ -3,3 +3,11 @@
     margin: 1em;
     width: 80%;
 }
+
+.About button.SignUpButton:hover,
+.About button.SignUpButton:active,
+.About button.SignUpButton:focus  {
+    background-color: var(--bs-secondary);
+    border-color: var(--bs-secondary);
+    color: #242424;
+}

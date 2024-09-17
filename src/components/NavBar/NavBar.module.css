@@ -4,3 +4,21 @@
     border-top: 2px solid #8DBA92;
     font-size: 1.5em;
 }
+
+.NavBar .NavDropdownButton {
+    background-color: transparent;
+    border: none;
+}
+
+.NavBar button.NavDropdownButton:hover, 
+.NavBar button.NavDropdownButton:focus, 
+.NavBar button.NavDropdownButton:active {
+    background-color: var(--bs-secondary);
+    border-color: var(--bs-secondary);
+    color: #242424;
+}
+
+.NavBar .NavDropdownItem:hover {
+    background-color: transparent;
+    color: black;
+}
