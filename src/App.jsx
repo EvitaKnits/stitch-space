@@ -4,13 +4,13 @@ import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
 import styles from './App.module.css';
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/Home/Home';
-import Feed from './pages/Feed';
-import Explore from './pages/Explore';
-import Login from './pages/Login';
-import MyStitchSpace from './pages/MyStitchSpace';
-import Register from './pages/Register';
-import UserDetails from './pages/UserDetails';
-import NotFound from './pages/NotFound';
+import Feed from './pages/Feed/Feed';
+import Explore from './pages/Explore/Explore';
+import Login from './pages/Login/Login';
+import MyStitchSpace from './pages/MyStitchSpace/MyStitchSpace';
+import Register from './pages/Register/Register';
+import UserDetails from './pages/UserDetails/UserDetails';
+import NotFound from './pages/NotFound/NotFound';
 
 
 function App() {
