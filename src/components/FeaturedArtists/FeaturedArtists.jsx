@@ -1,7 +1,17 @@
 import { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import ExampleCarouselImage from '../ExampleCarouselImage/ExampleCarouselImage';
+import { Carousel, CarouselItem } from 'react-bootstrap';
 import styles from "./FeaturedArtists.module.css";
+import Piece, { PieceCarouselItem } from '../Piece/Piece';
+
+const featuredPieces = [];
+
+// Development-only Code Start
+
+featuredPieces.push(new Piece({ id: 1, userName: "Jeff", title: "Has all the money" }))
+featuredPieces.push(new Piece({ id: 2, userName: "Mark", title: "Marky Mark" }))
+featuredPieces.push(new Piece({ id: 3, userName: "Tim", title: "Tam" }))
+
+// Development-only Code End
 
 const FeaturedArtists = () => {
     const [index, setIndex] = useState(0);
@@ -12,24 +22,11 @@ const FeaturedArtists = () => {
 
     return (
         <Carousel className={styles.Carousel} activeIndex={index} onSelect={handleSelect}>
-            <Carousel.Item>
-                <ExampleCarouselImage text="First slide" />
-                <Carousel.Caption className={styles.CarouselCaption}>
-                    <h3>James Robinson - Trees in Autumn - Embroidery</h3>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <ExampleCarouselImage text="Second slide" />
-                <Carousel.Caption className={styles.CarouselCaption}>
-                    <h3>Second slide label</h3>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <ExampleCarouselImage text="Third slide" />
-                <Carousel.Caption className={styles.CarouselCaption}>
-                    <h3>Third slide label</h3>
-                </Carousel.Caption>
-            </Carousel.Item>
+            {featuredPieces.map((value) => (
+                <CarouselItem key={value.id}>
+                    <PieceCarouselItem {...value} />
+                </CarouselItem>
+            ))}
         </Carousel>
     );
 };
