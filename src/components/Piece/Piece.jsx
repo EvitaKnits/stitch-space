@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
-import { Badge, Card, Carousel } from 'react-bootstrap';
-import Image from 'react-bootstrap/Image';
+import { Badge, Card, Carousel, Image } from 'react-bootstrap';
 import styles from "./Piece.module.css";
 
 export const PieceCard = ({ id, title, imageUrl, userName, artType, caption }) => {
@@ -34,14 +33,34 @@ export const PieceCarouselItem = ({ id, title, imageUrl, userName, artType, capt
 PieceCarouselItem.displayName = 'PieceCarouselItem';
 
 export default class Piece {
-    constructor({ id = 0, title = "Example Title that is roughly 75 characters long or there abouts. Maybe ish", imageUrl = "./src/assets/examplecarouselimage.jpg", userId = 0, userName = "Example User", artType = "Embroidery" }) {
+    constructor({
+        id = 0,
+        title = "Example Title",
+        imageUrl = "./src/assets/examplecarouselimage.jpg",
+        userId = 0,
+        userName = "Example User",
+        artType = "Embroidery",
+        rating = 2,
+    }) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.userId = userId;
         this.userName = userName;
         this.artType = artType;
-        this.caption = `"${title}" by ${userName} (${artType})`
+        this.rating = rating;
+        this.caption = `"${title}" by ${userName} (${artType})`;
+    }
+
+    static fromJSON(value) {
+        return new Piece({
+            id: value.id,
+            title: value.title,
+            imageUrl: value.image,
+            userId: value.userId,
+            userName: value.userName,
+            artType: value.artType,
+            rating: value.rating,
+        });
     }
 }
-

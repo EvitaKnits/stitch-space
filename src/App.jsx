@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
+import { PieceDataProvider } from './contexts/PieceDataContext';
 import styles from './App.module.css';
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/Home/Home';
@@ -22,19 +23,22 @@ function App() {
                     <h2>- the fibre art community</h2>
                 </div>
                 <NavBar />
-                <Router>
-                    <Routes>
-                        <Route path="/" element={<Home/>} />
-                        <Route path="/feed" element={<Feed/>} />
-                        <Route path="/explore" element={<Explore/>} />
-                        <Route path="/login" element={<Login/>} />
-                        <Route path="/mystitchspace" element={<MyStitchSpace/>} />
-                        <Route path="/register" element={<Register/>} />
-                        <Route path="/userdetails" element={<UserDetails/>} />
-                        {/* 404 route for unmatched paths */}
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </Router>
+                {/* This Provider allows components on all pages to search for Pieces */}
+                <PieceDataProvider>
+                    <Router>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/feed" element={<Feed />} />
+                            <Route path="/explore" element={<Explore />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/mystitchspace" element={<MyStitchSpace />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/userdetails" element={<UserDetails />} />
+                            {/* 404 route for unmatched paths */}
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </Router>
+                </PieceDataProvider>
             </header>
         </div>
     );
