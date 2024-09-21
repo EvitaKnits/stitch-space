@@ -1,4 +1,4 @@
-import Container from 'react-bootstrap/Container';
+import { useContext } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -6,44 +6,59 @@ import styles from "./NavBar.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { NavItem } from 'react-bootstrap';
-// import { axiosClient } from '../api/axiosDefaults';
+import { NavItem, Stack } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const NavBar = () => {
-    return (
-        <Navbar expand="lg" className={styles.NavBar}>
-            <Container>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/feed">Feed</Nav.Link>
-                        <Nav.Link href="/explore">Explore</Nav.Link>
-                    </Nav>
-                    <Nav className="ms-auto">
-                        <Dropdown as={NavItem} className={`ms-1`}>
-                            <Dropdown.Toggle className={styles.NavDropdownButton}>
-                                <FontAwesomeIcon icon={faUser} className='icons' />
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="/mystitchspace" className={styles.NavDropdownItem}>My Stitch Space</Dropdown.Item>
-                                <Dropdown.Item href="/userdetails" className={styles.NavDropdownItem}>User Details</Dropdown.Item>
-                                <Dropdown.Divider />
-                                <Dropdown.Item href="/login" className={styles.NavDropdownItem}>Logout</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                        <Dropdown as={NavItem} className={`ms-1`}>
-                            <Dropdown.Toggle className={styles.NavDropdownButton}>
-                                <FontAwesomeIcon icon={faBell} className='icons'/>
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item className={styles.NavDropdownItem}>Placeholder</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
+    const { currentUser, logOut } = useContext(CurrentUserContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logOut();
+        navigate('/')
+    }
+
+    return (<Stack direction="horizontal" className={`${styles.NavBar} align-items-baseline`}>
+        <Navbar collapseOnSelect expand="lg" className={`me-auto`}>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                    <Nav.Link href="/">Home</Nav.Link>
+                    {/* The Feed page is only displayed to logged in users */}
+                    {currentUser && <Nav.Link href="/feed">Feed</Nav.Link>}
+                    <Nav.Link href="/explore">Explore</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
         </Navbar>
+        <Nav className={`justify-content-end`}>
+            <Dropdown as={NavItem} className={`m-1`}>
+                <Dropdown.Toggle className={styles.NavDropdownButton} size="lg">
+                    <FontAwesomeIcon icon={faUser} className='icons' />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    {/* Shows only appropriate options when logged in/out */}
+                    {currentUser ?
+                        (<>
+                            <Dropdown.Item href="/mystitchspace" className={styles.NavDropdownItem}>My Stitch Space</Dropdown.Item>
+                            <Dropdown.Item href="/userdetails" className={styles.NavDropdownItem}>User Details</Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item onClick={handleLogout} className={styles.NavDropdownItem}>Logout</Dropdown.Item>
+                        </>
+                        ) :
+                        <Dropdown.Item href='/login' className={styles.NavDropdownItem}>Login</Dropdown.Item>}
+                </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown as={NavItem} className={`m-1`}>
+                <Dropdown.Toggle className={styles.NavDropdownButton} size="lg">
+                    <FontAwesomeIcon icon={faBell} className='icons' />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item className={styles.NavDropdownItem}>Placeholder</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        </Nav>
+    </Stack>
     );
 };
 

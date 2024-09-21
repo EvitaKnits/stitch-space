@@ -1,0 +1,18 @@
+.App-header {
+    text-align: left;
+}
+
+.App-header h1,
+.App-header h2 {
+    display: inline;
+    color: #225372;
+    margin: 0;
+    text-wrap: nowrap;
+}
+
+.App-header h2 {
+    flex: 1 1 0;
+    overflow: hidden;
+    white-space: pre;
+    text-overflow: ellipsis;
+}
