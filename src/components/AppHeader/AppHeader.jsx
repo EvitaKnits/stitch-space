@@ -16,7 +16,8 @@ const AppHeader = () => {
     const matchedRoutes = matchRoutes(routes, location)
     // Adds the name of the user logged in, to their MyStitchSpace page title
     if (currentUser && matchedRoutes) {
-        title = currentUser && `${currentUser.first_name || ''}${currentUser.last_name ? ' ' + currentUser.last_name : ''}'s`
+        const text = `${currentUser.first_name || ''}${currentUser.last_name ? ' ' + currentUser.last_name : ''}`
+        title = <h1 className=''>{text}<span className='d-none d-sm-inline'>&apos;s</span></h1>
     }
 
     return (
@@ -24,7 +25,7 @@ const AppHeader = () => {
             <header className={`App-header ${styles['App-header']}`}>
                 <Stack direction='horizontal' gap={2}>
                     <FontAwesomeIcon icon={faStroopwafel} size='3x' className='icons' />
-                    {title && <h1 className=''>{title}</h1>}
+                    {title}
                     {/* Hides 'StitchSpace' on small screens if the user's name is in the title */}
                     <h1 className={currentUser && 'd-none d-sm-inline'}>Stitch Space</h1>
                     {/* Hides the tagline on different breakpoints depending on whether the user's name is in the title */}
