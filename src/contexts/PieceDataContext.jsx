@@ -20,7 +20,7 @@ export const PieceDataProvider = ({ children }) => {
         setParams,
         pagination,
         handleNextPage,
-    } = useDataFetcher("/pieces/", {}, dataMapper);
+    } = useDataFetcher("/pieces", {}, dataMapper);
 
     return (
         <PieceDataContext.Provider
