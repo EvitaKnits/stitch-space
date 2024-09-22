@@ -1,12 +1,9 @@
-import { useContext } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpWideShort } from '@fortawesome/free-solid-svg-icons';
-import { PieceDataContext } from '../../contexts/PieceDataContext';
 
 // This component  updates the "sortBy" parameter on the Pieces requests
-const SortByDropdown = () => {
-    const { setParams } = useContext(PieceDataContext);
+const SortByDropdown = ({setParams}) => {
 
     const handleSelect = (eventKey) => {
         setParams((prevParams) => ({

@@ -9,10 +9,3 @@
     margin: 0;
     text-wrap: nowrap;
 }
-
-.App-header h2 {
-    flex: 1 1 0;
-    overflow: hidden;
-    white-space: pre;
-    text-overflow: ellipsis;
-}

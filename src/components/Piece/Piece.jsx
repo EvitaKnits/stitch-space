@@ -1,11 +1,12 @@
 import { Fragment } from 'react';
 import { Badge, Card, Carousel, Image } from 'react-bootstrap';
+import { Masonry } from "masonic";
 import styles from "./Piece.module.css";
 
-export const PieceCard = ({ id, title, imageUrl, userName, artType, caption }) => {
+const PieceCard = ({ id, title, imageUrl, userId, userName, artType, caption }) => {
     return (
         <Card>
-            <a href={`/pieces/${id}`}>
+            <a href={`/profile/${userId}/pieces/${id}`}>
                 <Card.Img variant="top" src={imageUrl} title={caption} /></a >
             <Card.Body>
                 <Card.Title style={{ overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3 }}>{title}</Card.Title>
@@ -16,6 +17,15 @@ export const PieceCard = ({ id, title, imageUrl, userName, artType, caption }) =
 
     );
 };
+
+export const MasonryWall = ({pieces})=>{
+    // 'Masonic' library handles the tiling of the Piece components
+    return <Masonry items={pieces} render={MasonryTile} columnGutter={5} className="p-5" />
+}
+
+const MasonryTile = ({ data }) => (
+    <PieceCard {...data} />
+);
 
 export const PieceCarouselItem = ({ id, title, imageUrl, userName, artType, caption }) => {
     return (

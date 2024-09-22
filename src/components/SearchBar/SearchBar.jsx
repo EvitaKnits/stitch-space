@@ -1,10 +1,8 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { PieceDataContext } from '../../contexts/PieceDataContext';
 
 // This component updates the "search" parameter on the Pieces requests
-const SearchBar = () => {
-    const { setParams } = useContext(PieceDataContext);
+const SearchBar = ({setParams}) => {
     const [inputValue, setInputValue] = useState("");
 
     const handleInputChange = (event) => {

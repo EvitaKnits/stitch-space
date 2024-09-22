@@ -16,7 +16,7 @@ const NavBar = () => {
 
     const handleLogout = () => {
         logOut();
-        navigate('/')
+        navigate('/login')
     }
 
     return (<Stack direction="horizontal" className={`${styles.NavBar} align-items-baseline`}>
@@ -40,15 +40,17 @@ const NavBar = () => {
                     {/* Shows only appropriate options when logged in/out */}
                     {currentUser ?
                         (<>
-                            <Dropdown.Item href="/mystitchspace" className={styles.NavDropdownItem}>My Stitch Space</Dropdown.Item>
+                            <Dropdown.Item href={`/profile/${currentUser.pk}`} className={styles.NavDropdownItem}>Profile</Dropdown.Item>
                             <Dropdown.Item href="/userdetails" className={styles.NavDropdownItem}>User Details</Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item onClick={handleLogout} className={styles.NavDropdownItem}>Logout</Dropdown.Item>
-                        </>
-                        ) :
-                        <Dropdown.Item href='/login' className={styles.NavDropdownItem}>Login</Dropdown.Item>}
+                        </>) : (<>
+                            <Dropdown.Item href='/login' className={styles.NavDropdownItem}>Login</Dropdown.Item>
+                            <Dropdown.Item href='/register' className={styles.NavDropdownItem}>Sign Up</Dropdown.Item>
+                        </>)}
                 </Dropdown.Menu>
             </Dropdown>
+            {currentUser && (
             <Dropdown as={NavItem} className={`m-1`}>
                 <Dropdown.Toggle className={styles.NavDropdownButton} size="lg">
                     <FontAwesomeIcon icon={faBell} className='icons' />
@@ -57,6 +59,7 @@ const NavBar = () => {
                     <Dropdown.Item className={styles.NavDropdownItem}>Placeholder</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
+            )}
         </Nav>
     </Stack>
     );
