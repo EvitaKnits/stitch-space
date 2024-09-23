@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import useSelectedProfile from "../../hooks/useSelectedProfile";
 
 const Profile = () => {
-    const { profile, loading } = useSelectedProfile()
+    const { isAuthUserProfile, profile, loading } = useSelectedProfile();
 
     return loading ? '' : (<Container fluid className="mt-3" >
         <Row>
@@ -18,8 +18,9 @@ const Profile = () => {
                     </Row>
                     <Row className="p-2">
                         <Col xs={12}>Stitcher Since: {profile.createdAt}</Col>
-                        <Col><Button>Follow</Button></Col>
-                    </Row>
+                        {/* Disable the button if the user is viewing their own profile */}
+                        <Col><Button disabled={isAuthUserProfile}>Follow</Button></Col>
+                        </Row>
                     <Row>
                         <div>{profile.biography}</div>
                     </Row>

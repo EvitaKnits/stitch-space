@@ -1,6 +1,7 @@
 :root {
     --bs-primary: #225372;
     --bs-secondary: #8DBA92;
+    --bs-primary-disabled: #5f7380;
     --bs-body-bg: #F4EDE4;
     --bs-body-color: #4A4A4A;
     --bs-success: #37A25E;
@@ -52,12 +53,37 @@ a {
     color: var(--bs-primary);
 }
 
+/* Custom Bootstrap Overrides */
+
 .btn-primary {
     background-color: var(--bs-primary);
     border-color: var(--bs-primary);
     color: #ffffff;
 }
 
+.btn.btn-primary:hover,
+.btn.btn-primary:active,
+.btn.btn-primary:focus {
+    background-color: var(--bs-secondary);
+    border-color: var(--bs-secondary);
+    color: #242424;
+}
+
+.btn.btn-primary:disabled {
+    background-color: var(--bs-primary-disabled);
+    border-color: var(--bs-primary-disabled);
+    color: #ffffff;
+}
+
 .icons {
     color: #E76F51;
+}
+
+/* Global style for Nav.Link */
+.nav-link {
+    color: #4A4A4A; 
+}
+
+.nav-link:hover {
+    color: black; 
 }
