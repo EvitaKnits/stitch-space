@@ -213,9 +213,13 @@ Piece Edit View:
 Followers/Following View: 
 ![My Stitch Space Wireframe - followers/following](documentation/followers.png)
 
+**Development note:** the user level rating in the Profile side bar of this page was not implemented and has now been added to the future development list.
+
 
 #### User Details
 ![User Details Wireframe](documentation/userdetails.png)
+
+**Development note:** having this as a separate page felt redundant, so this was incorporated into the profile sidebar of the 'My Stitch Space' page. 'Art Types' at the user level was also dropped as this was not required for any functionality after all. 
 
 #### Notifications
 ![Notifications Wireframe](documentation/notifications.png)
@@ -391,14 +395,16 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 
 - Sprint Planning: Creating the basic home page and the user details page are must haves this sprint, then the remaining stories from Epic 4: Browsing Pieces are distributed between should haves and could haves. The breakdown for this sprint is 40% must have, 40% should have and 20% could have. 
 - Sprint Retrospective: 
-    - Achievements: 
-    - Progress: 
-    - Challenges: 
-    - Action Next Sprint: 
+    - Achievements: Completing such a large amount of work in one sprint.
+    - Progress: Created all of the front end pages and created all the models, views and endpoints for the API.
+    - Challenges: Switching between the front and back ends was difficult at times, as different languages and mindsets were required. Also, knowing how to break up the stories in this type of project. I cancelled a couple of existing user stories, and added 6 more to cover the creation and API integration of each model. I then worked on 6 stories at once, incrementally adding to each of them. This doesn't feel optimal. 
+    - Action Next Sprint: The goal for the third sprint is to finish the whole project. I managed to set aside a lot of time for these two sprints to aim to finish by the end of September. This will involve integration of the front-end and the API, then the implementation of the final small pieces of functionality such as receiving notifications. 
 
 ### Sprint Three: 23/09 to 29/09
 
-- Sprint Planning: 
+![Sprint Three Screenshot](documentation/sprint3.png)
+
+- Sprint Planning: Completing the API integration is a must have this sprint, so all 6 of these stories have been marked as such. The remaining stories have been added to this sprint and marked as should haves, as I am aiming to finish this project this sprint. This gives me 40% must haves and 60% should haves.
 - Sprint Retrospective: 
     - Achievements: 
     - Progress: 
@@ -406,10 +412,12 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 
 ## 9. Future Development 
 
+- Add Password Reset functionality for users that have forgotten their password or want to change it. 
+- Add a user-level rating which averages the ratings on all their pieces and displays it in the Profile sidebar of the My Stitch Space page.
 - Add filters to uploaded images.
-- Expand to more obscure fibre arts
-- Allow users to indicate where a piece belongs to more than one art type
-- Allow users to be included on the same piece where they've collaborated
+- Expand to more obscure fibre arts.
+- Allow users to indicate where a piece belongs to more than one art type.
+- Allow users to be included on the same piece where they've collaborated.
 
 ## 10. Credits
 
