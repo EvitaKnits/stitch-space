@@ -4,13 +4,23 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import ArtTypeDropdown from '../../components/ArtTypeDropdown/ArtTypeDropdown';
 import SortByDropdown from '../../components/SortByDropdown/SortByDropdown';
 import usePiecesList from '../../hooks/usePiecesList';
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const Explore = () => {
+    const userContext = useContext(CurrentUserContext)
+    const navigate = useNavigate();
     const {
         pieces,
         loading,
         setParams
     } = usePiecesList()
+
+    // If the user isn't logged in, this redirects them to the login page
+    if (!userContext.currentUser) {
+        navigate('/login')
+    }
 
     return (
         <div className="p-3">

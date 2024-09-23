@@ -21,7 +21,7 @@ const ListView = () => {
         <Nav variant="underline" defaultActiveKey="all" className="mb-3" onSelect={handleArtTypeSelect}>
             <Nav.Item><Nav.Link eventKey="all">All</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link eventKey="knitting">Knitting</Nav.Link></Nav.Item>
-            <Nav.Item> <Nav.Link eventKey="embroidery">Embroidery</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link eventKey="embroidery">Embroidery</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link eventKey="crochet">Crochet</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link eventKey="weaving">Weaving</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link eventKey="dyeing">Dyeing</Nav.Link></Nav.Item>

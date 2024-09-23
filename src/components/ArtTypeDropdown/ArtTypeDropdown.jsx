@@ -1,12 +1,10 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import { PieceDataContext } from '../../contexts/PieceDataContext';
 
 // This component filters the "artType" parameter on the Pieces requests
-const ArtTypeDropdown = () => {
-    const { setParams } = useContext(PieceDataContext);
+const ArtTypeDropdown = ({ setParams}) => {
     const [selection, setSelection] = useState('');
 
     const handleSelect = (eventKey) => {

@@ -25,9 +25,13 @@ const NavBar = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    {/* The Feed page is only displayed to logged in users */}
-                    {currentUser && <Nav.Link href="/feed">Feed</Nav.Link>}
-                    <Nav.Link href="/explore">Explore</Nav.Link>
+                    {/* The Feed and Explore pages are only displayed to logged-in users */}
+                    {currentUser && (
+                            <>
+                                <Nav.Link href="/feed">Feed</Nav.Link>
+                                <Nav.Link href="/explore">Explore</Nav.Link>
+                            </>
+                        )}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
