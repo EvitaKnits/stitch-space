@@ -4,7 +4,6 @@ import Feed from './pages/Feed/Feed';
 import Explore from './pages/Explore/Explore';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import UserDetails from './pages/UserDetails/UserDetails';
 import NotFound from './pages/NotFound/NotFound';
 import AppHeader from './components/AppHeader/AppHeader';
 import { CurrentUserProvider } from './contexts/CurrentUserContext'
@@ -30,7 +29,6 @@ function App() {
                                 <Route path="piece/:pieceId" element={<DetailView />} />
                             </Route>
                             <Route path="/register" element={<Register />} />
-                            <Route path="/userdetails" element={<UserDetails />} />
                             {/* 404 route for unmatched paths */}
                             <Route path="*" element={<NotFound />} />
                         </Route>
