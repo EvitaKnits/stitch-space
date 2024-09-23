@@ -70,6 +70,10 @@ const fetchData = async (endpoint, params = {}) => {
                 const piece = generateMockPieces(1).pieces[0]
                 piece.userId = 1
                 responseData = piece}
+            if (endpoint === '/pieces/3' || endpoint === '/pieces/4'){ 
+                const piece = generateMockPieces(1).pieces[0]
+                piece.userId = 2
+                responseData = piece}
             if (endpoint === '/profile/1') responseData = {
                     "id": 1,
                     "firstName": "Evita",
