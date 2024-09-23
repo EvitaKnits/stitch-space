@@ -9,8 +9,8 @@ import NotFound from './pages/NotFound/NotFound';
 import AppHeader from './components/AppHeader/AppHeader';
 import { CurrentUserProvider } from './contexts/CurrentUserContext'
 import Profile from './pages/Profile/Profile';
-import DetailView from './pages/Profile/PieceDetailView';
-import ListView from './pages/Profile/PieceListView';
+import DetailView from './pages/Profile/PiecesDetailView';
+import ListView from './pages/Profile/PiecesListView';
 
 function App() {
     return (

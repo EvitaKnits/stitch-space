@@ -2,8 +2,19 @@ import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import styles from "./About.module.css";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useNavigate } from "react-router-dom";
+
 
 const About = () => {
+    const userContext = useContext(CurrentUserContext)
+    const navigate = useNavigate();
+
+    const handleSignUpClick = () => {
+        navigate("/register");
+    };
+
     return (
         <Container className="d-flex justify-content-center align-items-center">
             <Card className={styles.About}>
@@ -16,9 +27,12 @@ const About = () => {
                         techniques, and participate in meaningful conversations that help elevate your skills and expand your creative horizons. Join us and become part of a thriving
                         network of artists dedicated to the art of fibre.
                     </Card.Text>
-                    <div className="d-flex justify-content-center">
-                        <Button className={styles.SignUpButton}>Sign Up</Button>
-                    </div>
+                    {/* Only display sign up button if not signed in */}
+                    {!userContext.currentUser && (
+                        <div className="d-flex justify-content-center">
+                            <Button className={styles.SignUpButton} onClick={handleSignUpClick}>Sign Up</Button>
+                        </div>
+                    )}
                 </Card.Body>
             </Card>
         </Container>
