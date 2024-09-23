@@ -44,7 +44,7 @@ const NavBar = () => {
                     {/* Shows only appropriate options when logged in/out */}
                     {currentUser ?
                         (<>
-                            <Dropdown.Item href={`/profile/${currentUser.pk}`} className={styles.NavDropdownItem}>Profile</Dropdown.Item>
+                            <Dropdown.Item href={`/profile/${currentUser.pk}`} className={styles.NavDropdownItem}>My Stitch Space</Dropdown.Item>
                             <Dropdown.Item href="/userdetails" className={styles.NavDropdownItem}>User Details</Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item onClick={handleLogout} className={styles.NavDropdownItem}>Logout</Dropdown.Item>
