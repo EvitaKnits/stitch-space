@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Button, Container, Image, Row, Col, FloatingLabel } from "react-bootstrap";
+import { Button, Container, Image, Row, Col, FloatingLabel, Card } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Rating from "react-rating";
 import useSelectedPiece from "../../hooks/useSelectedPiece";
@@ -7,6 +7,7 @@ import useSelectedProfile from "../../hooks/useSelectedProfile";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import PiecesEdit from "./PiecesEdit";
 import { Link, useNavigate } from 'react-router-dom';
+import Comment from '../../components/Comments/Comment'
 
 const DetailView = () => {
     const { currentUser } = useContext(CurrentUserContext);
@@ -15,6 +16,24 @@ const DetailView = () => {
 
     const [comment, setComment] = useState('');
     const [editMode, setEditMode] = useState(false);
+
+    // Mock data for comments
+    const [comments, setComments] = useState([
+        {
+            id: 1,
+            firstName: "Evita",
+            lastName: "Orrock",
+            text: "Amazing artwork!",
+            date: "2023-10-01",
+        },
+        {
+            id: 2,
+            firstName: "Alice",
+            lastName: "Wunderland",
+            text: "Love the colors used.",
+            date: "2023-10-02",
+        },
+    ]);
 
     const handleRating = (value) => {
         console.log(value);
@@ -52,7 +71,14 @@ const DetailView = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle comment submission
+        const newComment = {
+            id: comments.length + 1,
+            username: currentUser.username || "Anonymous",
+            text: comment,
+            date: new Date().toISOString().split("T")[0],
+        };
+        setComments([...comments, newComment]);
+        setComment("");
     };
 
     const handleChange = (event) => {
@@ -141,7 +167,14 @@ const DetailView = () => {
                             </Container>
                         </Form>
                     </div>
-                    <div>Comments List</div>
+                    <Container className="mt-5 text-start">
+                        <h3>Comments</h3>
+                        <br></br>
+                        {/* Render comments in chronological order */}
+                        {comments.map((comment) => (
+                            <Comment classname='mt-3' key={comment.id} comment={comment} />
+                        ))}
+                    </Container>
                 </>
             )}
         </>
