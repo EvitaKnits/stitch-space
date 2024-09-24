@@ -6,12 +6,11 @@ import useSelectedPiece from "../../hooks/useSelectedPiece";
 import useSelectedProfile from "../../hooks/useSelectedProfile";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import PiecesEdit from "./PiecesEdit";
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const DetailView = () => {
     const { currentUser } = useContext(CurrentUserContext);
-    const profileData = useSelectedProfile();
+    const {selectedProfile, loading} = useSelectedProfile();
     const pieceData = useSelectedPiece();
 
     const [comment, setComment] = useState('');
@@ -20,6 +19,28 @@ const DetailView = () => {
     const handleRating = (value) => {
         console.log(value);
     };
+    const navigate = useNavigate();
+
+    const handleDeleteClick = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this piece?");
+        if (!confirmDelete) return;
+
+        try {
+            // Placeholder for the API call to delete the piece
+            console.log('Pretending to delete piece');
+
+            // Simulate success response after deleting the piece
+            alert('Piece deleted successfully');
+
+            // Redirect user back to the profile or gallery after "deletion"
+            navigate(`/profile/${selectedProfile}`);
+        } catch (error) {
+            // Handle errors gracefully
+            console.error("Error deleting the piece (placeholder):", error);
+            alert("Failed to delete the piece (placeholder). Please try again.");
+        }
+    };
+
 
     const handleEditClick = () => {
         setEditMode(true);
@@ -41,7 +62,7 @@ const DetailView = () => {
     // Determine if current user is the owner of the piece
     const isOwner = currentUser && pieceData.piece && currentUser.pk === pieceData.piece.userId;
 
-    if (!pieceData.loading && !profileData.loading && pieceData.piece.userId.toString() !== profileData.selectedProfile) {
+    if (!pieceData.loading && !loading && pieceData.piece.userId.toString() !== selectedProfile) {
         return <div>Not this person&apos;s artwork</div>;
     }
 
@@ -59,10 +80,13 @@ const DetailView = () => {
                     <Container>
                         <Row className="my-2">
                             <Col className="text-start">
-                            <Button className="me-2" as={Link} to={`/profile/${profileData.selectedProfile}`}>Back to all art</Button>
-                            {/* Edit Button visible to owner */}
+                            <Button className="me-2" as={Link} to={`/profile/${selectedProfile}`}>Back to all art</Button>
+                            {/* Edit and Delete Buttons visible to owner */}
                             {isOwner && (
-                                    <Button onClick={handleEditClick}>Edit Piece</Button>
+                                    <>
+                                        <Button onClick={handleEditClick} className="me-2">Edit Piece</Button>
+                                        <Button variant="danger" onClick={handleDeleteClick}>Delete Piece</Button>
+                                    </>
                             )}
                             </Col>
                         </Row>

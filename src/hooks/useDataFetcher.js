@@ -74,7 +74,7 @@ const fetchData = async (endpoint, params = {}) => {
                 const piece = generateMockPieces(1).pieces[0]
                 piece.userId = 2
                 responseData = piece}
-            if (endpoint === '/profile/1') responseData = {
+            if (endpoint.includes('/profile/1')) responseData = {
                     "id": 1,
                     "firstName": "Evita",
                     "lastName": "Orrock",
@@ -85,7 +85,7 @@ const fetchData = async (endpoint, params = {}) => {
                     "createdAt": "19 Sep 2024",
                     "updatedAt": "19 Sep 2024"
                 }
-                if (endpoint === '/profile/2') responseData = {
+                if (endpoint.includes('/profile/2')) responseData = {
                     "id": 2,
                     "firstName": "Alice",
                     "lastName": "Wunderland",

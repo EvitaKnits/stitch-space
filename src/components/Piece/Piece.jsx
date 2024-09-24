@@ -1,7 +1,8 @@
 import { Fragment } from 'react';
-import { Badge, Card, Carousel, Image } from 'react-bootstrap';
+import { Badge, Card, Carousel, Image, Button } from 'react-bootstrap';
 import { Masonry } from "masonic";
 import styles from "./Piece.module.css";
+import { useNavigate } from "react-router-dom";
 
 const PieceCard = ({ id, title, imageUrl, userId, userName, artType, caption }) => {
     return (
@@ -18,14 +19,33 @@ const PieceCard = ({ id, title, imageUrl, userId, userName, artType, caption }) 
     );
 };
 
-export const MasonryWall = ({pieces})=>{
+export const MasonryWall = ({ pieces }) => {
     // 'Masonic' library handles the tiling of the Piece components
     return <Masonry items={pieces} render={MasonryTile} columnGutter={5} className="p-5" />
 }
 
-const MasonryTile = ({ data }) => (
-    <PieceCard {...data} />
-);
+const MasonryTile = ({ data }) => {
+    const navigate = useNavigate();
+
+    if (data.isAddNewButton) {
+        return (
+            <Card className="text-center">
+                <Card.Body className="d-flex align-items-center justify-content-center">
+                    <Button
+                        variant="primary"
+                        onClick={() => {
+                            navigate(`/profile/${data.userId}/pieces/new`);
+                        }}
+                    >
+                        Add a new piece
+                    </Button>
+                </Card.Body>
+            </Card>
+        );
+    } else {
+        return <PieceCard {...data} />;
+    }
+};
 
 export const PieceCarouselItem = ({ id, title, imageUrl, userName, artType, caption }) => {
     return (

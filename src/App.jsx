@@ -10,6 +10,7 @@ import { CurrentUserProvider } from './contexts/CurrentUserContext'
 import Profile from './pages/Profile/Profile';
 import DetailView from './pages/Profile/PiecesDetailView';
 import ListView from './pages/Profile/PiecesListView';
+import PiecesCreate from './pages/Profile/PiecesCreate';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                             <Route path="profile/:profileId" element={<Profile />}>
                                 <Route path="" element={<ListView />} />
                                 <Route path="piece/:pieceId" element={<DetailView />} />
+                                <Route path="pieces/new" element={<PiecesCreate />} />
                             </Route>
                             <Route path="/register" element={<Register />} />
                             {/* 404 route for unmatched paths */}
