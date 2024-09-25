@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Button, Container, Image, Row, Col, FloatingLabel, Card } from "react-bootstrap";
+import { Button, Container, Image, Row, Col, FloatingLabel } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Rating from "react-rating";
 import useSelectedPiece from "../../hooks/useSelectedPiece";
@@ -11,7 +11,7 @@ import Comment from '../../components/Comments/Comment'
 
 const DetailView = () => {
     const { currentUser } = useContext(CurrentUserContext);
-    const {selectedProfile, loading} = useSelectedProfile();
+    const { selectedProfile, loading } = useSelectedProfile();
     const pieceData = useSelectedPiece();
 
     const [comment, setComment] = useState('');
@@ -35,9 +35,15 @@ const DetailView = () => {
         },
     ]);
 
-    const handleRating = (value) => {
-        console.log(value);
+    const [userRating, setUserRating] = useState(0);
+
+    // Handle user rating
+    const handleUserRating = (value) => {
+        setUserRating(value);
+        // For now, just logging it
+        console.log(`User rated: ${value}`);
     };
+
     const navigate = useNavigate();
 
     const handleDeleteClick = async () => {
@@ -106,14 +112,14 @@ const DetailView = () => {
                     <Container>
                         <Row className="my-2">
                             <Col className="text-start">
-                            <Button className="me-2" as={Link} to={`/profile/${selectedProfile}`}>Back to all art</Button>
-                            {/* Edit and Delete Buttons visible to owner */}
-                            {isOwner && (
+                                <Button className="me-2" as={Link} to={`/profile/${selectedProfile}`}>Back to all art</Button>
+                                {/* Edit and Delete Buttons visible to owner */}
+                                {isOwner && (
                                     <>
                                         <Button onClick={handleEditClick} className="me-2">Edit Piece</Button>
                                         <Button variant="danger" onClick={handleDeleteClick}>Delete Piece</Button>
                                     </>
-                            )}
+                                )}
                             </Col>
                         </Row>
                         <Row>
@@ -124,14 +130,35 @@ const DetailView = () => {
                                 <h2>{pieceData.piece.title}</h2>
                             </Col>
                             <Col className="text-sm-end" xs={12} sm={6}>
-                                <Rating
-                                    initialRating={pieceData.piece.avgRating}
-                                    style={{ color: 'goldenrod' }}
-                                    emptySymbol="fa fa-star-o fa-xl"
-                                    fullSymbol="fa fa-star fa-xl"
-                                    fractions={2}
-                                    onChange={handleRating}
-                                />
+                                <Container>
+                                    {/* User's Rating */}
+                                    {currentUser && (
+                                        <Row>
+                                            <strong>Your Rating:</strong>
+                                            <Rating
+                                                initialRating={userRating}
+                                                emptySymbol="fa fa-star-o fa-xl"
+                                                fullSymbol="fa fa-star fa-xl"
+                                                fractions={2}
+                                                onChange={handleUserRating}
+                                                style={{ color: 'goldenrod' }}
+                                            />
+                                        </Row>
+                                    )}
+                                    {/* Community Average Rating */}
+                                    <Row>
+                                        <strong>Avg. Rating</strong>
+                                        <Rating
+                                            readonly
+                                            initialRating={pieceData.piece.rating}
+                                            emptySymbol="fa fa-star-o fa-md"
+                                            fullSymbol="fa fa-star fa-md"
+                                            fractions={2}
+                                            style={{ color: 'grey' }} 
+                                        />
+                                    </Row>
+                                </Container>
+
                             </Col>
                         </Row>
                         <Row className="text-sm-start">
@@ -176,7 +203,8 @@ const DetailView = () => {
                         ))}
                     </Container>
                 </>
-            )}
+            )
+            }
         </>
     );
 };
