@@ -65,6 +65,44 @@ const fetchData = async (endpoint, params = {}) => {
         let responseData;
         // Generate mock data for development and get 'real' data for testing
         if (import.meta.env.DEV && !import.meta.env.VITE_TEST_VAR) {
+            if (endpoint.includes('/followers')) {
+                responseData = {
+                    "followers": [
+                      {
+                        "id": 3,
+                        "followerProfile": {
+                          "id": 3,
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "username": "johndoe",
+                          "image": "https://picsum.photos/seed/303/300/300",
+                          "email": "john.doe@example.com",
+                          "biography": "Passionate about knitting and crochet.",
+                          "lastVisitedNotifications": null,
+                          "createdAt": "2024-09-19T12:47:56.267675Z",
+                          "updatedAt": "2024-09-19T12:47:56.267675Z"
+                        },
+                        "createdAt": "2024-09-20T11:24:08.958484Z"
+                      },
+                      {
+                        "id": 4,
+                        "followerProfile": {
+                          "id": 4,
+                          "firstName": "Jane",
+                          "lastName": "Smith",
+                          "username": "janesmith",
+                          "image": "https://picsum.photos/seed/304/300/300",
+                          "email": "jane.smith@example.com",
+                          "biography": "Lover of embroidery and weaving.",
+                          "lastVisitedNotifications": null,
+                          "createdAt": "2024-09-19T12:50:00.123456Z",
+                          "updatedAt": "2024-09-19T12:50:00.123456Z"
+                        },
+                        "createdAt": "2024-09-21T09:45:12.789012Z"
+                      }
+                    ]
+                  }
+            }
             if (endpoint === '/pieces') responseData = generateMockPieces(50);
             if (endpoint === '/pieces/1' || endpoint === '/pieces/2'){ 
                 const piece = generateMockPieces(1).pieces[0]

@@ -11,6 +11,8 @@ import Profile from './pages/Profile/Profile';
 import DetailView from './pages/Profile/PiecesDetailView';
 import ListView from './pages/Profile/PiecesListView';
 import PiecesCreate from './pages/Profile/PiecesCreate';
+import FollowersView from './pages/Profile/FollowersView';
+import FollowingView from './pages/Profile/FollowingView';
 
 function App() {
     return (
@@ -28,7 +30,9 @@ function App() {
                             <Route path="profile/:profileId" element={<Profile />}>
                                 <Route path="" element={<ListView />} />
                                 <Route path="piece/:pieceId" element={<DetailView />} />
-                                <Route path="pieces/new" element={<PiecesCreate />} />
+                                <Route path="piece/new" element={<PiecesCreate />} />
+                                <Route path="followers" element={<FollowersView />} />
+                                <Route path="following" element={<FollowingView />} />
                             </Route>
                             <Route path="/register" element={<Register />} />
                             {/* 404 route for unmatched paths */}
