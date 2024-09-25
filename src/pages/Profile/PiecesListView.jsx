@@ -11,27 +11,32 @@ const ListView = () => {
     } = useSelectedProfile();
     const { profileId } = useParams();
 
-    const { pieces, params, setParams } = usePiecesList({ profile__owner__id: profileId });
-
+    const { pieces, loading, params, setParams } = usePiecesList({ profile__owner__id: profileId });
+    
     const handleArtTypeSelect = (eventKey) => {
         setParams({ ...(params), artType: eventKey });
     };
 
     // Modified pieces array to add button for new piece creation
-    const modifiedPieces = isAuthUserProfile
-        ? [{
-            id: 'addNew',
-            isAddNewButton: true,
-            userId: profileId,
-            // Provide default values for required props
-            title: '',
-            imageUrl: '',
-            userName: '',
-            artType: '',
-            caption: ''
-        }, ...pieces]
-        : pieces;
-
+    const modifiedPieces = !loading && pieces.map((piece) => ({ ...piece, hideUserName: true }));
+    if (!loading){
+        if (isAuthUserProfile){
+            modifiedPieces.unshift({
+                id: 'addNew',
+                isAddNewButton: true,
+                userId: profileId,
+                // Provide default values for required props
+                title: '',
+                imageUrl: '',
+                userName: '',
+                artType: '',
+                caption: '',
+                hideUserName: true,
+            })
+        }
+        
+    }
+    
     return !profileData.loading && pieces && (<>
         <Nav variant="underline" defaultActiveKey="all" className="mb-3" onSelect={handleArtTypeSelect}>
             <Nav.Item><Nav.Link eventKey="all">All</Nav.Link></Nav.Item>
