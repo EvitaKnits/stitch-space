@@ -4,14 +4,14 @@ import { Masonry } from "masonic";
 import styles from "./Piece.module.css";
 import { useNavigate } from "react-router-dom";
 
-const PieceCard = ({ id, title, imageUrl, userId, userName, artType, caption }) => {
+const PieceCard = ({ id, title, imageUrl, userId, userName, artType, caption, hideUserName }) => {
     return (
         <Card>
-            <a href={`/profile/${userId}/pieces/${id}`}>
+            <a href={`/profile/${userId}/piece/${id}`}>
                 <Card.Img variant="top" src={imageUrl} title={caption} /></a >
             <Card.Body>
                 <Card.Title style={{ overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3 }}>{title}</Card.Title>
-                <Card.Text>{userName}</Card.Text>
+                {!hideUserName && <Card.Text>{userName}</Card.Text>}
                 <Badge bg="secondary">{artType}</Badge>
             </Card.Body>
         </Card >
