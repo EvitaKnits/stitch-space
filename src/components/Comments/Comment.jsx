@@ -10,16 +10,16 @@ const Comment = ({ comment }) => {
                     <div className="d-flex align-items-center">
                         <FontAwesomeIcon icon={faUser} className='me-2 icons' />
                         <Card.Title className="mb-0">
-                            {comment.firstName} {comment.lastName}
+                            {comment.profile.firstName} {comment.profile.lastName}
                         </Card.Title>
                     </div>
                 </div>
                 <Card.Text className='mb-2 text-start'>
-                    {comment.text}
+                    {comment.content}
                 </Card.Text>
             </Card.Body>
             <Card.Footer className="text-muted text-end small">
-                {new Date(comment.date).toLocaleString()}
+                {new Date(comment.createdAt).toLocaleString()}
             </Card.Footer>
         </Card>
     );

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Button, Container, Image, Row, Col, FloatingLabel } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Rating from "react-rating";
@@ -19,22 +19,7 @@ const DetailView = () => {
     const [editMode, setEditMode] = useState(false);
 
     // Mock data for comments
-    const [comments, setComments] = useState([
-        {
-            id: 1,
-            firstName: "Evita",
-            lastName: "Orrock",
-            text: "Amazing artwork!",
-            date: "2023-10-01",
-        },
-        {
-            id: 2,
-            firstName: "Alice",
-            lastName: "Wunderland",
-            text: "Love the colors used.",
-            date: "2023-10-02",
-        },
-    ]);
+    const [comments, setComments] = useState([]);
 
     // Handle user rating
     const handleUserRating = (value) => {
@@ -59,6 +44,25 @@ const DetailView = () => {
     }
 
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        if (!pieceData.loading){
+            try {
+                const fetchComments = async () => {
+                    try {
+                        const response = await axiosClient.get(`pieces/${pieceData.selectedPiece}/comments/`, {params: {page_size: 200}});
+                        setComments(response.data?.results || [])
+                    } catch (err) {
+                        console.log(err.response?.data);
+                    }
+                }
+                fetchComments();
+            } catch (error) {
+                // Handle errors gracefully
+                console.error("Error fetching comments (placeholder):", error);
+            }
+        }
+    }, [pieceData.loading, pieceData.selectedPiece])
 
     const handleDeleteClick = async () => {
         const confirmDelete = window.confirm("Are you sure you want to delete this piece?");
@@ -93,14 +97,21 @@ const DetailView = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newComment = {
-            id: comments.length + 1,
-            username: currentUser.username || "Anonymous",
-            text: comment,
-            date: new Date().toISOString().split("T")[0],
-        };
-        setComments([...comments, newComment]);
-        setComment("");
+        try {
+            const fetchComments = async () => {
+                try {
+                    const response = await axiosClient.post(`pieces/${pieceData.selectedPiece}/comments/`, {content:comment});
+                    setComments([...comments, response.data]);
+                    setComment("");
+                } catch (err) {
+                    console.log(err.response?.data);
+                }
+            }
+            fetchComments();
+        } catch (error) {
+            // Handle errors gracefully
+            console.error("Error fetching comments (placeholder):", error);
+        }
     };
 
     const handleChange = (event) => {
@@ -116,7 +127,9 @@ const DetailView = () => {
 
     if (pieceData.loading) {
         return '';
-    }
+    } 
+
+    
 
     return (
         <>
