@@ -28,7 +28,7 @@ const About = () => {
                         network of artists dedicated to the art of fibre.
                     </Card.Text>
                     {/* Only display sign up button if not signed in */}
-                    {!userContext.currentUser && (
+                    {!userContext.loading && !userContext.currentUser && (
                         <div className="d-flex justify-content-center">
                             <Button className={styles.SignUpButton} onClick={handleSignUpClick}>Sign Up</Button>
                         </div>

@@ -7,6 +7,7 @@ const Home = () => {
         <Fragment>
             <About />
             <h2>Featured Artists</h2>
+            Check out our featured embroidery artists. These three pieces have been selected to showcase the incredible diversity, creativity, and craftsmanship found in contemporary embroidery. Each work highlights unique techniques and perspectives, demonstrating how this traditional art form continues to evolve and inspire.
             <FeaturedArtists />
         </Fragment>
     );
