@@ -4,16 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 // This component filters the "artType" parameter on the Pieces requests
-const ArtTypeDropdown = ({ setParams}) => {
+const ArtTypeDropdown = ({ setParams }) => {
     const [selection, setSelection] = useState('');
 
     const handleSelect = (eventKey) => {
         // Stores selection to enable highlighting of selected item in the dropdown
         setSelection(eventKey);
-        setParams((prevParams) => ({
-            ...prevParams,
-            artType: eventKey,
-        }));
+        setParams((prevData) => {
+            const newData = { ...prevData }
+            delete newData["art_type"]
+            if (eventKey !== 'all') newData.art_type = eventKey
+            return newData;
+        });
     };
 
     return (
@@ -24,13 +26,14 @@ const ArtTypeDropdown = ({ setParams}) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-                <Dropdown.Item active={selection === 'Knitting'} eventKey="Knitting">Knitting</Dropdown.Item>
-                <Dropdown.Item active={selection === 'Crochet'} eventKey="Crochet">Crochet</Dropdown.Item>
-                <Dropdown.Item active={selection === 'Embroidery'} eventKey="Embroidery">Embroidery</Dropdown.Item>
-                <Dropdown.Item active={selection === 'Weaving'} eventKey="Weaving">Weaving</Dropdown.Item>
-                <Dropdown.Item active={selection === 'Dyeing'} eventKey="Dyeing">Dyeing</Dropdown.Item>
+                {!!selection && (<><Dropdown.Item active={selection === 'all'} eventKey="all">All</Dropdown.Item><Dropdown.Divider /></>)}
+                <Dropdown.Item active={selection === 'knitting'} eventKey="knitting">Knitting</Dropdown.Item>
+                <Dropdown.Item active={selection === 'crochet'} eventKey="crochet">Crochet</Dropdown.Item>
+                <Dropdown.Item active={selection === 'embroidery'} eventKey="embroidery">Embroidery</Dropdown.Item>
+                <Dropdown.Item active={selection === 'weaving'} eventKey="weaving">Weaving</Dropdown.Item>
+                <Dropdown.Item active={selection === 'dyeing'} eventKey="Dyeing">Dyeing</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item active={selection === 'Other'} eventKey="Other">Other</Dropdown.Item>
+                <Dropdown.Item active={selection === 'other'} eventKey="other">Other</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
     );

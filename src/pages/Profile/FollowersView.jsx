@@ -17,7 +17,7 @@ const FollowersView = () => {
                 <h2>{profileData.profile.firstName}&apos;s Followers</h2>
                 {followers && followers.length > 0 ? (
                     followers.map((follower) => (
-                        <FollowerCard key={follower.id} {...follower} />
+                        <FollowerCard key={follower.profileId} {...follower} />
                     ))
                 ) : (
                     <p>No followers yet.</p>

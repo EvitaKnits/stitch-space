@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Button, Form, Col, Row, FloatingLabel } from 'react-bootstrap';
+import axiosClient from '../../api/axiosDefaults';
 
-const ProfileEdit = ({ profile, onCancel }) => {
+const ProfileEdit = ({ profile, onCancel, onEdit }) => {
     const [formData, setFormData] = useState({
         firstName: profile.firstName || '',
         lastName: profile.lastName || '',
@@ -20,10 +21,17 @@ const ProfileEdit = ({ profile, onCancel }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Implement API call to update profile
-        console.log('Updated profile data:', formData);
-        // Exit edit mode after saving
-        onCancel();
+
+        const editProfile = async () => {
+            try {
+                await axiosClient.patch(`profile/${profile.id}/`, { ...formData });
+                // Close the edit view
+                onEdit()
+            } catch (err) {
+                console.log(err.response?.data);
+            }
+        }
+        editProfile();
     };
 
     return (

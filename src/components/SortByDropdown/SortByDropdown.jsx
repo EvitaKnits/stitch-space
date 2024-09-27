@@ -1,15 +1,21 @@
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpWideShort } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 
 // This component  updates the "sortBy" parameter on the Pieces requests
-const SortByDropdown = ({setParams}) => {
+const SortByDropdown = ({ setParams }) => {
+    const [selection, setSelection] = useState('');
 
     const handleSelect = (eventKey) => {
-        setParams((prevParams) => ({
-            ...prevParams,
-            sortBy: eventKey,
-        }));
+        // Stores selection to enable highlighting of selected item in the dropdown
+        setSelection(eventKey);
+        setParams((prevData) => {
+            const newData = { ...prevData }
+            delete newData["ordering"]
+            if (eventKey !== '') newData.ordering = eventKey
+            return newData;
+        });
     };
 
     return (
@@ -20,11 +26,11 @@ const SortByDropdown = ({setParams}) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-                <Dropdown.Item eventKey="nameAsc">Piece Name A-Z</Dropdown.Item>
-                <Dropdown.Item eventKey="nameDesc">Piece Name Z-A</Dropdown.Item>
-                <Dropdown.Item eventKey="mostLikes">Most Likes</Dropdown.Item>
-                <Dropdown.Item eventKey="leastLikes">Least Likes</Dropdown.Item>
-                <Dropdown.Item eventKey="mostDiscussed">Most Discussed</Dropdown.Item>
+                <Dropdown.Item active={selection === 'title'} eventKey="title">Piece Name A-Z</Dropdown.Item>
+                <Dropdown.Item active={selection === '-title'} eventKey="-title">Piece Name Z-A</Dropdown.Item>
+                <Dropdown.Item active={selection === 'rating'} eventKey="rating">Highest Rated</Dropdown.Item>
+                <Dropdown.Item active={selection === '-rating'} eventKey="-rating">Lowest Rated</Dropdown.Item>
+                <Dropdown.Item active={selection === 'comments'} eventKey="comments">Most Discussed</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
     );

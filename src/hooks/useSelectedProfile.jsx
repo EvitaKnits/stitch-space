@@ -4,7 +4,7 @@ import useDataFetcher from "./useDataFetcher";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const useSelectedProfile = () => {
-    const {currentUser} = useContext(CurrentUserContext)
+    const userContext = useContext(CurrentUserContext)
     const { profileId } = useParams();
 
     // Using "useCallback" to prevent infinite loop of re-rendering
@@ -15,19 +15,23 @@ const useSelectedProfile = () => {
     const {
         data,
         loading,
+        error,
+        setRefresh
     } = useDataFetcher(`/profile/${profileId}`, {}, dataMapper);
 
     const checkIsAuthUser = useCallback(() => {
-        if (!loading && data) {
-            return profileId === currentUser.pk.toString()
+        if (!userContext.loading && userContext.currentUser) {
+            return profileId === userContext.currentUser.pk.toString()
         }
-    }, [profileId, data, loading, currentUser])
+    }, [profileId, userContext.currentUser, userContext.loading])
 
     return {
         selectedProfile: profileId,
         isAuthUserProfile: checkIsAuthUser(),
         profile: data,
-        loading
+        loading,
+        error,
+        setRefresh
     }
 }
 

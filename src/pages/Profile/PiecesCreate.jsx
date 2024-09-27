@@ -1,23 +1,21 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Button, Form, Container, Row, Col, FloatingLabel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Piece from '../../components/Piece/Piece';
 import useSelectedProfile from '../../hooks/useSelectedProfile';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import axiosClient from '../../api/axiosDefaults';
 
 const PiecesCreate = () => {
+    const { currentUser, loading } = useContext(CurrentUserContext)
     const [formData, setFormData] = useState({
         title: '',
         artType: '',
-        imageUrl: '',
+        image: ''
     });
 
-    const {selectedProfile, isAuthUserProfile, loading} = useSelectedProfile();
+    const { selectedProfile } = useSelectedProfile();
 
     const navigate = useNavigate();
-
-    if (!loading && !isAuthUserProfile){
-        navigate(-1)
-    }
 
 
     const handleChange = (e) => {
@@ -30,21 +28,17 @@ const PiecesCreate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Create a new Piece instance using the form data
-        const newPiece = new Piece({
-            id: Date.now(),
-            title: formData.title,
-            artType: formData.artType,
-            imageUrl: formData.imageUrl,
-            userId: parseInt(selectedProfile, 10),
-            userName: 'Mock User',
-            rating: 0,
-        });
 
-        console.log('New piece created:', newPiece);
-
-        // Navigate back to the pieces list
-        navigate(`/profile/${selectedProfile}`);
+        const createPiece = async () => {
+            try {
+                await axiosClient.post(`pieces/create/`, { ...formData, profile: currentUser.pk });
+                // Navigate back to the pieces list
+                navigate(`/profile/${selectedProfile}`);
+            } catch (err) {
+                console.log(err.response?.data);
+            }
+        }
+        if (!loading && currentUser) createPiece();
     };
 
     const handleCancel = () => {
@@ -90,11 +84,11 @@ const PiecesCreate = () => {
                         </FloatingLabel>
                     </Col>
                 </Row>
-                <FloatingLabel controlId="formImageUrl" label="Image URL" className="mb-3">
+                <FloatingLabel controlId="formImage" label="Image URL" className="mb-3">
                     <Form.Control
                         type="text"
-                        name="imageUrl"
-                        value={formData.imageUrl}
+                        name="image"
+                        value={formData.image}
                         onChange={handleChange}
                         placeholder="Image URL"
                         required

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Button, Form, Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import axiosClient from '../../api/axiosDefaults';
 
-const PiecesEdit = ({ piece, onCancel }) => {
+const PiecesEdit = ({ piece, onCancel, onEdit }) => {
     const [formData, setFormData] = useState({
         title: piece.title || '',
         artType: piece.artType || '',
-        createdDate: piece.createdDate || '',
         image: piece.image || '',
     });
 
@@ -19,11 +19,20 @@ const PiecesEdit = ({ piece, onCancel }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Implement API call to update the piece
-        console.log('Updated piece data:', formData);
-        // Exit edit mode after saving
-        onCancel();
+
+        const editPiece = async () => {
+            try {
+                await axiosClient.patch(`pieces/${piece.id}/`, { ...formData });
+                // Close the edit view
+                onEdit()
+            } catch (err) {
+                console.log(err.response?.data);
+            }
+        }
+        editPiece();
     };
+
+    
 
     return (
         <Container>
@@ -44,13 +53,20 @@ const PiecesEdit = ({ piece, onCancel }) => {
                 <Row className="mb-3">
                     <Col>
                         <FloatingLabel controlId="formArtType" label="Art Type">
-                            <Form.Control
-                                type="text"
+                        <Form.Select
                                 name="artType"
                                 value={formData.artType}
                                 onChange={handleChange}
-                                placeholder="Art Type"
-                            />
+                                required
+                            >
+                                <option value="">Select Art Type</option>
+                                <option value="knitting">Knitting</option>
+                                <option value="embroidery">Embroidery</option>
+                                <option value="crochet">Crochet</option>
+                                <option value="weaving">Weaving</option>
+                                <option value="dyeing">Dyeing</option>
+                                <option value="other">Other</option>
+                            </Form.Select>
                         </FloatingLabel>
                     </Col>
                 </Row>

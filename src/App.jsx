@@ -17,9 +17,9 @@ import FollowingView from './pages/Profile/FollowingView';
 function App() {
     return (
         <div>
-            {/* This Provider allows components on all pages to access the authenticated user information */}
-            <CurrentUserProvider >
-                <Router>
+            <Router>
+                {/* This Provider allows components on all pages to access the authenticated user information */}
+                <CurrentUserProvider >
                     <Routes>
                         {/* This Route wraps all the other Routes as the main navigation */}
                         <Route element={<AppHeader />}>
@@ -39,8 +39,8 @@ function App() {
                             <Route path="*" element={<NotFound />} />
                         </Route>
                     </Routes>
-                </Router>
-            </CurrentUserProvider>
+                </CurrentUserProvider>
+            </Router>
         </div>
     );
 };

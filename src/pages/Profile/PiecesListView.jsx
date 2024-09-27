@@ -11,23 +11,28 @@ const ListView = () => {
     } = useSelectedProfile();
     const { profileId } = useParams();
 
-    const { pieces, loading, params, setParams } = usePiecesList({ profile__owner__id: profileId });
+    const { pieces, loading, setParams } = usePiecesList({ profile__owner__id: profileId });
     
     const handleArtTypeSelect = (eventKey) => {
-        setParams({ ...(params), artType: eventKey });
+        setParams((prevData) => {
+            const newData = { ...prevData }
+            delete newData["art_type"]
+            if (eventKey !== 'all') newData.art_type = eventKey
+            return newData;
+        });
     };
 
     // Modified pieces array to add button for new piece creation
-    const modifiedPieces = !loading && pieces.map((piece) => ({ ...piece, hideUserName: true }));
+    const modifiedPieces = !loading ? pieces.map((piece) => ({ ...piece, hideUserName: true })):[]
     if (!loading){
         if (isAuthUserProfile){
             modifiedPieces.unshift({
-                id: 'addNew',
+                id: 0,
                 isAddNewButton: true,
-                userId: profileId,
+                profile: profileId,
                 // Provide default values for required props
                 title: '',
-                imageUrl: '',
+                image: '',
                 userName: '',
                 artType: '',
                 caption: '',
@@ -47,7 +52,7 @@ const ListView = () => {
             <Nav.Item><Nav.Link eventKey="dyeing">Dyeing</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link eventKey="other">Other</Nav.Link></Nav.Item>
         </Nav>
-        <MasonryWall pieces={modifiedPieces} />
+        {modifiedPieces.length>0 && <MasonryWall pieces={modifiedPieces} />}
     </>
     )
 }

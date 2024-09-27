@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
 // This component updates the "search" parameter on the Pieces requests
-const SearchBar = ({setParams}) => {
+const SearchBar = ({ setParams }) => {
     const [inputValue, setInputValue] = useState("");
 
     const handleInputChange = (event) => {
@@ -13,13 +13,15 @@ const SearchBar = ({setParams}) => {
     useEffect(() => {
         // Named timeout so a new one isn't created each time
         const timeoutId = setTimeout(() => {
-            setParams((prevParams) => ({
-                ...prevParams,
-                search: inputValue,
-            }));
+            setParams((prevData) => {
+                const newData = {...prevData}
+                delete newData["search"]
+                if (inputValue !== '') newData.search = inputValue
+                return newData;
+              });
         }, 500);
         return () => clearTimeout(timeoutId);
-    }, [inputValue, setParams]);
+    }, [setParams, inputValue])
 
     return (
         <Form>

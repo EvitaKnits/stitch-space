@@ -1,16 +1,19 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Card, Button, Alert } from 'react-bootstrap';
 import axiosClient from '../../api/axiosDefaults';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const Register = () => {
+    const { logIn } = useContext(CurrentUserContext)
+    const navigate = useNavigate();
     const [validated, setValidated] = useState(false);
     const [errors, setErrors] = useState({});
     const [signUpData, setSignUpData] = useState({
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         email: "",
         password1: "",
         password2: "",
@@ -29,7 +32,9 @@ const Register = () => {
         event.preventDefault();
         if (form.checkValidity()) {
             try {
-                await axiosClient.post("/dj-rest-auth/registration/", signUpData);
+                await axiosClient.post("/dj-rest-auth/registration/", {...signUpData, username:signUpData.email});
+                await logIn({password:signUpData.password1, username:signUpData.email});
+                navigate('/');
             } catch (err) {
                 setErrors(err.response?.data);
             }
@@ -47,13 +52,13 @@ const Register = () => {
                 className="d-flex flex-column text-start gap-3"
             >
                 {/* First Name Field */}
-                <FloatingLabel controlId="firstName" label="First Name">
+                <FloatingLabel controlId="first_name" label="First Name">
                     <Form.Control
                         required
                         type="text"
                         placeholder="First name"
                         isInvalid={!!errors.firstName}
-                        name="firstName"
+                        name="first_name"
                         value={firstName}
                         onChange={handleChange}
                     />
@@ -63,13 +68,13 @@ const Register = () => {
                 </FloatingLabel>
 
                 {/* Last Name Field */}
-                <FloatingLabel controlId="lastName" label="Last Name">
+                <FloatingLabel controlId="last_name" label="Last Name">
                     <Form.Control
                         required
                         type="text"
                         placeholder="Last name"
                         isInvalid={!!errors.lastName}
-                        name="lastName"
+                        name="last_name"
                         value={lastName}
                         onChange={handleChange}
                     />

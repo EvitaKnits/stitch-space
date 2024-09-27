@@ -8,6 +8,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import PiecesEdit from "./PiecesEdit";
 import { Link, useNavigate } from 'react-router-dom';
 import Comment from '../../components/Comments/Comment'
+import axiosClient from '../../api/axiosDefaults';
 
 const DetailView = () => {
     const { currentUser } = useContext(CurrentUserContext);
@@ -35,14 +36,27 @@ const DetailView = () => {
         },
     ]);
 
-    const [userRating, setUserRating] = useState(0);
-
     // Handle user rating
     const handleUserRating = (value) => {
-        setUserRating(value);
-        // For now, just logging it
-        console.log(`User rated: ${value}`);
+        const ratePiece = async () => {
+            try {
+                if (!pieceData.piece.userRating) {
+                    await axiosClient.post(`pieces/${pieceData.selectedPiece}/ratings/`, { score: parseInt(value) });
+                } else {
+                    await axiosClient.put(`ratings/${pieceData.piece.userRating.id}/`, { score: parseInt(value) });
+                }
+                pieceData.setRefresh(true)
+            } catch (err) {
+                console.log(err.response?.data);
+            }
+        }
+        ratePiece();
     };
+
+    const handleEdit = () => {
+        pieceData.setRefresh(true);
+        setEditMode(false);
+    }
 
     const navigate = useNavigate();
 
@@ -51,14 +65,16 @@ const DetailView = () => {
         if (!confirmDelete) return;
 
         try {
-            // Placeholder for the API call to delete the piece
-            console.log('Pretending to delete piece');
-
-            // Simulate success response after deleting the piece
-            alert('Piece deleted successfully');
-
-            // Redirect user back to the profile or gallery after "deletion"
-            navigate(`/profile/${selectedProfile}`);
+            const createPiece = async () => {
+                try {
+                    await axiosClient.delete(`pieces/${pieceData.selectedPiece}/`);
+                    // Navigate back to the pieces list
+                    navigate(`/profile/${selectedProfile}`);
+                } catch (err) {
+                    console.log(err.response?.data);
+                }
+            }
+            if (!loading && currentUser) createPiece();
         } catch (error) {
             // Handle errors gracefully
             console.error("Error deleting the piece (placeholder):", error);
@@ -92,9 +108,9 @@ const DetailView = () => {
     };
 
     // Determine if current user is the owner of the piece
-    const isOwner = currentUser && pieceData.piece && currentUser.pk === pieceData.piece.userId;
+    const isOwner = currentUser && pieceData.piece && currentUser.pk === pieceData.piece.profile.id;
 
-    if (!pieceData.loading && !loading && pieceData.piece.userId.toString() !== selectedProfile) {
+    if (!pieceData.loading && !loading && pieceData.piece.profile.id.toString() !== selectedProfile) {
         return <div>Not this person&apos;s artwork</div>;
     }
 
@@ -106,7 +122,7 @@ const DetailView = () => {
         <>
             {editMode ? (
                 // Render PiecesEdit component
-                <PiecesEdit piece={pieceData.piece} onCancel={handleEditCancel} />
+                <PiecesEdit piece={pieceData.piece} onCancel={handleEditCancel} onEdit={handleEdit} />
             ) : (
                 <>
                     <Container>
@@ -136,7 +152,7 @@ const DetailView = () => {
                                         <Row>
                                             <strong>Your Rating:</strong>
                                             <Rating
-                                                initialRating={userRating}
+                                                initialRating={pieceData.piece?.userRating?.score || 0 }
                                                 emptySymbol="fa fa-star-o fa-xl"
                                                 fullSymbol="fa fa-star fa-xl"
                                                 fractions={2}
@@ -154,7 +170,7 @@ const DetailView = () => {
                                             emptySymbol="fa fa-star-o fa-md"
                                             fullSymbol="fa fa-star fa-md"
                                             fractions={2}
-                                            style={{ color: 'grey' }} 
+                                            style={{ color: 'grey' }}
                                         />
                                     </Row>
                                 </Container>

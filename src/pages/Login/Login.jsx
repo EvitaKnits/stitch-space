@@ -31,7 +31,7 @@ const Login = () => {
         event.preventDefault();
         if (form.checkValidity()) {
             try {
-                await logIn(loginData);
+                await logIn({...loginData, username:loginData.email});
                 navigate('/');
             } catch (err) {
                 setErrors(err.response?.data);

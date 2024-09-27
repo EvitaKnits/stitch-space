@@ -4,11 +4,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import styles from "./NavBar.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NavItem, Stack } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import NotificationsDropdown from '../NotificationsDropdown/NotificationsDropdown';
 
 const NavBar = () => {
     const { currentUser, logOut } = useContext(CurrentUserContext);
@@ -27,11 +27,11 @@ const NavBar = () => {
                     <Nav.Link href="/">Home</Nav.Link>
                     {/* The Feed and Explore pages are only displayed to logged-in users */}
                     {currentUser && (
-                            <>
-                                <Nav.Link href="/feed">Feed</Nav.Link>
-                                <Nav.Link href="/explore">Explore</Nav.Link>
-                            </>
-                        )}
+                        <>
+                            <Nav.Link href="/feed">Feed</Nav.Link>
+                            <Nav.Link href="/explore">Explore</Nav.Link>
+                        </>
+                    )}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
@@ -53,16 +53,7 @@ const NavBar = () => {
                         </>)}
                 </Dropdown.Menu>
             </Dropdown>
-            {currentUser && (
-            <Dropdown as={NavItem} className={`m-1`}>
-                <Dropdown.Toggle className={styles.NavDropdownButton} size="lg">
-                    <FontAwesomeIcon icon={faBell} className='icons' />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item className={styles.NavDropdownItem}>Placeholder</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-            )}
+            {currentUser && (<NotificationsDropdown />)}
         </Nav>
     </Stack>
     );

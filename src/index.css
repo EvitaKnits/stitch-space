@@ -3,6 +3,7 @@
     --bs-secondary: #8DBA92;
     --bs-primary-disabled: #5f7380;
     --bs-body-bg: #F4EDE4;
+    --bs-input-bg: #f6f5f4;
     --bs-body-color: #4A4A4A;
     --bs-success: #37A25E;
     --bs-danger: #E76F51;
@@ -86,4 +87,10 @@ a {
 
 .nav-link:hover {
     color: black; 
+}
+
+/* Input Styling */
+
+.form-floating > .form-control, .form-floating > .form-select {
+    background-color: var(--bs-input-bg);
 }

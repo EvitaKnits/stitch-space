@@ -5,7 +5,7 @@ import Piece from "../components/Piece/Piece";
 const usePiecesList = (intitialParams = {}) => {
     // Using "useCallback" to prevent infinite loop of re-rendering
     const dataMapper = useCallback((responseData) => {
-        return responseData.pieces.map((value) =>
+        return responseData.results.map((value) =>
             Piece.fromJSON(value)
         );
     }, []);

@@ -14,6 +14,7 @@ const useSelectedPiece = () => {
     const {
         data,
         loading,
+        setRefresh
     } = useDataFetcher(`/pieces/${pieceId}`, {}, dataMapper);
 
     useEffect(() => {
@@ -28,7 +29,8 @@ const useSelectedPiece = () => {
         selectedPiece: pieceId,
         isAuthUserPiece,
         piece: data,
-        loading
+        loading,
+        setRefresh
     }
 }
 

@@ -5,8 +5,8 @@ import { Follower } from "../components/Follower/Follower";
 const useFollowersList = (profileId, initialParams = {}) => {
     // Using "useCallback" to prevent unnecessary re-renders
     const dataMapper = useCallback((responseData) => {
-        return responseData.followers.map((value) =>
-            Follower.fromJSON(value)
+        return responseData.results.map((value) =>
+            Follower.fromFollowerJSON(value)
         );
     }, []);
 
@@ -15,7 +15,7 @@ const useFollowersList = (profileId, initialParams = {}) => {
         loading,
         params,
         setParams,
-    } = useDataFetcher(`/profiles/${profileId}/followers`, initialParams, dataMapper);
+    } = useDataFetcher(`/profile/${profileId}/followers`, initialParams, dataMapper);
 
     return {
         followers: data,

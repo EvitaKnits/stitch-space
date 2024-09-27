@@ -413,11 +413,12 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 ## 9. Future Development 
 
 - Add Password Reset functionality for users that have forgotten their password or want to change it. 
+- Provide functionality for directly uploading images to the site rather than using URLs of images hosted elsewhere
 - Add a user-level rating which averages the ratings on all their pieces and displays it in the Profile sidebar of the My Stitch Space page.
-- Add filters to uploaded images.
 - Expand to more obscure fibre arts.
 - Allow users to indicate where a piece belongs to more than one art type.
 - Allow users to be included on the same piece where they've collaborated.
+- Improve endpoints so that it is not possible to create nonsensical entries when hitting them directly, e.g. creating a notification for a user that tells them something relevant to a different user. 
 
 ## 10. Credits
 

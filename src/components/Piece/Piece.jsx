@@ -4,14 +4,14 @@ import { Masonry } from "masonic";
 import styles from "./Piece.module.css";
 import { useNavigate } from "react-router-dom";
 
-const PieceCard = ({ id, title, imageUrl, userId, userName, artType, caption, hideUserName }) => {
+const PieceCard = ({ id, title, image, profileId, firstName, lastName, artType, caption, hideUserName }) => {
     return (
         <Card>
-            <a href={`/profile/${userId}/piece/${id}`}>
-                <Card.Img variant="top" src={imageUrl} title={caption} /></a >
+            <a href={`/profile/${profileId}/piece/${id}`}>
+                <Card.Img variant="top" src={image} title={caption} /></a >
             <Card.Body>
                 <Card.Title style={{ overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3 }}>{title}</Card.Title>
-                {!hideUserName && <Card.Text>{userName}</Card.Text>}
+                {!hideUserName && <Card.Text>{`${firstName} ${lastName}`}</Card.Text>}
                 <Badge bg="secondary">{artType}</Badge>
             </Card.Body>
         </Card >
@@ -34,7 +34,7 @@ const MasonryTile = ({ data }) => {
                     <Button
                         variant="primary"
                         onClick={() => {
-                            navigate(`/profile/${data.userId}/pieces/new`);
+                            navigate(`/profile/${data.profile}/piece/new`);
                         }}
                     >
                         Add a new piece
@@ -47,11 +47,11 @@ const MasonryTile = ({ data }) => {
     }
 };
 
-export const PieceCarouselItem = ({ id, title, imageUrl, userName, artType, caption }) => {
+export const PieceCarouselItem = ({ id, title, image, profile, userName, artType, caption }) => {
     return (
         <Fragment>
-            <a href={`/pieces/${id}`}>
-                <Image src={imageUrl} fluid text={caption} />
+            <a href={`/profile/${profile}/pieces/${id}`}>
+                <Image src={image} fluid text={caption} />
             </a>
             <Carousel.Caption className={styles.CarouselCaption}>
                 <h3>{userName}- {title} - {artType}</h3>
@@ -66,31 +66,67 @@ export default class Piece {
     constructor({
         id = 0,
         title = "Example Title",
-        imageUrl = "./src/assets/examplecarouselimage.jpg",
-        userId = 0,
-        userName = "Example User",
+        image = "https://picsum.photos/200/300",
+        profile = {},
         artType = "Embroidery",
         rating = 2,
-    }) {
+        userRating = {},
+        createdAt = "2024-09-20T14:34:47.892221Z",
+        updatedAt = "2024-09-25T19:24:50.511153Z",
+    } = {}) {
         this.id = id;
         this.title = title;
-        this.imageUrl = imageUrl;
-        this.userId = userId;
-        this.userName = userName;
+        this.image = image;
+
+        const {
+            id: profileId = 12,
+            firstName = "Example",
+            lastName = "User",
+            email = "example@user.com",
+            biography = "Example user bio",
+            image: profileImage = "https://picsum.photos/id/237/300",
+            lastVisitedNotifications = null,
+            createdAt: profileCreatedAt = "2024-09-25T20:57:43.381714Z",
+            updatedAt: profileUpdatedAt = "2024-09-25T20:57:43.381724Z"
+        } = profile;
+
+        this.profileId = profileId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.biography = biography;
+        this.profileImage = profileImage;
+        this.lastVisitedNotifications = lastVisitedNotifications;
+        this.profileCreatedAt = profileCreatedAt;
+        this.profileUpdatedAt = profileUpdatedAt;
+
+        const {
+            ratingId = null,
+            score = 0,
+        } = userRating || {};
+
+        this.ratingId = ratingId;
+        this.score = score;
+
         this.artType = artType;
         this.rating = rating;
-        this.caption = `"${title}" by ${userName} (${artType})`;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+
+        this.caption = `"${title}" by ${firstName} ${lastName} (${artType})`;
     }
 
     static fromJSON(value) {
         return new Piece({
             id: value.id,
             title: value.title,
-            imageUrl: value.image,
-            userId: value.userId,
-            userName: value.userName,
+            image: value.image,
+            profile: value.profile,
             artType: value.artType,
             rating: value.rating,
+            userRating: value.userRating,
+            createdAt: value.createdAt,
+            updatedAt: value.updatedAt,
         });
     }
 }

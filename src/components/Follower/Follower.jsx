@@ -1,7 +1,7 @@
 import { Card, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const FollowerCard = ({ id, fullName, imageUrl }) => {
+const FollowerCard = ({ profileId, fullName, imageUrl }) => {
     return (
         <Card className="mb-3">
             <Card.Body className="d-flex align-items-center">
@@ -14,7 +14,7 @@ const FollowerCard = ({ id, fullName, imageUrl }) => {
                 />
                 <div>
                     <Card.Title className="mb-0">
-                        <Link to={`/profile/${id}`}>{fullName}</Link>
+                        <Link to={`/profile/${profileId}`}>{fullName}</Link>
                     </Card.Title>
                 </div>
             </Card.Body>
@@ -44,7 +44,7 @@ export class Follower {
         this.createdAt = createdAt;
     }
 
-    static fromJSON(value) {
+    static fromFollowerJSON(value) {
         return new Follower({
             id: value.id,
             followerProfile: {
@@ -52,6 +52,19 @@ export class Follower {
                 firstName: value.followerProfile?.firstName,
                 lastName: value.followerProfile?.lastName,
                 image: value.followerProfile?.image,
+            },
+            createdAt: value.createdAt,
+        });
+    }
+
+    static fromFollowingJSON(value) {
+        return new Follower({
+            id: value.id,
+            followerProfile: {
+                id: value.followedProfile?.id,
+                firstName: value.followedProfile?.firstName,
+                lastName: value.followedProfile?.lastName,
+                image: value.followedProfile?.image,
             },
             createdAt: value.createdAt,
         });
