@@ -15,6 +15,9 @@ const useFollowingList = (profileId, initialParams = {}) => {
         loading,
         params,
         setParams,
+        pagination,
+        handleNextPage,
+        handlePrevPage,
     } = useDataFetcher(`/profile/${profileId}/following`, initialParams, dataMapper);
 
     return {
@@ -22,6 +25,9 @@ const useFollowingList = (profileId, initialParams = {}) => {
         loading,
         params,
         setParams,
+        pagination,
+        handleNextPage,
+        handlePrevPage,
     };
 };
 
