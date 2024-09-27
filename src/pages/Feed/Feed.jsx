@@ -3,11 +3,11 @@ import usePiecesList from "../../hooks/usePiecesList";
 
 const Feed = () => {
     // Providing the custom context for Pieces to the context hook
-    const { loading, pieces } = usePiecesList();
+    const { loading, pieces, ...rest } = usePiecesList();
 
     return (
         <div className="p-3">
-            {(!loading && pieces) ?<MasonryWall pieces={pieces}/> : ''}
+            {(!loading && pieces) ?<MasonryWall pieces={pieces} {...rest}/> : ''}
         </div>
     )
 };

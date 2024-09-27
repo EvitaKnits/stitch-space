@@ -11,7 +11,7 @@ const ListView = () => {
     } = useSelectedProfile();
     const { profileId } = useParams();
 
-    const { pieces, loading, setParams } = usePiecesList({ profile__owner__id: profileId });
+    const { pieces, loading, setParams, ...rest } = usePiecesList({ profile__owner__id: profileId });
     
     const handleArtTypeSelect = (eventKey) => {
         setParams((prevData) => {
@@ -52,7 +52,7 @@ const ListView = () => {
             <Nav.Item><Nav.Link eventKey="dyeing">Dyeing</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link eventKey="other">Other</Nav.Link></Nav.Item>
         </Nav>
-        {modifiedPieces.length>0 && <MasonryWall pieces={modifiedPieces} />}
+        {modifiedPieces.length>0 && <MasonryWall pieces={modifiedPieces}  {...rest}/>}
     </>
     )
 }

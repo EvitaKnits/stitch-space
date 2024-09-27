@@ -9,10 +9,9 @@ const useDataFetcher = (endpoint, initialParams = {}, dataMapper = (data) => dat
     const [refresh, setRefresh] = useState(false);
     const [params, setParams] = useState(initialParams);
     const [pagination, setPagination] = useState({
-        page: 1,
-        pageSize: 10,
-        totalPages: 0,
-        total: 0,
+        count: 0,
+        nextPage: null,
+        previousPage: null,
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -24,14 +23,14 @@ const useDataFetcher = (endpoint, initialParams = {}, dataMapper = (data) => dat
             setLoading(true);
             setError(null);
             try {
-                const response = await fetchData(endpoint, { ...params, page: pagination.page });
+                const response = await fetchData(endpoint, { ...params });
                 // Maps data for reusability in other resources
                 const mappedData = dataMapper(response);
                 setData(mappedData);
 
                 // Applies pagination where relevant
-                if (response.pagination) {
-                    setPagination(response.pagination);
+                if (response.count) {
+                    setPagination({count:response.count, nextPage:response.nextPage, previousPage:response.nextPage === "3"?"1":response.previousPage});
                 }
             } catch (err) {
                 setError(err);
@@ -49,11 +48,11 @@ const useDataFetcher = (endpoint, initialParams = {}, dataMapper = (data) => dat
     }, [endpoint, params, pagination.page, dataMapper, navigate, refresh]);
 
     const handleNextPage = () => {
-        setPagination((prev) => ({ ...prev, page: prev.page + 1 }));
+        setParams((prev) => ({ ...prev, page: pagination.nextPage }));
     };
 
     const handlePrevPage = () => {
-        setPagination((prev) => ({ ...prev, page: Math.max(prev.page - 1, 1) }));
+        setParams((prev) => ({ ...prev, page: pagination.previousPage }));
     };
 
     return {

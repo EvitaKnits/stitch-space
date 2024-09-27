@@ -16,13 +16,19 @@ const usePiecesList = (intitialParams = {}) => {
         loading,
         params,
         setParams,
+        pagination,
+        handleNextPage,
+        handlePrevPage,
     } = useDataFetcher("/pieces", intitialParams, dataMapper);
 
     return {
         pieces: data,
         loading,
         params,
-        setParams
+        setParams,
+        pagination,
+        handleNextPage,
+        handlePrevPage,
     }
 }
 

@@ -10,7 +10,8 @@ const Explore = () => {
         pieces,
         loading,
         setParams,
-        params
+        params,
+        ...rest
     } = usePiecesList()
 
     return (
@@ -31,7 +32,7 @@ const Explore = () => {
                 </Stack>
             </Stack>
             {!loading && pieces && (
-                <MasonryWall pieces={pieces} />
+                <MasonryWall pieces={pieces}  {...rest}/>
             )}
         </div>
     );

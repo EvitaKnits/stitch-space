@@ -1,8 +1,10 @@
 import { Fragment } from 'react';
-import { Badge, Card, Carousel, Image, Button } from 'react-bootstrap';
+import { Badge, Card, Carousel, Image, Button, Stack } from 'react-bootstrap';
 import { Masonry } from "masonic";
 import styles from "./Piece.module.css";
 import { useNavigate } from "react-router-dom";
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PieceCard = ({ id, title, image, profileId, firstName, lastName, artType, caption, hideUserName }) => {
     return (
@@ -19,9 +21,15 @@ const PieceCard = ({ id, title, image, profileId, firstName, lastName, artType, 
     );
 };
 
-export const MasonryWall = ({ pieces }) => {
+export const MasonryWall = ({ pieces, pagination, handleNextPage, handlePrevPage }) => {
     // 'Masonic' library handles the tiling of the Piece components
-    return <Masonry items={pieces} render={MasonryTile} columnGutter={5} className="p-5" />
+    return (<>
+        <Masonry items={pieces} render={MasonryTile} columnGutter={5} className="p-5" />
+        <Stack direction="horizontal" gap={3}>
+            {pagination.previousPage && <Button className='' onClick={handlePrevPage}><FontAwesomeIcon icon={faArrowLeft} /> Previous page</Button>}
+            {pagination.nextPage && <Button className='ms-auto' onClick={handleNextPage}>Next page <FontAwesomeIcon icon={faArrowRight} /></Button>}
+        </Stack>
+    </>)
 }
 
 const MasonryTile = ({ data }) => {
