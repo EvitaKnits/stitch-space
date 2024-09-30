@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 import styles from './Piece.module.css'
 
-const PieceCard = ({
+export const PieceCard = ({
     id,
     title,
     image,
@@ -102,7 +102,8 @@ export const PieceCarouselItem = ({
     title,
     image,
     profile,
-    userName,
+    firstName,
+    lastName,
     artType,
     caption,
 }) => {
@@ -113,7 +114,7 @@ export const PieceCarouselItem = ({
             </a>
             <Carousel.Caption className={styles.CarouselCaption}>
                 <h3>
-                    {userName}- {title} - {artType}
+                    {firstName} {lastName} - {title} - {artType}
                 </h3>
             </Carousel.Caption>
         </Fragment>

@@ -1,37 +1,33 @@
 import { useState } from 'react'
 import { Carousel, CarouselItem } from 'react-bootstrap'
-
-import Piece, { PieceCarouselItem } from '../Piece/Piece'
 import styles from './FeaturedArtists.module.css'
+import { PieceCard } from '../Piece/Piece'
+import usePiecesList from '../../hooks/usePiecesList'
 
-const featuredPieces = []
-
-// Development-only Code Start
-
-featuredPieces.push(
-    new Piece({ id: 1, userName: 'Jeff', title: 'Has all the money' })
-)
-featuredPieces.push(new Piece({ id: 2, userName: 'Mark', title: 'Marky Mark' }))
-featuredPieces.push(new Piece({ id: 3, userName: 'Tim', title: 'Tam' }))
-
-// Development-only Code End
 
 const FeaturedArtists = () => {
     const [index, setIndex] = useState(0)
+    const { pieces, loading } = usePiecesList({
+        featured: true,
+    })
+
 
     const handleSelect = (selectedIndex) => {
         setIndex(selectedIndex)
     }
 
+    if (loading) return '';
+
     return (
         <Carousel
-            className={styles.Carousel}
+            className={styles.Carousel + 'p-2'}
             activeIndex={index}
             onSelect={handleSelect}
+            indicators={false}
         >
-            {featuredPieces.map((value) => (
-                <CarouselItem key={value.id}>
-                    <PieceCarouselItem {...value} />
+            {pieces.map((value) => (
+                <CarouselItem key={value.id} >
+                    <PieceCard {...value} />
                 </CarouselItem>
             ))}
         </Carousel>
