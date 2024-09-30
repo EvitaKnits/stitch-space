@@ -6,7 +6,7 @@
 
 .About button.SignUpButton:hover,
 .About button.SignUpButton:active,
-.About button.SignUpButton:focus  {
+.About button.SignUpButton:focus {
     background-color: var(--bs-secondary);
     border-color: var(--bs-secondary);
     color: #242424;

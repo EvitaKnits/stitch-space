@@ -1,50 +1,60 @@
-import { useContext, useState } from 'react';
-import { Button, Form, Container, Row, Col, FloatingLabel } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import useSelectedProfile from '../../hooks/useSelectedProfile';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import axiosClient from '../../api/axiosDefaults';
+import { useContext, useState } from 'react'
+import {
+    Button,
+    Col,
+    Container,
+    FloatingLabel,
+    Form,
+    Row,
+} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+
+import axiosClient from '../../api/axiosDefaults'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
+import useSelectedProfile from '../../hooks/useSelectedProfile'
 
 const PiecesCreate = () => {
     const { currentUser, loading } = useContext(CurrentUserContext)
     const [formData, setFormData] = useState({
         title: '',
         artType: '',
-        image: ''
-    });
+        image: '',
+    })
 
-    const { selectedProfile } = useSelectedProfile();
+    const { selectedProfile } = useSelectedProfile()
 
-    const navigate = useNavigate();
-
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
+        const { name, value } = e.target
+        setFormData((prevData) => ({
             ...prevData,
-            [name]: value
-        }));
-    };
+            [name]: value,
+        }))
+    }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         const createPiece = async () => {
             try {
-                await axiosClient.post(`pieces/create/`, { ...formData, profile: currentUser.pk });
+                await axiosClient.post(`pieces/create/`, {
+                    ...formData,
+                    profile: currentUser.pk,
+                })
                 // Navigate back to the pieces list
-                navigate(`/profile/${selectedProfile}`);
+                navigate(`/profile/${selectedProfile}`)
             } catch (err) {
-                console.log(err.response?.data);
+                console.log(err.response?.data)
             }
         }
-        if (!loading && currentUser) createPiece();
-    };
+        if (!loading && currentUser) createPiece()
+    }
 
     const handleCancel = () => {
         // Navigate back to the pieces list or previous page
-        navigate(-1);
-    };
+        navigate(-1)
+    }
 
     return (
         <Container>
@@ -84,7 +94,11 @@ const PiecesCreate = () => {
                         </FloatingLabel>
                     </Col>
                 </Row>
-                <FloatingLabel controlId="formImage" label="Image URL" className="mb-3">
+                <FloatingLabel
+                    controlId="formImage"
+                    label="Image URL"
+                    className="mb-3"
+                >
                     <Form.Control
                         type="text"
                         name="image"
@@ -94,11 +108,15 @@ const PiecesCreate = () => {
                         required
                     />
                 </FloatingLabel>
-                <Button variant="primary" type="submit">Create Piece</Button>{' '}
-                <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+                <Button variant="primary" type="submit">
+                    Create Piece
+                </Button>{' '}
+                <Button variant="secondary" onClick={handleCancel}>
+                    Cancel
+                </Button>
             </Form>
         </Container>
-    );
-};
+    )
+}
 
-export default PiecesCreate;
+export default PiecesCreate

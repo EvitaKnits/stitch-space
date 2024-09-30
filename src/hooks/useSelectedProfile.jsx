@@ -1,23 +1,23 @@
-import { useCallback, useContext } from "react";
-import { useParams } from "react-router-dom";
-import useDataFetcher from "./useDataFetcher";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useCallback, useContext } from 'react'
+import { useParams } from 'react-router-dom'
+
+import { CurrentUserContext } from '../contexts/CurrentUserContext'
+import useDataFetcher from './useDataFetcher'
 
 const useSelectedProfile = () => {
     const userContext = useContext(CurrentUserContext)
-    const { profileId } = useParams();
+    const { profileId } = useParams()
 
     // Using "useCallback" to prevent infinite loop of re-rendering
     const dataMapper = useCallback((responseData) => {
         return responseData
-    }, []);
+    }, [])
 
-    const {
-        data,
-        loading,
-        error,
-        setRefresh
-    } = useDataFetcher(`/profile/${profileId}`, {}, dataMapper);
+    const { data, loading, error, setRefresh } = useDataFetcher(
+        `/profile/${profileId}`,
+        {},
+        dataMapper
+    )
 
     const checkIsAuthUser = useCallback(() => {
         if (!userContext.loading && userContext.currentUser) {
@@ -31,8 +31,8 @@ const useSelectedProfile = () => {
         profile: data,
         loading,
         error,
-        setRefresh
+        setRefresh,
     }
 }
 
-export default useSelectedProfile;
+export default useSelectedProfile

@@ -1,38 +1,44 @@
-import { useState } from 'react';
-import { Button, Form, Container, Row, Col, FloatingLabel } from 'react-bootstrap';
-import axiosClient from '../../api/axiosDefaults';
+import { useState } from 'react'
+import {
+    Button,
+    Col,
+    Container,
+    FloatingLabel,
+    Form,
+    Row,
+} from 'react-bootstrap'
+
+import axiosClient from '../../api/axiosDefaults'
 
 const PiecesEdit = ({ piece, onCancel, onEdit }) => {
     const [formData, setFormData] = useState({
         title: piece.title || '',
         artType: piece.artType || '',
         image: piece.image || '',
-    });
+    })
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
+        const { name, value } = e.target
+        setFormData((prevData) => ({
             ...prevData,
-            [name]: value
-        }));
-    };
+            [name]: value,
+        }))
+    }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         const editPiece = async () => {
             try {
-                await axiosClient.patch(`pieces/${piece.id}/`, { ...formData });
+                await axiosClient.patch(`pieces/${piece.id}/`, { ...formData })
                 // Close the edit view
                 onEdit()
             } catch (err) {
-                console.log(err.response?.data);
+                console.log(err.response?.data)
             }
         }
-        editPiece();
-    };
-
-    
+        editPiece()
+    }
 
     return (
         <Container>
@@ -53,7 +59,7 @@ const PiecesEdit = ({ piece, onCancel, onEdit }) => {
                 <Row className="mb-3">
                     <Col>
                         <FloatingLabel controlId="formArtType" label="Art Type">
-                        <Form.Select
+                            <Form.Select
                                 name="artType"
                                 value={formData.artType}
                                 onChange={handleChange}
@@ -70,7 +76,11 @@ const PiecesEdit = ({ piece, onCancel, onEdit }) => {
                         </FloatingLabel>
                     </Col>
                 </Row>
-                <FloatingLabel controlId="formImage" label="Image URL" className="mb-3">
+                <FloatingLabel
+                    controlId="formImage"
+                    label="Image URL"
+                    className="mb-3"
+                >
                     <Form.Control
                         type="text"
                         name="image"
@@ -80,11 +90,15 @@ const PiecesEdit = ({ piece, onCancel, onEdit }) => {
                     />
                 </FloatingLabel>
                 {/* Add other fields as needed */}
-                <Button variant="primary" type="submit">Save Changes</Button>{' '}
-                <Button variant="secondary" onClick={onCancel}>Cancel</Button>
+                <Button variant="primary" type="submit">
+                    Save Changes
+                </Button>{' '}
+                <Button variant="secondary" onClick={onCancel}>
+                    Cancel
+                </Button>
             </Form>
         </Container>
-    );
-};
+    )
+}
 
-export default PiecesEdit;
+export default PiecesEdit

@@ -1,2 +1,2 @@
-// Using this with Vitest 
-import '@testing-library/jest-dom';
+// Using this with Vitest
+import '@testing-library/jest-dom'

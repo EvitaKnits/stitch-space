@@ -1,14 +1,13 @@
-import { useCallback } from "react";
-import useDataFetcher from "./useDataFetcher";
-import Piece from "../components/Piece/Piece";
+import { useCallback } from 'react'
+
+import Piece from '../components/Piece/Piece'
+import useDataFetcher from './useDataFetcher'
 
 const usePiecesList = (intitialParams = {}) => {
     // Using "useCallback" to prevent infinite loop of re-rendering
     const dataMapper = useCallback((responseData) => {
-        return responseData.results.map((value) =>
-            Piece.fromJSON(value)
-        );
-    }, []);
+        return responseData.results.map((value) => Piece.fromJSON(value))
+    }, [])
 
     // Using the custom hook that gets the data
     const {
@@ -19,7 +18,7 @@ const usePiecesList = (intitialParams = {}) => {
         pagination,
         handleNextPage,
         handlePrevPage,
-    } = useDataFetcher("/pieces", intitialParams, dataMapper);
+    } = useDataFetcher('/pieces', intitialParams, dataMapper)
 
     return {
         pieces: data,
@@ -32,4 +31,4 @@ const usePiecesList = (intitialParams = {}) => {
     }
 }
 
-export default usePiecesList;
+export default usePiecesList

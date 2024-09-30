@@ -1,49 +1,56 @@
 import { useContext, useState } from 'react'
-import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { Card, Button, Alert } from 'react-bootstrap';
-import axiosClient from '../../api/axiosDefaults';
-import { Link, useNavigate } from 'react-router-dom';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { Alert, Button, Card } from 'react-bootstrap'
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Form from 'react-bootstrap/Form'
+import { Link, useNavigate } from 'react-router-dom'
+
+import axiosClient from '../../api/axiosDefaults'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 
 const Register = () => {
     const { logIn } = useContext(CurrentUserContext)
-    const navigate = useNavigate();
-    const [validated, setValidated] = useState(false);
-    const [errors, setErrors] = useState({});
+    const navigate = useNavigate()
+    const [validated, setValidated] = useState(false)
+    const [errors, setErrors] = useState({})
     const [signUpData, setSignUpData] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        password1: "",
-        password2: "",
-    });
-    const { firstName, lastName, email, password1, password2 } = signUpData;
+        first_name: '',
+        last_name: '',
+        email: '',
+        password1: '',
+        password2: '',
+    })
+    const { firstName, lastName, email, password1, password2 } = signUpData
 
     const handleChange = (event) => {
         setSignUpData({
             ...signUpData,
             [event.target.name]: event.target.value,
-        });
-    };
+        })
+    }
 
     const handleSubmit = async (event) => {
-        const form = event.currentTarget;
-        event.preventDefault();
+        const form = event.currentTarget
+        event.preventDefault()
         if (form.checkValidity()) {
             try {
-                await axiosClient.post("/dj-rest-auth/registration/", {...signUpData, username:signUpData.email});
-                await logIn({password:signUpData.password1, username:signUpData.email});
-                navigate('/');
+                await axiosClient.post('/dj-rest-auth/registration/', {
+                    ...signUpData,
+                    username: signUpData.email,
+                })
+                await logIn({
+                    password: signUpData.password1,
+                    username: signUpData.email,
+                })
+                navigate('/')
             } catch (err) {
-                setErrors(err.response?.data);
+                setErrors(err.response?.data)
             }
         }
-        setValidated(true);
-    };
+        setValidated(true)
+    }
 
     return (
-        <Card className='container-sm col-md-6 mx-auto mt-5'>
+        <Card className="container-sm col-md-6 mx-auto mt-5">
             <h1 className="m-3">Sign Up</h1>
             <Form
                 noValidate
@@ -148,7 +155,8 @@ const Register = () => {
                     </Alert>
                 ))}
             </Form>
-        </Card>)
-};
+        </Card>
+    )
+}
 
-export default Register;
+export default Register

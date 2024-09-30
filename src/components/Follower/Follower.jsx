@@ -1,5 +1,5 @@
-import { Card, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Card, Image } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const FollowerCard = ({ profileId, fullName, imageUrl }) => {
     return (
@@ -19,9 +19,9 @@ const FollowerCard = ({ profileId, fullName, imageUrl }) => {
                 </div>
             </Card.Body>
         </Card>
-    );
-};
-export default FollowerCard;
+    )
+}
+export default FollowerCard
 
 // Follower Model Class: Maps the data from JSON to the model
 export class Follower {
@@ -29,19 +29,19 @@ export class Follower {
         id = 0,
         followerProfile: {
             id: profileId = 0,
-            firstName = "Alice",
-            lastName = "Alison",
+            firstName = 'Alice',
+            lastName = 'Alison',
             image = null,
-        } = {},  // Default to an empty object in case followerProfile is not provided
-        createdAt = "2024-09-20T11:24:08.958484Z",
+        } = {}, // Default to an empty object in case followerProfile is not provided
+        createdAt = '2024-09-20T11:24:08.958484Z',
     }) {
-        this.id = id; // Follower ID
-        this.profileId = profileId; // Profile ID of the follower
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.imageUrl = image;
-        this.fullName = `${firstName} ${lastName}`;
-        this.createdAt = createdAt;
+        this.id = id // Follower ID
+        this.profileId = profileId // Profile ID of the follower
+        this.firstName = firstName
+        this.lastName = lastName
+        this.imageUrl = image
+        this.fullName = `${firstName} ${lastName}`
+        this.createdAt = createdAt
     }
 
     static fromFollowerJSON(value) {
@@ -54,7 +54,7 @@ export class Follower {
                 image: value.followerProfile?.image,
             },
             createdAt: value.createdAt,
-        });
+        })
     }
 
     static fromFollowingJSON(value) {
@@ -67,6 +67,6 @@ export class Follower {
                 image: value.followedProfile?.image,
             },
             createdAt: value.createdAt,
-        });
+        })
     }
 }

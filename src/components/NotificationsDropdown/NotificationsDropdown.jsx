@@ -1,34 +1,48 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faComment, faEye, faStar } from '@fortawesome/free-solid-svg-icons';
-import styles from "./NotificationsDropdown.module.css";
-import { NavItem } from 'react-bootstrap';
-import { useContext, useEffect, useState } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import axiosClient from '../../api/axiosDefaults';
+import {
+    faBell,
+    faComment,
+    faEye,
+    faStar,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useContext, useEffect, useState } from 'react'
+import { NavItem } from 'react-bootstrap'
+import Dropdown from 'react-bootstrap/Dropdown'
+
+import axiosClient from '../../api/axiosDefaults'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
+import styles from './NotificationsDropdown.module.css'
 
 const NotificationsDropdown = () => {
     const { loading, currentUser } = useContext(CurrentUserContext)
-    const [notifications, setNotifications] = useState([]);
-    const [lastVisited, setlastVisited] = useState(null);
-    const hasNewNotifications = false;
+    const [notifications, setNotifications] = useState([])
+    const [lastVisited, setlastVisited] = useState(null)
+    const hasNewNotifications = false
 
     useEffect(() => {
         if (!loading && currentUser) {
             try {
                 const fetchComments = async () => {
                     try {
-                        const response = await axiosClient.get(`profile/${currentUser.pk}/notifications/`, { params: { page_size: 200 } });
+                        const response = await axiosClient.get(
+                            `profile/${currentUser.pk}/notifications/`,
+                            { params: { page_size: 200 } }
+                        )
                         setNotifications(response.data?.results || [])
-                        if (lastVisited === null) setlastVisited(new Date(response.data?.results[0]?.recipient?.lastVisitedNotifications))
+                        if (lastVisited === null)
+                            setlastVisited(
+                                new Date(
+                                    response.data?.results[0]?.recipient?.lastVisitedNotifications
+                                )
+                            )
                     } catch (err) {
-                        console.log(err.response?.data);
+                        console.log(err.response?.data)
                     }
                 }
-                fetchComments();
+                fetchComments()
             } catch (error) {
                 // Handle errors gracefully
-                console.error("Error fetching comments (placeholder):", error);
+                console.error('Error fetching comments (placeholder):', error)
             }
         }
     }, [loading, currentUser, lastVisited])
@@ -36,59 +50,90 @@ const NotificationsDropdown = () => {
     const updateLastViewedTime = () => {
         const updateProfile = async () => {
             try {
-                await axiosClient.patch(`profile/${currentUser.pk}/`, { lastVisitedNotifications: new Date().toISOString() });
+                await axiosClient.patch(`profile/${currentUser.pk}/`, {
+                    lastVisitedNotifications: new Date().toISOString(),
+                })
             } catch (err) {
-                console.log(err.response?.data);
+                console.log(err.response?.data)
             }
         }
-        updateProfile();
+        updateProfile()
     }
 
     const renderNotificationText = ({ interactionType, actor, piece }) => {
         switch (interactionType) {
             case 'follow':
-                return <><FontAwesomeIcon
-                    icon={faEye}
-                    className='icons me-2'
-                    style={{ color: 'blue' }}
-                />{`${actor.firstName} ${actor.lastName} started following you`}</>
+                return (
+                    <>
+                        <FontAwesomeIcon
+                            icon={faEye}
+                            className="icons me-2"
+                            style={{ color: 'blue' }}
+                        />
+                        {`${actor.firstName} ${actor.lastName} started following you`}
+                    </>
+                )
             case 'rating':
-                return <><FontAwesomeIcon
-                    icon={faStar}
-                    className='icons me-2'
-                    style={{ color: 'blue' }}
-                />{`${actor.firstName} ${actor.lastName} rated ${piece.title}`}</>;
+                return (
+                    <>
+                        <FontAwesomeIcon
+                            icon={faStar}
+                            className="icons me-2"
+                            style={{ color: 'blue' }}
+                        />
+                        {`${actor.firstName} ${actor.lastName} rated ${piece.title}`}
+                    </>
+                )
             case 'comment':
-                return <><FontAwesomeIcon
-                    icon={faComment}
-                    className='icons me-2'
-                    style={{ color: 'blue' }}
-                />{`${actor.firstName} ${actor.lastName} commented on ${piece.title}`}</>;
+                return (
+                    <>
+                        <FontAwesomeIcon
+                            icon={faComment}
+                            className="icons me-2"
+                            style={{ color: 'blue' }}
+                        />
+                        {`${actor.firstName} ${actor.lastName} commented on ${piece.title}`}
+                    </>
+                )
             default:
-                return 'Unknown notification type';
+                return 'Unknown notification type'
         }
-    };
+    }
 
     return (
-        <Dropdown as={NavItem} className="m-1" onToggle={updateLastViewedTime} autoClose={true}>
+        <Dropdown
+            as={NavItem}
+            className="m-1"
+            onToggle={updateLastViewedTime}
+            autoClose={true}
+        >
             <Dropdown.Toggle className={styles.NavDropdownButton} size="lg">
                 <FontAwesomeIcon
                     icon={faBell}
-                    className='icons'
-                    style={{ color: hasNewNotifications ? 'yellow' : 'revert-layer' }}
+                    className="icons"
+                    style={{
+                        color: hasNewNotifications ? 'yellow' : 'revert-layer',
+                    }}
                 />
             </Dropdown.Toggle>
 
-            <Dropdown.Menu className={styles.NotificationsMenu} style={{
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                overflowX: 'hidden',
-                width: 'min-content'
-            }}>
+            <Dropdown.Menu
+                className={styles.NotificationsMenu}
+                style={{
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    overflowX: 'hidden',
+                    width: 'min-content',
+                }}
+            >
                 {notifications.length > 0 ? (
                     notifications.map((notification) => {
-                        const notificationCreated = new Date(notification.createdAt);
-                        const notificationUrl = notification.piece ? `/profile/${notification.recipient.id}/piece/${notification.piece.id}/` : `/profile/${notification.actor.id}/`
+                        const notificationCreated = new Date(
+                            notification.createdAt
+                        )
+                        const notificationUrl = notification.piece
+                            ? `/profile/${notification.recipient.id}/piece/${notification.piece.id}/`
+                            : `/profile/${notification.actor.id}/`
 
                         return (
                             <Dropdown.Item
@@ -96,11 +141,15 @@ const NotificationsDropdown = () => {
                                 className={styles.NotificationItem + ' p-3'}
                                 href={notificationUrl}
                                 style={{
-                                    color: notificationCreated < lastVisited ? 'grey' : 'black'
+                                    color:
+                                        notificationCreated < lastVisited
+                                            ? 'grey'
+                                            : 'black',
                                 }}
                             >
                                 {renderNotificationText(notification)}
-                            </Dropdown.Item>)
+                            </Dropdown.Item>
+                        )
                     })
                 ) : (
                     <Dropdown.Item className={styles.NotificationItem}>
@@ -109,7 +158,7 @@ const NotificationsDropdown = () => {
                 )}
             </Dropdown.Menu>
         </Dropdown>
-    );
-};
+    )
+}
 
-export default NotificationsDropdown;
+export default NotificationsDropdown

@@ -1,47 +1,47 @@
-import { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { useNavigate } from "react-router-dom";
+import { useContext } from 'react'
 import { useState } from 'react'
-import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { Card, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Alert, Button, Card } from 'react-bootstrap'
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Form from 'react-bootstrap/Form'
+import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 
 const Login = () => {
     const { logIn } = useContext(CurrentUserContext)
-    const navigate = useNavigate();
-    const [validated, setValidated] = useState(false);
-    const [errors, setErrors] = useState({});
+    const navigate = useNavigate()
+    const [validated, setValidated] = useState(false)
+    const [errors, setErrors] = useState({})
     const [loginData, setLoginData] = useState({
-        email: "",
-        password: ""
-    });
-    const { email, password } = loginData;
+        email: '',
+        password: '',
+    })
+    const { email, password } = loginData
 
     const handleChange = (event) => {
         setLoginData({
             ...loginData,
             [event.target.name]: event.target.value,
-        });
-    };
+        })
+    }
 
     const handleSubmit = async (event) => {
-        const form = event.currentTarget;
-        event.preventDefault();
+        const form = event.currentTarget
+        event.preventDefault()
         if (form.checkValidity()) {
             try {
-                await logIn({...loginData, username:loginData.email});
-                navigate('/');
+                await logIn({ ...loginData, username: loginData.email })
+                navigate('/')
             } catch (err) {
-                setErrors(err.response?.data);
+                setErrors(err.response?.data)
             }
         }
-        setValidated(true);
-    };
+        setValidated(true)
+    }
 
     return (
-        <Card className='container-sm col-md-6 mx-auto mt-5'>
+        <Card className="container-sm col-md-6 mx-auto mt-5">
             <h1 className="m-3">Login</h1>
             <Form
                 noValidate
@@ -98,7 +98,8 @@ const Login = () => {
                     </Alert>
                 ))}
             </Form>
-        </Card>)
-};
+        </Card>
+    )
+}
 
-export default Login;
+export default Login
