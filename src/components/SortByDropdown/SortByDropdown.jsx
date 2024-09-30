@@ -40,20 +40,20 @@ const SortByDropdown = ({ setParams }) => {
                     Piece Name Z-A
                 </Dropdown.Item>
                 <Dropdown.Item
-                    active={selection === 'rating'}
-                    eventKey="rating"
+                    active={selection === '-avg_rating'}
+                    eventKey="-avg_rating"
                 >
                     Highest Rated
                 </Dropdown.Item>
                 <Dropdown.Item
-                    active={selection === '-rating'}
-                    eventKey="-rating"
+                    active={selection === 'avg_rating'}
+                    eventKey="avg_rating"
                 >
                     Lowest Rated
                 </Dropdown.Item>
                 <Dropdown.Item
-                    active={selection === 'comments'}
-                    eventKey="comments"
+                    active={selection === '-comments'}
+                    eventKey="-comments"
                 >
                     Most Discussed
                 </Dropdown.Item>
