@@ -76,7 +76,7 @@ const Profile = () => {
                                     <Col xs={12}>
                                         <h4>{profile.firstName} {profile.lastName}</h4>
                                         <p>Stitcher Since: {profile.createdAt}</p>
-                                        <p>Creator of xx pieces</p>
+                                        <p>Creator of {profile.pieces} pieces</p>
                                     </Col>
                                 </Row>
                                 <Row>
