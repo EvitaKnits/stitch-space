@@ -31,7 +31,7 @@ const ArtTypeDropdown = ({ setParams }) => {
                 <Dropdown.Item active={selection === 'crochet'} eventKey="crochet">Crochet</Dropdown.Item>
                 <Dropdown.Item active={selection === 'embroidery'} eventKey="embroidery">Embroidery</Dropdown.Item>
                 <Dropdown.Item active={selection === 'weaving'} eventKey="weaving">Weaving</Dropdown.Item>
-                <Dropdown.Item active={selection === 'dyeing'} eventKey="Dyeing">Dyeing</Dropdown.Item>
+                <Dropdown.Item active={selection === 'dyeing'} eventKey="dyeing">Dyeing</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item active={selection === 'other'} eventKey="other">Other</Dropdown.Item>
             </Dropdown.Menu>

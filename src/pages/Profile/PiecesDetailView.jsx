@@ -101,7 +101,7 @@ const DetailView = () => {
             const fetchComments = async () => {
                 try {
                     const response = await axiosClient.post(`pieces/${pieceData.selectedPiece}/comments/`, {content:comment});
-                    setComments([...comments, response.data]);
+                    setComments([response.data, ...comments]);
                     setComment("");
                 } catch (err) {
                     console.log(err.response?.data);
