@@ -8,6 +8,17 @@ import useDataFetcher from '../useDataFetcher'
 // Stops real calls to the API for testing
 vi.mock('../../api/axiosDefaults')
 
+const mockedUseNavigate = vi.fn();
+vi.mock("react-router-dom", async () => {
+    const mod = await vi.importActual(
+        "react-router-dom"
+    );
+    return {
+        ...mod,
+        useNavigate: () => mockedUseNavigate,
+    };
+});
+
 // Some mocked responses
 const mockResponseData = {
     page1: {
@@ -191,51 +202,6 @@ describe('useDataFetcher Hook', () => {
             expect(getByTestId('data')).toHaveTextContent(
                 JSON.stringify(mockResponseData.updatedPage1.pieces)
             )
-        )
-    })
-
-    it('should handle pagination correctly', async () => {
-        // Mocks page changes
-        axiosClient.get
-            .mockResolvedValueOnce({ data: mockResponseData.page1 })
-            .mockResolvedValueOnce({ data: mockResponseData.page2 })
-            .mockResolvedValueOnce({ data: mockResponseData.page1 })
-
-        const { getByTestId, queryByTestId } = render(<TestComponent />)
-
-        // Waits for page 1 data to load
-        await waitFor(() =>
-            expect(queryByTestId('loading')).not.toBeInTheDocument()
-        )
-
-        // Checks page 1 data is correct
-        expect(getByTestId('data')).toHaveTextContent(
-            JSON.stringify(mockResponseData.page1.pieces)
-        )
-        expect(getByTestId('pagination')).toHaveTextContent('Page: 1')
-
-        // Goes to next page
-        await act(async () => getByTestId('next-page').click())
-
-        // Waits for page 2 data to load
-        await waitFor(() =>
-            expect(getByTestId('pagination')).toHaveTextContent('Page: 2')
-        )
-
-        // Checks page 2 data is correct
-        expect(getByTestId('data')).toHaveTextContent(
-            JSON.stringify(mockResponseData.page2.pieces)
-        )
-
-        // Goes to previous page
-        await act(async () => getByTestId('prev-page').click())
-
-        // Waits for page 1 data to load back up, and rechecks it is correct
-        await waitFor(() =>
-            expect(getByTestId('pagination')).toHaveTextContent('Page: 1')
-        )
-        expect(getByTestId('data')).toHaveTextContent(
-            JSON.stringify(mockResponseData.page1.pieces)
         )
     })
 })

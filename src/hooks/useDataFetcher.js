@@ -85,6 +85,7 @@ const fetchData = async (endpoint, params = {}) => {
         return response.data
     } catch (error) {
         console.log(`Error fetching data from ${endpoint}:`, error)
+        throw error
     }
 }
 
