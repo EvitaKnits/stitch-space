@@ -27,21 +27,23 @@ const useDataFetcher = (
             setLoading(true)
             setError(null)
             try {
-                const response = await fetchData(endpoint, { ...params })
-                // Maps data for reusability in other resources
-                const mappedData = dataMapper(response)
-                setData(mappedData)
+                if (endpoint) {
+                    const response = await fetchData(endpoint, { ...params })
+                    // Maps data for reusability in other resources
+                    const mappedData = dataMapper(response)
+                    setData(mappedData)
 
-                // Applies pagination where relevant
-                if (response.count) {
-                    setPagination({
-                        count: response.count,
-                        nextPage: response.nextPage,
-                        previousPage:
-                            response.nextPage === '3'
-                                ? '1'
-                                : response.previousPage,
-                    })
+                    // Applies pagination where relevant
+                    if (response.count) {
+                        setPagination({
+                            count: response.count,
+                            nextPage: response.nextPage,
+                            previousPage:
+                                response.nextPage === '3'
+                                    ? '1'
+                                    : response.previousPage,
+                        })
+                    }
                 }
             } catch (err) {
                 setError(err)

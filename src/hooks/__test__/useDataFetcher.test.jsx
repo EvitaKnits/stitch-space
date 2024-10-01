@@ -97,7 +97,7 @@ describe('useDataFetcher Hook', () => {
 
     // A test component that uses this hook
     const TestComponent = ({
-        endpoint,
+        endpoint = 'test/',
         initialParams = {},
         dataMapper = dataMapperFunc,
     }) => {

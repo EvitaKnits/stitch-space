@@ -14,7 +14,7 @@ const useSelectedProfile = () => {
     }, [])
 
     const { data, loading, error, setRefresh } = useDataFetcher(
-        `/profile/${profileId}`,
+        profileId?`/profile/${profileId}`:null,
         {},
         dataMapper
     )
