@@ -11,7 +11,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 import axiosClient from '../../api/axiosDefaults'
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
-import styles from './NotificationsDropdown.module.css'
+import styles from '../NavBar/NavBar.module.css'
 
 const NotificationsDropdown = () => {
     const { loading, currentUser } = useContext(CurrentUserContext)
@@ -68,7 +68,6 @@ const NotificationsDropdown = () => {
                         <FontAwesomeIcon
                             icon={faEye}
                             className="icons me-2"
-                            style={{ color: 'blue' }}
                         />
                         {`${actor.firstName} ${actor.lastName} started following you`}
                     </>
@@ -79,7 +78,6 @@ const NotificationsDropdown = () => {
                         <FontAwesomeIcon
                             icon={faStar}
                             className="icons me-2"
-                            style={{ color: 'blue' }}
                         />
                         {`${actor.firstName} ${actor.lastName} rated ${piece.title}`}
                     </>
@@ -90,7 +88,6 @@ const NotificationsDropdown = () => {
                         <FontAwesomeIcon
                             icon={faComment}
                             className="icons me-2"
-                            style={{ color: 'blue' }}
                         />
                         {`${actor.firstName} ${actor.lastName} commented on ${piece.title}`}
                     </>
@@ -117,15 +114,7 @@ const NotificationsDropdown = () => {
                 />
             </Dropdown.Toggle>
 
-            <Dropdown.Menu
-                className={styles.NotificationsMenu}
-                style={{
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    overflowX: 'hidden',
-                    width: 'min-content',
-                }}
-            >
+            <Dropdown.Menu className={styles.NotificationsMenu}>
                 {notifications.length > 0 ? (
                     notifications.map((notification) => {
                         const notificationCreated = new Date(

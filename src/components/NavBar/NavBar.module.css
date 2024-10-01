@@ -23,3 +23,16 @@
     background-color: var(--bs-secondary);
     color: black;
 }
+
+.NotificationsMenu {
+    max-height: 300px;
+    overflow-y: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    width: min-content;
+}
+
+a.NotificationItem {
+    border-bottom: 1px solid lightgray;
+}
