@@ -66,6 +66,16 @@ const Profile = () => {
         }
     }
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString(undefined, options);
+    };
+
+    const formattedDate = profile?.createdAt
+        ? formatDate(profile.createdAt)
+        : 'Unknown Date';
+
     return loading || !profile ? (
         ''
     ) : (
@@ -96,7 +106,7 @@ const Profile = () => {
                                             {profile.lastName}
                                         </h4>
                                         <p>
-                                            Stitcher Since: {profile.createdAt}
+                                            Stitcher Since {formattedDate}
                                         </p>
                                         <p>
                                             Creator of {profile.pieces} pieces

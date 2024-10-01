@@ -447,21 +447,25 @@ Issue: Registering a new user, doesn't assign their first name and last name cor
 
 ![Bug Four](documentation/bug4.png)
 
-Fix:
+Fix: This was a back end issue solved in the API repository as **bug one** for that repository. See the [README](https://github.com/EvitaKnits/stitch-space-API) for full details.
+
+![Bug Four Fixed](documentation/bug4fixed.png)
 
 ### Bug Five
 
 Issue: The 'Stitcher Since' timestamp was not showing a very user friendly date. (See image from bug four which also shows bug five's issue)
 
-Fix:
+Fix: I added a helper function to transform the timestamp to the format I desired, e.g instead of '2024-10-01T11:53:33.146351Z', it is now '1 October 2024'. (See image of fix from bug four which also shows this fix)
 
 ### Bug Six
 
 Issue: The Navigation Bar doesn't indicate which page you are currently on in any way. This needs changing to be less confusing.
 
-![Bug Six]()
+![Bug Six](documentation/bug6.png)
 
-Fix:
+Fix: I added the 'useLocation' hook from 'react-router-dom' and some conditional CSS formatting to make the page name bold when the user is on that page.
+
+![Bug Six Fixed](documentation/bug6fixed.png)
 
 ### Bug Seven
 

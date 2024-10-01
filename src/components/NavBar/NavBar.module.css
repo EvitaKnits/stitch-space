@@ -36,3 +36,7 @@
 a.NotificationItem {
     border-bottom: 1px solid lightgray;
 }
+
+.activeLink {
+    font-weight: bold;
+}
