@@ -19,9 +19,12 @@ const UserProvider = ({ children }) => {
         try {
             const { data } = await axiosClient.get('dj-rest-auth/user/')
             setCurrentUser(data)
-            setLoading(false)
+
         } catch (err) {
             console.error(err)
+        }
+        finally {
+            setLoading(false)
         }
     }
 
