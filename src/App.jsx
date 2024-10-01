@@ -50,7 +50,7 @@ function App() {
                                     element={<FollowingView />}
                                 />
                             </Route>
-                            <Route path="/register" element={<Register />} />
+                            <Route path="register" element={<Register />} />
                             {/* 404 route for unmatched paths */}
                             <Route path="*" element={<NotFound />} />
                         </Route>

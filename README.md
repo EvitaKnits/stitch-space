@@ -439,7 +439,7 @@ This is the button showing up as intended post-fix:
 
 Issue: Clicking on the 'Sign Up' link in the user dropdown found in the navigation bar, redirects to the 'Login' page.
 
-Fix:
+Fix: I changed all the 'href' links in the NavBar.jsx file to use 'Link' from react-router-dom.
 
 ### Bug Four
 

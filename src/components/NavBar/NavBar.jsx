@@ -5,7 +5,7 @@ import { NavItem, Stack } from 'react-bootstrap'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import NotificationsDropdown from '../NotificationsDropdown/NotificationsDropdown'
@@ -29,12 +29,12 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
                         {/* The Feed and Explore pages are only displayed to logged-in users */}
                         {currentUser && (
                             <>
-                                <Nav.Link href="/feed">Feed</Nav.Link>
-                                <Nav.Link href="/explore">Explore</Nav.Link>
+                                <Nav.Link as={Link} to="/feed">Feed</Nav.Link>
+                                <Nav.Link as={Link} to="/explore">Explore</Nav.Link>
                             </>
                         )}
                     </Nav>
@@ -53,7 +53,8 @@ const NavBar = () => {
                         {currentUser ? (
                             <>
                                 <Dropdown.Item
-                                    href={`/profile/${currentUser.pk}`}
+                                    as={Link}
+                                    to={`/profile/${currentUser.pk}`}
                                     className={styles.NavDropdownItem}
                                 >
                                     My Stitch Space
@@ -69,13 +70,15 @@ const NavBar = () => {
                         ) : (
                             <>
                                 <Dropdown.Item
-                                    href="/login"
+                                    as={Link}
+                                    to="/login"
                                     className={styles.NavDropdownItem}
                                 >
                                     Login
                                 </Dropdown.Item>
                                 <Dropdown.Item
-                                    href="/register"
+                                    as={Link}
+                                    to="/register"
                                     className={styles.NavDropdownItem}
                                 >
                                     Sign Up
