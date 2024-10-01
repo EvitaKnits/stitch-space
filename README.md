@@ -485,6 +485,14 @@ Issue: There is no upload date on the Piece Detail view below the type of craft 
 
 Fix:
 
+### Bug Ten
+
+Issue: The 'Stitch Space' title in the App header is not behaving as expected and puts the artist's name in there on every page once they've logged in, rather than only on their personal Stitch Space. 
+
+![Bug Ten](documentation/bug10.png)
+
+Fix: 
+
 ## 7. Set Up and Deployment
 
 ### React with Vite Set Up
