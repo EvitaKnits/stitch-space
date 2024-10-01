@@ -48,7 +48,49 @@ The goal of this site is to create a dedicated space for fibre artists to showca
 
 ## 2. Features
 
-[Fill in at the end with screenshots]
+### Existing Features
+
+- **Navigation Bar**: at the top of each page, the navigation bar provides all links required to access every part of the site. It is fully responsive and changes its contents depending on whether the user is signed in or not. 
+
+**Signed Out**
+![Signed Out Navigation Bar](documentation/navbarloggedout.png)
+
+**Signed In**
+![Signed In Navigation Bar](documentation/navbar.png)
+
+- **Home Page**: this page greets the user with a brief overview of what Stitch Space is about, provides an easy way to sign up and shows a small section of featured artists to give a preview of the art to prospective users.
+
+![Home Page]()
+
+- **Registration Page**: this is a simple and uncluttered page with a short form to fill in, in order to become a Stitch Space member.
+
+![Registration Page]()
+
+- **Feed Page**: this page shows the artwork of all the people you follow, in one convenient place.
+
+![Feed Page]()
+
+- **Explore Page**: this page allows you to explore all artwork on the site and find new artists to follow. There are different filtering options to allow you to easily locate the type of work you are interested in.
+
+![Explore Page]()
+
+- **Notifications Dropdown**: this dropdown is available in the navigation bar and is therefore found on every page across the site. It provides you with a quick view into the interactions relevant to you. If another user follows you, rates your piece or comments on your piece, it will be displayed here for you to view. Rows show in bold if they've not been seen previously and are more greyed out if they have already been viewed.
+
+![Notifications Dropdown](documentation/notificationsdropdown.png)
+
+- **My Stitch Space Page**: this serves as your personal artist portfolio. The side bar gives an overview of you and the main part of the page is dedicated to displaying your artworks. There is a mini-navigation bar at the top to allow users to view all your pieces or just the pieces of each craft at a time. 
+
+![My Stitch Space Page]()
+
+- **Followers/Following Sections**: the buttons in the profile side bar allow you to view the users following this artist, or the users this artist is following. 
+
+![Followers Section]()
+![Following Section]()
+
+- **Profile Editing Section**: it is possible to quickly and easily edit your profile details without leaving your 'My Stitch Space' page.
+
+![Profile Edit Section]()
+
 
 ## 3. Requirement Gathering and Planning
 
@@ -73,9 +115,10 @@ flowchart LR
     A[Navigate to \n Stitch Space] --> B[Enter details on \nRegistration form]
     B --> C[Click Register \n button]
     C --> D[Log in with email \n and password]
-    D --> E[Navigate to \n User Details page]
-    E --> F[Fill in extra \n optional details]
-    F --> G[Save]
+    D --> E[Navigate to \n My Stitch Space page]
+    E --> F[Click the Edit\n Profile button ]
+    F --> G[Edit details or \n add picture or bio]
+    G --> H[Save Changes]
 ```
 
 2. Create a Piece
@@ -83,7 +126,7 @@ flowchart LR
 ```mermaid
 flowchart LR
     A[Log In] --> B[Navigate to personal \n Stitch Space page]
-    B --> C[Click 'New \n Piece' button]
+    B --> C[Click 'Add a \nNew Piece' button]
     C --> D[Fill in New\n Piece form]
     D --> E[Click 'Create \n Piece' button]
 ```
@@ -94,9 +137,9 @@ flowchart LR
 flowchart TD
     A[Log In] --> B[Click 'Feed' in\n the navigation bar]
     A --> C[Click 'Explore' in \n the navigation bar]
-    A --> D[Click 'My Stitch Space' in the \n dropdown from the profile \n picture in the navigation bar]
+    A --> D[Click 'My Stitch Space' in the \n dropdown from the user \n icon in the navigation bar]
     B --> E[Click on any piece]
-    C --> F[Carry out a search with \n any parameters and filters]
+    C --> F[Carry out a search, optionally\n adding any filters]
     F --> E
     D --> G[Click on 'Following' or 'Followers' \n and click on a specific user]
     G --> E
@@ -108,7 +151,7 @@ flowchart TD
 ```mermaid
 flowchart LR
     A[Log In] --> B[Navigate to personal \n Stitch Space page \n via the profile picture in \n the navigation bar]
-    B --> C[Click on \n a piece]
+    B --> C[Click on a piece \nthen the 'Edit Piece' button]
     C --> D[Change details \n in Piece form]
     D --> E[Click 'Save \n Changes' button]
     C --> F[Click on 'Delete \n Piece' button]
@@ -124,7 +167,7 @@ flowchart TD
     A --> D[Click 'Explore' in the navigation bar]
     B --> E[Click on 'Followers' or 'Following' in the side bar]
     C --> F[Click on any piece then the artist's name]
-    D --> G[Carry out a search with \n any parameters and filters]
+    D --> G[Carry out a search search, optionally\n adding any filters]
     G --> F
     F --> E
 ```
@@ -155,7 +198,6 @@ Neither: Accessible without being logged in.
 | Login                                | Yes                | No                | N/A              |
 | Feed                                 | No                 | Yes               | Yes              |
 | Explore                              | No                 | Yes               | N/A              |
-| User Details                         | No                 | Yes               | Yes              |
 | Personal Stitch Space: default       | No                 | Yes               | No               |
 | Personal Stitch Space: add new piece | No                 | Yes               | Yes              |
 | Personal Stitch Space: piece detail  | No                 | Yes               | No               |
@@ -226,13 +268,9 @@ Piece Edit View:
 Followers/Following View:
 ![My Stitch Space Wireframe - followers/following](documentation/followers.png)
 
-**Development note:** the user level rating in the Profile side bar of this page was not implemented and has now been added to the future development list.
-
 #### User Details
 
 ![User Details Wireframe](documentation/userdetails.png)
-
-**Development note:** having this as a separate page felt redundant, so this was incorporated into the profile sidebar of the 'My Stitch Space' page. 'Art Types' at the user level was also dropped as this was not required for any functionality after all.
 
 #### Notifications
 
@@ -241,6 +279,22 @@ Followers/Following View:
 #### Sign Up
 
 ![Sign Up Wireframe](documentation/signup.png)
+
+#### Development Notes
+The wireframes were broadly stuck to during development, non-minor changes are listed below, with their reasoning: 
+
+- Home Page: 
+    - A sign up button was added to the 'About' section when the user was not logged in. This made it easier for new users to sign up right from the home page rather than having to navigate to the navigation bar.
+    - The 'User Details' item was removed from the user icon dropdown as this was not implemented as a separate page in the end (see why in the last part of this section below).
+
+- My Stitch Space: 
+    - The user level rating in the Profile side bar of this page was not implemented and has now been added to the future development list. This was not a required piece of functionality for the MVP of this site. 
+    - The mobile view was not implemented to have dropdown sections, as it was much cleaner to just stack the content and make it scrollable. 
+    - There is no upload for photos - instead, URLs of photos hosted elsewhere are used for the MVP of this site. The ability to upload photos directly has been added to the future development list.
+
+- User Details: 
+    - This page was removed completely, because all the edits to the user's information could easily and cleanly be done from the side bar itself, rather than having to navigate to a whole separate page
+    - Art Types' at the user level was also dropped as this was not required for any functionality after all.
 
 ### Colour Scheme
 
@@ -327,7 +381,76 @@ To ensure the front end of my program was accessible I used Lighthouse and recor
 
 ## 6. Bugs
 
-Here is the list of bugs mostly found towards the end of development when I encountered functionality not working as intended that I had previously thought did. I don't believe I have left any unresolved bugs.
+Here is a list showing a small selection of bugs found towards the end of development. This list is not exhaustive but is intended to give a sample of the types of things that were found and fixed. I don't believe I have left any unresolved bugs.
+
+### Bug One
+
+Issue: The background colour of the Notifications drop down button in the Navigation bar was the primary colour used for other buttons, but should match the beige background colour in this context, like the dropdown user button next to it. 
+
+![Bug One](documentation/bug1.png)
+
+Fix: I removed the separate NotificationsDropdown.module.css file and imported the file styling the user icon button (NavBar.module.css) so they would match, as they are both in the navigation bar. I moved the styling I wanted to keep for the notification items too. 
+
+![Bug One Fixed](documentation/navbar.png)
+
+### Bug Two
+
+Issue: The 'Sign Up' button that had previously shown up in the 'About' section of the home page when the user viewing the page was not signed in, disappeared at some point during development. 
+
+Fix: To reinstate this button
+
+This is the button showing up as intended post-fix:
+![Bug Two Fixed]()
+
+### Bug Three
+
+Issue: Clicking on the 'Sign Up' link in the user dropdown found in the navigation bar, redirects to the 'Login' page.
+
+Fix: 
+
+### Bug Four
+
+Issue: Registering a new user, doesn't assign their first name and last name correctly to the database, thus their Stitch Space is wrong.
+
+![Bug Four](documentation/bug4.png)
+
+Fix: 
+
+### Bug Five
+
+Issue: The 'Stitcher Since' timestamp was not showing a very user friendly date. (See image from bug four which also shows bug five's issue)
+
+Fix: 
+
+### Bug Six
+
+Issue: The Navigation Bar doesn't indicate which page you are currently on in any way. This needs changing to be less confusing.
+
+![Bug Six]()
+
+Fix: 
+
+### Bug Seven
+
+Issue: It is currently possible for a user to rate their own pieces
+
+Fix: 
+
+### Bug Eight
+
+Issue: The colour of the icons in the notification dropdown do not match the colour scheme and the rest of the icons on the site. 
+
+![Bug Eight](documentation/bug8.png)
+
+Fix: I found that I had accidentally left in some inline styling I added to these icons when I was first sketching out the notifications dropdown and wanted to make them more visible. I removed this and they followed the styling of the 'icons' class as expected. 
+
+![Bug Eight Fixed](documentation/notificationsdropdown.png)
+
+### Bug Nine
+
+Issue: There is no upload date on the Piece Detail view below the type of craft the piece is. 
+
+Fix: 
 
 ## 7. Set Up and Deployment
 
@@ -431,9 +554,13 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 
 -   Sprint Planning: Completing the API integration is a must have this sprint, so all 6 of these stories have been marked as such. The remaining stories have been added to this sprint and marked as should haves, as I am aiming to finish this project this sprint. This gives me 40% must haves and 60% should haves.
 -   Sprint Retrospective:
-    -   Achievements:
-    -   Progress:
-    -   Challenges:
+    -   Achievements: Completing all user stories. 
+    -   Progress: The bulk of the work was finished in this sprint, leaving just the final parts to polish off and some bugs to fix, followed by the write up in the READMEs for the front and back end repositories. 
+    -   Challenges: There was a steep learning curve here with the integration, so this took more time than anticipated.
+
+### Wrapping Up: 30/09 to 02/10
+
+These few days were dedicated to the final write up in this README as well as the README in the back end repository. This involved activities such as ensuring accuracy of information, details of testing and bugs and accessibility validation. 
 
 ## 9. Future Development
 
@@ -456,8 +583,14 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 -   Reference for using Vite instead of Create React App: https://www.freecodecamp.org/news/how-to-create-a-react-app-in-2024/
 -   This helped me figure out the mistake I made in the Vite setup where I put `express` in the wrong dependencies section: [Heroku troubleshooting docs](https://devcenter.heroku.com/articles/troubleshooting-node-deploys)
 -   The image on the 404 page is by [Noor Sethi on Unsplash](https://unsplash.com/@noorsethi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
--   I used images from [Lorem Picsum](https://picsum.photos/) during development to give me plenty of data to work with
+-   I used images from [Lorem Picsum](https://picsum.photos/) during development to give me plenty of data to work with, and for the example pieces in the system that are not the Featured Artist pieces on the Home Page carousel.
 -   I used [Masonic](https://github.com/jaredLunde/masonic) library to handle tiling of pieces in places such as the Feed and Explore pages.
+
+- The images on the Featured Artists carousel on the home page have been sourced from [Unsplash](https://unsplash.com/):
+    - Photo titled 'Pandemic Times' is by [Swati H. Das](https://unsplash.com/photos/pink-blue-and-yellow-wooden-musical-instrument-mHkeT419LGM)
+    - Photo titled 'Dark Florals' is by [Ksenia Yakovleva](https://unsplash.com/photos/a-close-up-of-a-embroidery-on-a-black-cloth-with-a-pair-of-scissors-GkwoMPCmwDs)
+    - Photo titled 'Renaissance Woman' is by [Olga Kalinina](https://unsplash.com/photos/a-close-up-of-a-embroidery-on-a-table-k2jyiW9z9yc)
+  
 
 I also used the documentation of all the elements included in this project:
 
