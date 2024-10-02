@@ -11,6 +11,7 @@ const FollowerCard = ({ profileId, fullName, imageUrl }) => {
                     width={50}
                     height={50}
                     className="me-3"
+                    alt='profile picture'
                 />
                 <div>
                     <Card.Title className="mb-0">

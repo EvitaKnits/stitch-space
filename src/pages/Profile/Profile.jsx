@@ -86,7 +86,7 @@ const Profile = () => {
                         <Row className="justify-content-center">
                             <Col xs={9} md={12}>
                                 <Ratio aspectRatio="1x1">
-                                    <Image src={profile.image} rounded />
+                                    <Image src={profile.image} rounded  alt='profile picture'/>
                                 </Ratio>
                             </Col>
                         </Row>
@@ -101,10 +101,10 @@ const Profile = () => {
                             <>
                                 <Row className="p-2">
                                     <Col xs={12}>
-                                        <h4>
+                                        <h2>
                                             {profile.firstName}{' '}
                                             {profile.lastName}
-                                        </h4>
+                                        </h2>
                                         <p>
                                             Stitcher Since {formattedDate}
                                         </p>

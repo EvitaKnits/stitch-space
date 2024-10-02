@@ -104,7 +104,7 @@ const NotificationsDropdown = () => {
             onToggle={updateLastViewedTime}
             autoClose={true}
         >
-            <Dropdown.Toggle className={styles.NavDropdownButton} size="lg">
+            <Dropdown.Toggle className={styles.NavDropdownButton} size="lg" aria-label='notification-dropdown'>
                 <FontAwesomeIcon
                     icon={faBell}
                     className="icons"

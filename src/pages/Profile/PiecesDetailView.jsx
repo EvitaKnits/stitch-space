@@ -221,6 +221,7 @@ const DetailView = () => {
                                 src={pieceData.piece.image}
                                 className="w-auto mx-auto"
                                 style={{ maxHeight: '75vh' }}
+                                alt="Image of the art piece"
                             />
                         </Row>
                         <Row className="my-2">

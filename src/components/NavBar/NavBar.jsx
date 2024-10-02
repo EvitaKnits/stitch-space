@@ -46,6 +46,7 @@ const NavBar = () => {
             <Nav className={`justify-content-end`}>
                 <Dropdown as={NavItem} className={`m-1`}>
                     <Dropdown.Toggle
+                        aria-label='user-dropdown'
                         className={styles.NavDropdownButton}
                         size="lg"
                     >

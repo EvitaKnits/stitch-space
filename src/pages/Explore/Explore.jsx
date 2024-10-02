@@ -12,10 +12,10 @@ const Explore = () => {
 
     return (
         <div className="p-3">
-            <h5>
+            <h3>
                 Search by piece or artist name, or leave blank and explore with
                 filters
-            </h5>
+            </h3>
             <Fade in={!loading}>
                 <Stack
                     direction="horizontal"

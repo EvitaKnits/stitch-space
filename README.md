@@ -8,6 +8,8 @@ This README focuses on the front-end components and functionality within this re
 
 To visit the deployed Stitch Space site [click here](https://stitch-space-f65c363b25bd.herokuapp.com/)
 
+![Home Page](documentation/readmeheader.png)
+
 ## Table of Contents
 
 1. [Purpose](#1-purpose)
@@ -321,7 +323,7 @@ This made up the bulk of the testing and was carried out continuously throughout
 
 My manual testing at the end covered:
 
--   Each user journey from end to end
+-   Each user journey from end to end - see [User Journeys](#user-journeys) for steps taken in each one.
 -   The level of access when logged out
 -   The level of access when logged in and whether the user could only access their own personal details and pieces of functionality intended only for them
 
@@ -353,9 +355,9 @@ Pixel references for each of the screen sizes:
 
 | Language   | Validation Method                                                             | Outcome |
 | ---------- | ----------------------------------------------------------------------------- | ------- |
-| HTML       | Via direct input on [W3C HTML Validator](https://validator.w3.org/)           |         |
-| CSS        | Via direct input on [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) |         |
-| JavaScript | [JS Hint](https://jshint.com/)                                                |         |
+| HTML       | Via direct input on [W3C HTML Validator](https://validator.w3.org/)           |  No errors |
+| CSS        | Via direct input on [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) |  No errors |
+| JavaScript | Via command line [ES Lint](https://eslint.org/)                               |  No errors |
 
 
 ### Accessibility
@@ -366,8 +368,17 @@ To ensure the front end of my program was accessible I used Lighthouse and recor
 
 | Page | Result |
 | ---- | ------ |
+| Home | ![Lighthouse: Home](documentation/lighthousehome.png) |
+| Login | ![Lighthouse: Login](documentation/lighthouselogin.png) |
+| Feed | ![Lighthouse: Feed](documentation/lighthousefeed.png) |
+| Explore | ![Lighthouse: Explore](documentation/lighthouseexplore.png) |
+| My Stitch Space | ![Lighthouse: Profile](documentation/lighthouseprofile.png) |
+| MSS: Piece Detail | ![Lighthouse: Piece](documentation/lighthousepiece.png) |
+| MSS: New Piece | ![Lighthouse: New Piece](documentation/lighthousenewpiece.png) |
+| MSS: Followers | ![Lighthouse: Followers](documentation/lighthousefollowers.png) |
+| MSS: Following | ![Lighthouse: Following](documentation/lighthousefollowing.png) |
 
-**Colour Contrast**
+Where there is less than 100% performance above (Feed, Explore, My Stitch Space), this is due to the 'Masonic' library I used for the 'Masonry Wall' component. I unfortunately did not realise that there is an accessibility issue in that library and now it is central to my project. This is a known issue logged in the repository's 'Issues' tab on [GitHub](https://github.com/jaredLunde/masonic/issues/133).
 
 ## 6. Bugs
 
@@ -636,6 +647,8 @@ These few days were dedicated to the final write up in this README as well as th
 -   The image on the 404 page is by [Noor Sethi on Unsplash](https://unsplash.com/@noorsethi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
 -   I used images from [Lorem Picsum](https://picsum.photos/) during development to give me plenty of data to work with, and for the example pieces in the system that are not the Featured Artist pieces on the Home Page carousel.
 -   I used [Masonic](https://github.com/jaredLunde/masonic) library to handle tiling of pieces in places such as the Feed and Explore pages.
+- I used [Prettier](https://prettier.io/) to format my code.
+- I used [ES Lint](https://eslint.org/) for code validation via the command line.
 
 -   The images on the Featured Artists carousel on the home page have been sourced from [Unsplash](https://unsplash.com/):
     -   Photo titled 'Pandemic Times' is by [Swati H. Das](https://unsplash.com/photos/pink-blue-and-yellow-wooden-musical-instrument-mHkeT419LGM)
