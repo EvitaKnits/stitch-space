@@ -14,7 +14,6 @@ To visit the deployed Stitch Space site [click here](https://stitch-space-f65c36
 2. [Features](#2-features)
 3. [Requirement Gathering and Planning](#3-requirement-gathering-and-planning)
     - [Brief Competitor Analysis and Target Demographic](#brief-competitor-analysis-and-target-demographic)
-    - [Epics and User Stories](#epics-and-user-stories)
     - [User Journeys](#user-journeys)
     - [User Permissions](#user-permissions)
     - [API Integration](#api-integration)
@@ -26,7 +25,6 @@ To visit the deployed Stitch Space site [click here](https://stitch-space-f65c36
     - [Icons](#icons)
 5. [Testing](#5-testing)
     - [Continuous Testing](#continuous-testing)
-    - [Automated Testing](#automated-testing)
     - [Manual Testing](#manual-testing)
     - [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness)
     - [Code Validation](#code-validation)
@@ -36,6 +34,7 @@ To visit the deployed Stitch Space site [click here](https://stitch-space-f65c36
     - [React with Vite Set Up](#react-with-vite-set-up)
     - [Deployment](#deployment)
 8. [Agile Methodology](#8-agile-methodology)
+    - [Epics and User Stories](#epics-and-user-stories)
     - [Sprint One](#sprint-one-0909-to-1509)
     - [Sprint Two](#sprint-two-1609-to-2209)
     - [Sprint Three](#sprint-three-2309-to-2909)
@@ -204,7 +203,7 @@ Neither: Accessible without being logged in.
 | Personal Stitch Space: followers     | No                 | Yes               | No               |
 | Notifications                        | No                 | Yes               | Yes              |
 
-Admins can access the Django admin panel.
+Admins can access the Django admin panel for the back-end API.
 
 ### API Integration
 
@@ -223,7 +222,7 @@ React Context will be used for simple state management.
 
 ### Data Validation
 
-Comprehensive data format specifications are available in the API repository's readme. This front-end ensures that only valid data is sent to the back end by performing field-level validation before submitting any requests.
+Comprehensive data format specifications are available in the API repository's README. This front-end ensures that only valid data is sent to the back end by performing field-level validation before submitting any requests.
 
 ### Error Messaging
 
@@ -316,10 +315,6 @@ I searched Font Awesome for an icon that could be used that aligns with the them
 
 Through a combination of automated testing written using Jest for JavaScript, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherence to coding standards and best practices, ultimately aiming for robust and maintainable code.
 
-### Automated Testing
-
-When I was sufficiently through my project to have a stable enough codebase, I added basic automated testing for the core functionality of the application, using React Testing Library.
-
 ### Manual Testing
 
 This made up the bulk of the testing and was carried out continuously throughout the build, ensuring each change had the intended result.
@@ -332,7 +327,7 @@ My manual testing at the end covered:
 
 ### Browser Compatibility and Screen Size Responsiveness
 
-I viewed the site on each of the three key screen sizes (mobile, tablet and computer), using devtools, on four of the most popular browsers. I also used the responsive setting to slide the width of the screen from narrow all the way through to wide to check the transition points.
+I viewed the site on each of the three key screen sizes (mobile, tablet and computer), using devtools, on three of the most popular browsers. 
 
 Pixel references for each of the screen sizes:
 
@@ -344,22 +339,15 @@ Pixel references for each of the screen sizes:
 
 | Browser | Screen Size       | Appearance | Responsiveness |
 | ------- | ----------------- | ---------- | -------------- |
-| Chrome  | Mobile            |            |                |
-|         | Tablet            |            |                |
-|         | Computer          |            |                |
-|         | Transition Points |            |                |
-| Firefox | Mobile            |            |                |
-|         | Tablet            |            |                |
-|         | Computer          |            |                |
-|         | Transition Points |            |                |
-| Safari  | Mobile            |            |                |
-|         | Tablet            |            |                |
-|         | Computer          |            |                |
-|         | Transition Points |            |                |
-| Edge    | Mobile            |            |                |
-|         | Tablet            |            |                |
-|         | Computer          |            |                |
-|         | Transition Points |            |                |
+| Chrome  | Mobile            | Good       |     Bug 11     |
+|         | Tablet            | Good       |     Good       |
+|         | Computer          | Good       |     Good       |
+| Firefox | Mobile            | Good       |     Bug 11     |
+|         | Tablet            | Good       |     Good       |
+|         | Computer          | Good       |     Good       |
+| Safari  | Mobile            | Good       |     Bug 11     |
+|         | Tablet            | Good       |     Good       |
+|         | Computer          | Good       |     Good       |
 
 ### Code Validation
 
@@ -368,7 +356,7 @@ Pixel references for each of the screen sizes:
 | HTML       | Via direct input on [W3C HTML Validator](https://validator.w3.org/)           |         |
 | CSS        | Via direct input on [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) |         |
 | JavaScript | [JS Hint](https://jshint.com/)                                                |         |
-| Python     | [CI Python Linter](https://pep8ci.herokuapp.com/)                             |         |
+
 
 ### Accessibility
 
@@ -383,7 +371,7 @@ To ensure the front end of my program was accessible I used Lighthouse and recor
 
 ## 6. Bugs
 
-Here is a list showing a small selection of bugs found towards the end of development. This list is not exhaustive but is intended to give a sample of the types of things that were found and fixed. I don't believe I have left any unresolved bugs.
+Here is a list showing a selection of bugs found towards the end of development. This list is not exhaustive but is intended to give a sample of the types of things that were found and fixed. I don't believe I have left any unresolved bugs.
 
 ### Bug One
 
@@ -504,6 +492,16 @@ Issue: The 'Stitch Space' title in the App header is not behaving as expected an
 Fix: I used the 'useLocation' hook from 'react-router-dom' again to determine where the user is in the site and whether the title should include their name or not. 
 
 ![Bug Ten Fixed](documentation/bug10fixed.png)
+
+### Bug Eleven
+
+Issue: The three buttons displayed above the image on the Piece Detail page get stuck together on mobile screens
+
+![Bug Eleven](documentation/bug11.png)
+
+Fix: I just added some bootstrap margin utilities - one of them adds a small margin on top on mobile view and the other makes sure this margin is removed for small screens and above. Thus, the buttons appear responsively for all screen sizes.
+
+![Bug Eleven Fixed](documentation/bug11fixed.png)
 
 ## 7. Set Up and Deployment
 

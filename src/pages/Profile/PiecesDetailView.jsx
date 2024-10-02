@@ -208,6 +208,7 @@ const DetailView = () => {
                                         <Button
                                             variant="danger"
                                             onClick={handleDeleteClick}
+                                            className="mt-2 mt-sm-0"
                                         >
                                             Delete Piece
                                         </Button>
