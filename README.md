@@ -2,9 +2,9 @@
 
 # Stitch Space: a fibre art portfolio social site
 
-This repository contains the front-end code for the Stitch Space website. The back-end API repository can be found [here](https://github.com/EvitaKnits/stitch-space-API). The front end is built using Vite, React, React-Bootstrap, JavaScript, and JSX, and is hosted on Heroku.
+This repository contains the frontend code for the Stitch Space website. The backend API repository can be found [here](https://github.com/EvitaKnits/stitch-space-API). The front end is built using Vite, React, React-Bootstrap, JavaScript, and JSX, and is hosted on Heroku.
 
-This README focuses on the front-end components and functionality within this repository. It also includes general information on the project, such as competitor analysis, development management using GitHub Projects, and the Agile methodology employed throughout the development process. For information regarding the back-end API, please refer to the README in the back-end repository.
+This README focuses on the frontend components and functionality within this repository. It also includes general information on the project, such as competitor analysis, development management using GitHub Projects, and the Agile methodology employed throughout the development process. For information regarding the backend API, please refer to the README in the backend repository.
 
 To visit the deployed Stitch Space site [click here](https://stitch-space-f65c363b25bd.herokuapp.com/)
 
@@ -18,6 +18,7 @@ To visit the deployed Stitch Space site [click here](https://stitch-space-f65c36
     - [Brief Competitor Analysis and Target Demographic](#brief-competitor-analysis-and-target-demographic)
     - [User Journeys](#user-journeys)
     - [User Permissions](#user-permissions)
+    - [React Components](#react-components)
     - [API Integration](#api-integration)
     - [Data Validation](#data-validation)
     - [Error Messaging](#error-messaging)
@@ -28,11 +29,13 @@ To visit the deployed Stitch Space site [click here](https://stitch-space-f65c36
 5. [Testing](#5-testing)
     - [Continuous Testing](#continuous-testing)
     - [Manual Testing](#manual-testing)
+    - [Functional Testing](#functional-testing)
     - [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness)
     - [Code Validation](#code-validation)
     - [Accessibility](#accessibility)
 6. [Bugs](#6-bugs)
 7. [Set Up and Deployment](#7-set-up-and-deployment)
+    - [Libraries](#libraries)
     - [React with Vite Set Up](#react-with-vite-set-up)
     - [Deployment](#deployment)
 8. [Agile Methodology](#8-agile-methodology)
@@ -81,11 +84,11 @@ The goal of this site is to create a dedicated space for fibre artists to showca
 
 ![Notifications Dropdown](documentation/notificationsdropdown.png)
 
--   **My Stitch Space Page**: this serves as your personal artist portfolio. The side bar gives an overview of you and the main part of the page is dedicated to displaying your artworks. There is a mini-navigation bar at the top to allow users to view all your pieces or just the pieces of each craft at a time.
+-   **My Stitch Space Page**: this serves as your personal artist portfolio. The sidebar gives an overview of you and the main part of the page is dedicated to displaying your artwork. There is a mini-navigation bar at the top to allow users to view all your pieces or just the pieces of each craft at a time.
 
 ![My Stitch Space Page](documentation/myss.png)
 
--   **Followers/Following Sections**: the buttons in the profile side bar allow you to view the users following this artist, or the users this artist is following.
+-   **Followers/Following Sections**: the buttons in the profile sidebar allow you to view the users following this artist, or the users this artist is following.
 
 ![Followers Section](documentation/myssfollowers.png)
 ![Following Section](documentation/myssfollowing.png)
@@ -98,13 +101,13 @@ The goal of this site is to create a dedicated space for fibre artists to showca
 
 ### Brief Competitor Analysis and Target Demographic
 
-When analyzing competitors in the realm of online portfolio platforms for artists, several notable options come to mind:
+When analysing competitors in the realm of online portfolio platforms for artists, several notable options come to mind:
 
 -   Instagram is a popular choice for artists looking to showcase their work due to its large user base and visual-centric approach. However, its broad focus across many content types means it lacks specific features tailored to fibre artists and their unique needs.
 -   Etsy provides a platform for selling handmade goods, including fibre arts, but it primarily focuses on e-commerce rather than creating a dedicated portfolio space where artists can purely showcase and engage with their work.
--   Behance and DeviantArt are also widely recognized in the art community for portfolio presentation, but their generalist approach encompasses all art forms, which can make it harder for fibre artists to find a targeted audience and community.
+-   Behance and DeviantArt are also widely recognised in the art community for portfolio presentation, but their generalist approach encompasses all art forms, which can make it harder for fibre artists to find a targeted audience and community.
 
-In this landscape, Stitch Space aims to carve out a unique niche by offering a dedicated platform specifically for fibre artists. It focuses on providing a community-driven environment where artists can not only showcase their portfolios but also interact with peers, gain inspiration, and receive feedback. The goal is to foster a specialized community that supports and celebrates the work of fibre artists, making Stitch Space an ideal platform for those looking to share their craft in a more targeted and supportive setting.
+In this landscape, Stitch Space aims to carve out a unique niche by offering a dedicated platform specifically for fibre artists. It focuses on providing a community-driven environment where artists can not only showcase their portfolios but also interact with peers, gain inspiration, and receive feedback. The goal is to foster a specialised community that supports and celebrates the work of fibre artists, making Stitch Space an ideal platform for those looking to share their craft in a more targeted and supportive setting.
 
 ### User Journeys
 
@@ -167,7 +170,7 @@ flowchart TD
     A[Log In] --> B[Navigate to personal Stitch Space page via the profile picture in the navigation bar]
     A --> C[Click 'Feed' in the navigation bar]
     A --> D[Click 'Explore' in the navigation bar]
-    B --> E[Click on 'Followers' or 'Following' in the side bar]
+    B --> E[Click on 'Followers' or 'Following' in the sidebar]
     C --> F[Click on any piece then the artist's name]
     D --> G[Carry out a search search, optionally adding any filters]
     G --> F
@@ -187,10 +190,10 @@ Before signing up, users can explore the home page to learn more about Stitch Sp
 
 Once signed in, users can access the full site, with restrictions ensuring they can only add, edit, or view their own personal details and artwork.
 
-The table below provides a detailed overview of page access based on authentication and authorization:
+The table below provides a detailed overview of page access based on authentication and authorisation:
 
 Authentication: Requires the user to be logged in.
-Authorization: Limits access to a user's own content.
+Authorisation: Limits access to a user's own content.
 Neither: Accessible without being logged in.
 
 | Page                                 | Access Logged Out? | Access Logged In? | Access Only Own? |
@@ -207,36 +210,54 @@ Neither: Accessible without being logged in.
 | Personal Stitch Space: followers     | No                 | Yes               | No               |
 | Notifications                        | No                 | Yes               | Yes              |
 
-Admins can access the Django admin panel for the back-end API.
+Admins can access the Django admin panel for the backend API.
+
+### React Components
+
+This project includes several reusable React components that are used across various parts of the application. They are documented below along with their purpose and main props: 
+
+| **Component**          | **Purpose**                                                                 | 
+|------------------------|-----------------------------------------------------------------------------|
+| `About`                | Displays information about the platform and shows a sign-up button if user is not logged in. |
+| `AppHeader`            | The main header of the application, displaying the app's title, profile name, and navigation. |
+| `ArtTypeDropdown`      | Dropdown that filters art pieces by type (e.g., knitting, crochet, embroidery). |
+| `Comment`              | Renders a comment with the user’s profile info, content, and timestamp. |
+| `FeaturedArtists`      | Displays a carousel of featured art pieces. |
+| `FollowerCard`         | Displays a follower's profile info with a link to their profile. |
+| `NavBar`               | Main navigation bar with links to various app sections, including profile and login/logout. |
+| `NotificationsDropdown`| Dropdown menu of user notifications (follows, ratings, comments). | 
+| `PieceCard`            | Renders an individual art piece, showing the title, image, and artist’s name. | 
+| `SearchBar`            | Search input to filter art pieces by name. |
+| `SortByDropdown`       | Dropdown to sort art pieces by various criteria (e.g., title, rating). | 
 
 ### API Integration
 
-The HTTP requests specifications have been defined in detail, in the back-end API README, [here](https://github.com/EvitaKnits/stitch-space-API). These formats will be used.
+The HTTP requests specifications have been defined in detail, in the backend API README, [here](https://github.com/EvitaKnits/stitch-space-API). These formats have been used.
 
 **Authentication Mechanism**
-JSON Web Tokens (JWTs) will be used for token-based authentication.
+JSON Web Tokens (JWTs) are used for token-based authentication.
 
 **Cross-Origin Resourcer Sharing (CORS)**
-CORS will be configured on the Django back-end to allow requests from this React front-end. This will be done using the `django-cors-headers` package which will handle those settings.
+CORS is configured on the Django backend to allow requests from this React frontend. This has been done using the `django-cors-headers` package which will handle those settings.
 
 **Data Fetching and State Management**
-Axios is used for making HTTP requests to the DJango REST API back-end.
+Axios is used for making HTTP requests to the DJango REST API backend.
 
 React Context and Hooks are used for simple state management.
 
 ### Data Validation
 
-Comprehensive data format specifications are available in the API repository's README. This front-end ensures that only valid data is sent to the back end by performing field-level validation before submitting any requests.
+Comprehensive data format specifications are available in the API repository's README. This frontend ensures that only valid data is sent to the back end by performing field-level validation before submitting any requests.
 
 ### Error Messaging
 
-The Django REST API back end will return meaningful HTTP status codes, enabling this React front end to display clear error messages to users, helping them identify and resolve issues. However, because the front end is defensively programmed to prevent scenarios that trigger 400, 404, or most other errors, only a few error messages will be necessary. The API-side error codes are documented to support potential direct API access or usage by different front ends.                                                                                         |
+The Django REST API back end will return meaningful HTTP status codes, enabling this React front end to display clear error messages to users, helping them identify and resolve issues. However, because the front end is defensively programmed to prevent scenarios that trigger 400, 404, or most other errors, only a few error messages were necessary. The API-side error codes are documented to support potential direct API access or usage by different front ends.                                                                                         |
 
 ## 4. User Interface Design
 
 ### Wireframes
 
-The wireframes were created using Balsamiq and they illustrate the core user interface and functionality of Stitch Space from a monitor and mobile device perspective. These visual guides serves as the blueprint for the structure and design of the application, ensuring a cohesive and intuitive user experience.
+The wireframes were created using Balsamiq and they illustrate the core user interface and functionality of Stitch Space from a monitor and mobile device perspective. These visual guides serve as the blueprint for the structure and design of the application, ensuring a cohesive and intuitive user experience.
 
 #### Home Page
 
@@ -287,12 +308,12 @@ The wireframes were broadly stuck to during development, non-minor changes are l
 
 -   My Stitch Space:
 
-    -   The user level rating in the Profile side bar of this page was not implemented and has now been added to the future development list. This was not a required piece of functionality for the MVP of this site.
+    -   The user level rating in the Profile sidebar of this page was not implemented and has now been added to the future development list. This was not a required piece of functionality for the MVP of this site.
     -   The mobile view was not implemented to have dropdown sections, as it was much cleaner to just stack the content and make it scrollable.
     -   There is no upload for photos - instead, URLs of photos hosted elsewhere are used for the MVP of this site. The ability to upload photos directly has been added to the future development list.
 
 -   User Details:
-    -   This page was removed completely, because all the edits to the user's information could easily and cleanly be done from the side bar itself, rather than having to navigate to a whole separate page
+    -   This page was removed completely, because all the edits to the user's information could easily and cleanly be done from the sidebar itself, rather than having to navigate to a whole separate page
     -   Art Types' at the user level was also dropped as this was not required for any functionality after all.
 
 ### Colour Scheme
@@ -311,17 +332,92 @@ I searched Font Awesome for an icon that could be used that aligns with the them
 
 ### Continuous Testing
 
-Through a combination of automated testing written using `vitest` for JavaScript, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherence to coding standards and best practices, ultimately aiming for robust and maintainable code.
+Through a combination of automated testing written using `vitest` for JavaScript, and manual testing from the frontend, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherence to coding standards and best practices, ultimately aiming for robust and maintainable code.
 
 ### Manual Testing
 
-This made up the bulk of the testing and was carried out continuously throughout the build, ensuring each change had the intended result.
+My manual testing covered:
 
-My manual testing at the end covered:
-
--   Each user journey from end to end - see [User Journeys](#user-journeys) for steps taken in each one.
+-   Each user journey from end to end - see [User Journeys section](#user-journeys).
 -   The level of access when logged out
 -   The level of access when logged in and whether the user could only access their own personal details and pieces of functionality intended only for them
+
+Below is a breakdown of the key areas: 
+
+1. **User Registration and Authentication**
+
+**Goal**: To verify that users can register, log in, and log out correctly.
+
+**Steps**:
+- Registered with valid credentials.
+- Tried to register with invalid credentials (e.g., password mismatch).
+- Logged in successfully with valid credentials.
+- Tried logging in with incorrect credentials to ensure error messages appeared.
+- Logged out and confirmed access to restricted pages was denied after logout.
+
+**Edge Cases**:
+- Tried to submit empty or incomplete forms, ensuring appropriate validation messages appeared.
+- Attempted to access restricted pages without logging in and verified redirection to the login page.
+- Tried to use a duplicate email for registration and ensured that the API prevented it with an appropriate error message.
+
+2. **Profile Management**
+
+**Goal**: To confirm that users can view and edit their profile correctly, including adding a profile image URL and updating personal details.
+
+**Steps**:
+- Logged in, navigated to "My Stitch Space", and edited profile details (name, biography, profile image URL).
+- Ensured the updated profile details were reflected immediately on the UI.
+
+**Edge Case**:
+- Left profile fields empty to test form validation.
+
+3. **Piece Creation, Editing, and Deletion**
+
+**Goal**: To test the full lifecycle of art piece management—creating, editing, and deleting a piece.
+
+**Steps**:
+- Created a new art piece by filling out all required fields and submitting the form.
+- Edited an existing piece, updating the title and art type.
+- Deleted a piece and confirmed it no longer appeared on the "My Stitch Space" page.
+
+**Edge Cases**:
+- Left mandatory fields (title, image URL) empty to check if the form prevented submission.
+- Checked that only the owner of a piece could edit or delete it, ensuring permission boundaries were respected.
+
+4. **Browsing and Interacting with Art Pieces**
+
+**Goal**: To ensure that users can browse, search, filter, and interact with art pieces (e.g., commenting, rating).
+
+**Steps**:
+- Used the search bar and filters on the Explore page to find specific art types.
+- Commented on a piece and verified that the comment appeared.
+- Rated a piece and ensured the rating updated correctly.
+
+**Edge Cases**:
+- Tried submitting an empty comment and verified that the form did not allow it.
+- Checked that users could not rate their own pieces by confirming the rating UI was hidden for the piece owner.
+
+5. **Feed and Notifications**
+
+**Goal**: To confirm that users can view their personalised feed and receive notifications of interactions (e.g., follows, comments, ratings).
+
+**Steps**:
+- Followed multiple users and verified that their latest pieces appeared in the feed.
+- Checked that notifications were marked as new until viewed, and then displayed as read.
+- Followed a user, rated their piece, and commented to generate notifications.
+
+**Edge Case**:
+- Ensured that notifications only appeared for relevant interactions (e.g., user was notified only when others commented or rated their pieces, not their own actions).
+
+This made up the bulk of the testing and was carried out continuously throughout the build, ensuring each change had the intended result.
+
+### Functional Testing
+
+Functional testing focused on ensuring that each component worked as intended and handled user interaction smoothly. This included testing functionality such as:
+
+**Navigation**: Verified that all links, including internal navigation, worked correctly (e.g., clicking on a profile, going to a piece's detail page).
+**Dropdowns**: Ensured that dropdowns (e.g., notifications, user menu, art type filter) functioned correctly and responded to clicks.
+**Search and Filtering**: Checked that search and filter inputs dynamically updated results and that the system performed as expected with both broad and narrow search terms.
 
 ### Browser Compatibility and Screen Size Responsiveness
 
@@ -346,6 +442,13 @@ Pixel references for each of the screen sizes:
 | Safari  | Mobile            | Good       |     Bug 11     |
 |         | Tablet            | Good       |     Good       |
 |         | Computer          | Good       |     Good       |
+
+**Goal**: To verify that the site is fully responsive across different screen sizes and that the UI adapts correctly on mobile devices.
+
+**Steps**:
+- Used dev tools to simulate mobile (iPhone SE), tablet (iPad Mini), and computer (1366px) views in Chrome, Firefox, and Safari.
+- Ensured that components e.g. the navigation bar, piece cards and comments page were usable and well-formatted on smaller screens.
+- Ensured that each page looked as intended on all screen sizes.
 
 ### Code Validation
 
@@ -394,7 +497,7 @@ Fix: I removed the separate NotificationsDropdown.module.css file and imported t
 
 Issue: The 'Sign Up' button that had previously shown up in the 'About' section of the home page when the user viewing the page was not signed in, disappeared at some point during development.
 
-Fix: I found that I was not handling the loading state properly in the context so the condition for the sign up button to appear was never met. I moved the setting of the loading state to a 'finally' clause at the end (see below), to ensure it would be set corectly and the button would appear in the right circumstances.
+Fix: I found that I was not handling the loading state properly in the context so the condition for the sign up button to appear was never met. I moved the setting of the loading state to a 'finally' clause at the end (see below), to ensure it would be set correctly and the button would appear in the right circumstances.
 
 **Sign up button**
 ```
@@ -512,6 +615,20 @@ Fix: I just added some bootstrap margin utilities - one of them adds a small mar
 
 ## 7. Set Up and Deployment
 
+### Libraries
+
+Several front end libraries were utilised during this project. Below I set out which ones, their purpose and my reasoning for using them. 
+
+| **Library**            | **Purpose**                                                                 | **Reasoning**                                                |
+|------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------|
+| **React** | A JavaScript library for building user interfaces. | React's component-based structure makes it easy to manage the dynamic UI in this project by keeping the code modular, reusable, and efficient when it comes to rendering and managing state.|
+| **React Router** | Enables routing and navigation in single-page applications. | Handles navigation and dynamic route management smoothly, making it easy to switch between pages like profiles, art pieces, and searches, while keeping the URL structure clean and organised. |
+| **React Bootstrap**  | A UI framework that provides pre-built responsive components.  | Speeds up UI development with ready-made, responsive components like forms, buttons, and modals. This keeps the app's design consistent and cuts down on the need for writing custom CSS. |
+| **Font Awesome** | A library of vector icons for use in the UI.  | Provides a wide range of customisable icons that enhance the visual appeal and user experience by providing clear, intuitive cues (like notification and profile icons), all without adding much overhead to the project. |
+| **Masonic** | A masonry grid layout library for React.  | This library renders only the visible items in a grid, which works well for displaying art pieces in a staggered, gallery-style layout. It helps keep the interface clean and organised, even with large collections of items. |
+| **Axios**  | A promise-based HTTP client for making requests to APIs. | Simplifies making asynchronous HTTP requests to the backend, including handling authentication tokens and error management. |
+
+
 ### React with Vite Set Up
 
 This is how I set up React with Vite.
@@ -566,7 +683,7 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 
 | Epic                | Stories                                    |
 | ------------------- | ------------------------------------------ |
-| User Management     | Connect placeholder front-end and back-end |
+| User Management     | Connect placeholder frontend and backend |
 |                     | User registration                          |
 |                     | User login and logout                      |
 |                     | Password reset                             |
@@ -590,10 +707,10 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 
 -   Sprint Planning: this involved taking the highest priority issues and assigning them to the first sprint. The highest priority story involves wiring up the front and back ends so may take up the whole sprint. This was the only one marked as must have. The next two were should haves and the final one a could have. This gave me a breakdown of 25% for must, 50% for should and 25% for could.
 -   Sprint Retrospective:
-    -   Achievements: Completing the thin slice and connecting the placeholder front-end and back-end.
+    -   Achievements: Completing the thin slice and connecting the placeholder frontend and backend.
     -   Progress: A stable, deployed base on which to develop the rest of the project.
     -   Challenges: There was less time than anticipated to work on my project and the thin slice proved more difficult to complete too. The Cross-Origin Resource Sharing (CORS) element needed specific configuration that took a while to figure out for example.
-    -   Action Next Sprint: The goal for next sprint is to get the basic page structure created with dummy data, to provide a basis from which to develop the back-end further in future sprints.
+    -   Action Next Sprint: The goal for next sprint is to get the basic page structure created with dummy data, to provide a basis from which to develop the backend further in future sprints.
 
 ### Sprint Two: 16/09 to 22/09
 
@@ -604,7 +721,7 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
     -   Achievements: Completing such a large amount of work in one sprint.
     -   Progress: Created all of the front end pages and created all the models, views and endpoints for the API.
     -   Challenges: Switching between the front and back ends was difficult at times, as different languages and mindsets were required. Also, knowing how to break up the stories in this type of project. I cancelled a couple of existing user stories, and added 6 more to cover the creation and API integration of each model. I then worked on 6 stories at once, incrementally adding to each of them. This doesn't feel optimal.
-    -   Action Next Sprint: The goal for the third sprint is to finish the whole project. I managed to set aside a lot of time for these two sprints to aim to finish by the end of September. This will involve integration of the front-end and the API, then the implementation of the final small pieces of functionality such as receiving notifications.
+    -   Action Next Sprint: The goal for the third sprint is to finish the whole project. I managed to set aside a lot of time for these two sprints to aim to finish by the end of September. This will involve integration of the frontend and the API, then the implementation of the final small pieces of functionality such as receiving notifications.
 
 ### Sprint Three: 23/09 to 29/09
 
