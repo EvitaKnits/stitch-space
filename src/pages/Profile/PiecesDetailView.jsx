@@ -162,6 +162,18 @@ const DetailView = () => {
     if (pieceData.loading) {
         return ''
     }
+    const formatDateTime = (dateString) => {
+        const date = new Date(dateString)
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+        const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true }
+        const formattedDate = date.toLocaleDateString(undefined, dateOptions)
+        const formattedTime = date.toLocaleTimeString(undefined, timeOptions)
+        return `${formattedTime} | ${formattedDate}`
+    }
+
+    const formattedDateTime = pieceData.piece?.createdAt
+        ? formatDateTime(pieceData.piece.createdAt)
+        : 'Unknown Date and Time'
 
     return (
         <>
@@ -216,8 +228,8 @@ const DetailView = () => {
                             </Col>
                             <Col className="text-sm-end" xs={12} sm={6}>
                                 <Container>
-                                    {/* User's Rating */}
-                                    {currentUser && (
+                                    {/* User's Rating (only if not the owner of this piece) */}
+                                    {!isOwner && currentUser && (
                                         <Row>
                                             <strong>Your Rating:</strong>
                                             <Rating
@@ -252,7 +264,7 @@ const DetailView = () => {
                         </Row>
                         <Row className="text-sm-start">
                             <p>{pieceData.piece.artType}</p>
-                            <p>{pieceData.piece.createdDate}</p>
+                            <p>{formattedDateTime}</p>
                         </Row>
                     </Container>
                     <div>

@@ -1,7 +1,7 @@
 import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Fade, Stack } from 'react-bootstrap'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 import useSelectedProfile from '../../hooks/useSelectedProfile'
 import NavBar from '../NavBar/NavBar'
@@ -9,9 +9,14 @@ import styles from './AppHeader.module.css'
 
 const AppHeader = () => {
     const { profile, loading } = useSelectedProfile()
+    const location = useLocation()
 
+    // Check if the current path is under '/profile'
+    const isProfilePage = location.pathname.startsWith('/profile')
+
+    // Conditionally set the title if on profile-related routes
     const title =
-        !loading && profile ? (
+        !loading && profile && isProfilePage ? (
             <h1 className="">
                 {`${profile.firstName || ''}${profile.lastName ? ' ' + profile.lastName : ''}`}
                 <span className="d-none d-sm-inline">&apos;s</span>

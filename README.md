@@ -469,9 +469,13 @@ Fix: I added the 'useLocation' hook from 'react-router-dom' and some conditional
 
 ### Bug Seven
 
-Issue: It is currently possible for a user to rate their own pieces
+Issue: It is currently possible for a user to rate their own pieces.
 
-Fix:
+![Bug Seven](documentation/bug7.png)
+
+Fix: I added a check that only displays the rating element if the user is **not** the owner of the piece. This means the owner of the piece doesn't have access to the field to rate their own piece.
+
+![Bug Seven Fixed](documentation/bug7fixed.png)
 
 ### Bug Eight
 
@@ -485,9 +489,11 @@ Fix: I found that I had accidentally left in some inline styling I added to thes
 
 ### Bug Nine
 
-Issue: There is no upload date on the Piece Detail view below the type of craft the piece is.
+Issue: There is no upload date on the Piece Detail view below the type of craft the piece is. See bug 7 screenshots, as this issue is present there.
 
-Fix:
+Fix: This was just a typo. I had put 'createdDate' and not 'createdAt' which is the actual name of the field in the API response. I also applied the formatting I used in bug 5 to make the timestamp more user friendly.
+
+![Bug Nine Fixed](documentation/bug9fixed.png)
 
 ### Bug Ten
 
@@ -495,7 +501,9 @@ Issue: The 'Stitch Space' title in the App header is not behaving as expected an
 
 ![Bug Ten](documentation/bug10.png)
 
-Fix: 
+Fix: I used the 'useLocation' hook from 'react-router-dom' again to determine where the user is in the site and whether the title should include their name or not. 
+
+![Bug Ten Fixed](documentation/bug10fixed.png)
 
 ## 7. Set Up and Deployment
 
