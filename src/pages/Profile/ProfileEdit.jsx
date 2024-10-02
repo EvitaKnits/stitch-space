@@ -4,6 +4,7 @@ import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap'
 import axiosClient from '../../api/axiosDefaults'
 
 const ProfileEdit = ({ profile, onCancel, onEdit }) => {
+    const [errors, setErrors] = useState({})
     const [formData, setFormData] = useState({
         firstName: profile.firstName || '',
         lastName: profile.lastName || '',
@@ -25,13 +26,15 @@ const ProfileEdit = ({ profile, onCancel, onEdit }) => {
 
         const editProfile = async () => {
             try {
-                await axiosClient.patch(`profile/${profile.id}/`, {
+                const response = await axiosClient.patch(`profile/${profile.id}/`, {
                     ...formData,
                 })
                 // Close the edit view
+                console.debug(response)
                 onEdit()
             } catch (err) {
                 console.log(err.response?.data)
+                setErrors(err.response?.data)
             }
         }
         editProfile()
@@ -71,10 +74,14 @@ const ProfileEdit = ({ profile, onCancel, onEdit }) => {
                 <Form.Control
                     type="email"
                     name="email"
+                    isInvalid={!!errors.username}
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email Address"
                 />
+                <Form.Control.Feedback type="invalid">
+                        {errors.username && 'It is not possible to change your email address to this value, as this email address is already taken. Please enter a different email address'}
+                    </Form.Control.Feedback>
             </FloatingLabel>
             <FloatingLabel
                 controlId="formBiography"

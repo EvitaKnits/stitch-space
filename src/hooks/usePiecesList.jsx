@@ -13,6 +13,7 @@ const usePiecesList = (intitialParams = {}) => {
     const {
         data,
         loading,
+        error,
         params,
         setParams,
         pagination,
@@ -23,6 +24,7 @@ const usePiecesList = (intitialParams = {}) => {
     return {
         pieces: data,
         loading,
+        error,
         params,
         setParams,
         pagination,

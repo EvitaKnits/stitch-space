@@ -53,7 +53,6 @@ const Register = () => {
         <Card className="container-sm col-md-6 mx-auto mt-5">
             <h1 className="m-3">Sign Up</h1>
             <Form
-                noValidate
                 validated={validated}
                 onSubmit={handleSubmit}
                 className="d-flex flex-column text-start gap-3"
@@ -96,13 +95,13 @@ const Register = () => {
                         required
                         type="email"
                         placeholder="name@example.com"
-                        isInvalid={!!errors.email}
+                        isInvalid={!!errors.username}
                         name="email"
                         value={email}
                         onChange={handleChange}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {errors.email || 'Must be a valid e-mail'}
+                        {errors.username && 'A user with this email address already exists. Please log in if you already have an account, or enter a different email address to create a new user.'}
                     </Form.Control.Feedback>
                 </FloatingLabel>
 

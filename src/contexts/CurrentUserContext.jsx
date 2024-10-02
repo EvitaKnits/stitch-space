@@ -30,14 +30,11 @@ const UserProvider = ({ children }) => {
 
     // Handles login
     const logIn = async (logInData) => {
-        try {
-            const { data } = await axios.post('/dj-rest-auth/login/', logInData)
-            setCurrentUser(data.user)
-            setLoading(false)
-            navigate('/')
-        } catch (err) {
-            return err
-        }
+        const { data } = await axios.post('/dj-rest-auth/login/', logInData)
+        setCurrentUser(data.user)
+        setLoading(false)
+        navigate('/')
+
     }
 
     const logOut = async () => {

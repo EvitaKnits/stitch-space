@@ -14,6 +14,7 @@ const useFollowingList = (profileId, initialParams = {}) => {
     const {
         data,
         loading,
+        error,
         params,
         setParams,
         pagination,
@@ -28,6 +29,7 @@ const useFollowingList = (profileId, initialParams = {}) => {
     return {
         followers: data,
         loading,
+        error,
         params,
         setParams,
         pagination,

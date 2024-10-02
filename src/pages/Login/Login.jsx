@@ -44,7 +44,6 @@ const Login = () => {
         <Card className="container-sm col-md-6 mx-auto mt-5">
             <h1 className="m-3">Login</h1>
             <Form
-                noValidate
                 validated={validated}
                 onSubmit={handleSubmit}
                 className="d-flex flex-column text-start gap-3"
@@ -61,7 +60,7 @@ const Login = () => {
                         onChange={handleChange}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {errors.email || 'Must be a valid e-mail'}
+                        {errors.email}
                     </Form.Control.Feedback>
                 </FloatingLabel>
 

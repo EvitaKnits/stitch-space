@@ -12,7 +12,7 @@ const useSelectedPiece = () => {
     const dataMapper = useCallback((responseData) => {
         return responseData
     }, [])
-    const { data, loading, setRefresh } = useDataFetcher(
+    const { data, loading, setRefresh, error, } = useDataFetcher(
         `/pieces/${pieceId}`,
         {},
         dataMapper
@@ -31,6 +31,7 @@ const useSelectedPiece = () => {
         isAuthUserPiece,
         piece: data,
         loading,
+        error,
         setRefresh,
     }
 }

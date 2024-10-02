@@ -52,6 +52,7 @@ const PiecesEdit = ({ piece, onCancel, onEdit }) => {
                                 value={formData.title}
                                 onChange={handleChange}
                                 placeholder="Title"
+                                required
                             />
                         </FloatingLabel>
                     </Col>
