@@ -56,6 +56,7 @@ const DetailView = () => {
         ratePiece()
     }
 
+    // If the user submits the edit form, change the view
     const handleEdit = () => {
         pieceData.setRefresh(true)
         setEditMode(false)
@@ -111,14 +112,17 @@ const DetailView = () => {
         }
     }
 
+    // Opens up the 'Edit' view
     const handleEditClick = () => {
         setEditMode(true)
     }
 
+    // If the user cancels their edits without making changes, close the view
     const handleEditCancel = () => {
         setEditMode(false)
     }
 
+    // Comment form submission
     const handleSubmit = (e) => {
         e.preventDefault()
         try {
@@ -128,7 +132,9 @@ const DetailView = () => {
                         `pieces/${pieceData.selectedPiece}/comments/`,
                         { content: comment }
                     )
+                    // Add comment to the top of the list
                     setComments([response.data, ...comments])
+                    // Clear the textarea
                     setComment('')
                 } catch (err) {
                     console.log(err.response?.data)
@@ -151,6 +157,8 @@ const DetailView = () => {
         pieceData.piece &&
         currentUser.pk === pieceData.piece.profile.id
 
+        // If a URl gets entered manually for a profile that doesn't match the
+        // profile associated with the piece, show an error
     if (
         !pieceData.loading &&
         !loading &&

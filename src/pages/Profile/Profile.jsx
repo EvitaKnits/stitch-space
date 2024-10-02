@@ -27,6 +27,7 @@ const Profile = () => {
         setEditMode(false)
     }
 
+    // Determine the follow button state
     useEffect(() => {
         const checkIfFollowing = async () => {
             try {

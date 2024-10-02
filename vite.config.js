@@ -8,9 +8,5 @@ export default defineConfig({
         environment: 'jsdom',
         setupFiles: './src/setupTests.js',
         globals: true,
-        env: {
-            // This variable prevents tests using development data
-            VITE_TEST_VAR: true,
-        },
     },
 })

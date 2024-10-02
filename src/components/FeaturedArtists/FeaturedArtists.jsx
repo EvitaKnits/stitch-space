@@ -11,7 +11,6 @@ const FeaturedArtists = () => {
         featured: true,
     })
 
-
     const handleSelect = (selectedIndex) => {
         setIndex(selectedIndex)
     }

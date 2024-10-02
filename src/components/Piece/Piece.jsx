@@ -1,12 +1,10 @@
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Masonry } from 'masonic'
-import { Fragment } from 'react'
-import { Badge, Button, Card, Carousel, Image, Stack } from 'react-bootstrap'
+import { Badge, Button, Card, Stack } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-import styles from './Piece.module.css'
-
+// Basic view of an individual piece
 export const PieceCard = ({
     id,
     title,
@@ -74,6 +72,7 @@ export const MasonryWall = ({
     )
 }
 
+// Wrapper for the Masonic library to render the Piece cards
 const MasonryTile = ({ data }) => {
     const navigate = useNavigate()
 
@@ -97,32 +96,7 @@ const MasonryTile = ({ data }) => {
     }
 }
 
-export const PieceCarouselItem = ({
-    id,
-    title,
-    image,
-    profile,
-    firstName,
-    lastName,
-    artType,
-    caption,
-}) => {
-    return (
-        <Fragment>
-            <a href={`/profile/${profile}/pieces/${id}`}>
-                <Image src={image} fluid text={caption} />
-            </a>
-            <Carousel.Caption className={styles.CarouselCaption}>
-                <h3>
-                    {firstName} {lastName} - {title} - {artType}
-                </h3>
-            </Carousel.Caption>
-        </Fragment>
-    )
-}
-
-PieceCarouselItem.displayName = 'PieceCarouselItem'
-
+// A structured class for a consistent object structure
 export default class Piece {
     constructor({
         id = 0,
@@ -174,6 +148,7 @@ export default class Piece {
         this.caption = `"${title}" by ${firstName} ${lastName} (${artType})`
     }
 
+    // Helper function for mapping API responses to Piece objects
     static fromJSON(value) {
         return new Piece({
             id: value.id,

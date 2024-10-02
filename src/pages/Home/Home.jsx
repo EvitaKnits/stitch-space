@@ -13,6 +13,7 @@ const Home = () => {
             craftsmanship found in contemporary embroidery. Each work highlights
             unique techniques and perspectives, demonstrating how this
             traditional art form continues to evolve and inspire.</p>
+            {/* Carousel */}
             <FeaturedArtists />
         </Fragment>
     )

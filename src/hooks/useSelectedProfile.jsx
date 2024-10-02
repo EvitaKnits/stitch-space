@@ -19,6 +19,7 @@ const useSelectedProfile = () => {
         dataMapper
     )
 
+    // Determines if the logged in user has selected their own piece
     const checkIsAuthUser = useCallback(() => {
         if (!userContext.loading && userContext.currentUser) {
             return profileId === userContext.currentUser.pk.toString()

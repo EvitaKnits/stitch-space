@@ -33,10 +33,12 @@ const Register = () => {
         event.preventDefault()
         if (form.checkValidity()) {
             try {
+                // Register using the email entered as the username
                 await axiosClient.post('/dj-rest-auth/registration/', {
                     ...signUpData,
                     username: signUpData.email,
                 })
+                // Attempt to log the user in immediately after registering
                 await logIn({
                     password: signUpData.password1,
                     username: signUpData.email,

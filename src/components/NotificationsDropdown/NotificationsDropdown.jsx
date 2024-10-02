@@ -17,18 +17,19 @@ const NotificationsDropdown = () => {
     const { loading, currentUser } = useContext(CurrentUserContext)
     const [notifications, setNotifications] = useState([])
     const [lastVisited, setlastVisited] = useState(null)
-    const hasNewNotifications = false
 
+    // Fetch notifications once the profile has loaded
     useEffect(() => {
         if (!loading && currentUser) {
             try {
-                const fetchComments = async () => {
+                const fetchNotifications = async () => {
                     try {
                         const response = await axiosClient.get(
                             `profile/${currentUser.pk}/notifications/`,
                             { params: { page_size: 200 } }
                         )
                         setNotifications(response.data?.results || [])
+                        // Get the last visited date from the first entry in the response data
                         if (lastVisited === null)
                             setlastVisited(
                                 new Date(
@@ -39,7 +40,7 @@ const NotificationsDropdown = () => {
                         console.log(err.response?.data)
                     }
                 }
-                fetchComments()
+                fetchNotifications()
             } catch (error) {
                 // Handle errors gracefully
                 console.error('Error fetching comments (placeholder):', error)
@@ -51,6 +52,7 @@ const NotificationsDropdown = () => {
         const updateProfile = async () => {
             try {
                 await axiosClient.patch(`profile/${currentUser.pk}/`, {
+                    // Use Date format that matches Django's expected format
                     lastVisitedNotifications: new Date().toISOString(),
                 })
             } catch (err) {
@@ -61,6 +63,7 @@ const NotificationsDropdown = () => {
     }
 
     const renderNotificationText = ({ interactionType, actor, piece }) => {
+        // Maps the type of interaction to specific text and icon
         switch (interactionType) {
             case 'follow':
                 return (
@@ -108,9 +111,6 @@ const NotificationsDropdown = () => {
                 <FontAwesomeIcon
                     icon={faBell}
                     className="icons"
-                    style={{
-                        color: hasNewNotifications ? 'yellow' : 'revert-layer',
-                    }}
                 />
             </Dropdown.Toggle>
 
@@ -120,6 +120,7 @@ const NotificationsDropdown = () => {
                         const notificationCreated = new Date(
                             notification.createdAt
                         )
+                        // Link to the relevant profile or piece
                         const notificationUrl = notification.piece
                             ? `/profile/${notification.recipient.id}/piece/${notification.piece.id}/`
                             : `/profile/${notification.actor.id}/`
@@ -129,6 +130,7 @@ const NotificationsDropdown = () => {
                                 key={notification.id}
                                 className={styles.NotificationItem + ' p-3'}
                                 href={notificationUrl}
+                                // Differentiate between read and unread notifications
                                 style={{
                                     color:
                                         notificationCreated < lastVisited

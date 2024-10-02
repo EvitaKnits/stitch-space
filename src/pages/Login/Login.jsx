@@ -30,7 +30,9 @@ const Login = () => {
         const form = event.currentTarget
         event.preventDefault()
         if (form.checkValidity()) {
+            // Uses HTML5 validation
             try {
+                // Use the 'email' field as the username as we're overwriting it at registration
                 await logIn({ ...loginData, username: loginData.email })
                 navigate('/')
             } catch (err) {

@@ -28,6 +28,7 @@ function App() {
                             <Route path="feed" element={<Feed />} />
                             <Route path="explore" element={<Explore />} />
                             <Route path="login" element={<Login />} />
+                            {/* The Profile route wraps everything specific to a Profile or "Stitch Space" */}
                             <Route
                                 path="profile/:profileId"
                                 element={<Profile />}

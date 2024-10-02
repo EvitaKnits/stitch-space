@@ -37,6 +37,7 @@ const UserProvider = ({ children }) => {
 
     }
 
+    // Handles logout
     const logOut = async () => {
         try {
             await axios.post('/dj-rest-auth/logout/')

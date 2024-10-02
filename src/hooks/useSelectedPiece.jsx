@@ -18,6 +18,7 @@ const useSelectedPiece = () => {
         dataMapper
     )
 
+    // Determines if the logged in user has selected their own piece
     useEffect(() => {
         if (!loading && data && currentUser) {
             if (currentUser.id === data.id.toString()) {

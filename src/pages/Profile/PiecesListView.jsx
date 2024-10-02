@@ -13,6 +13,7 @@ const ListView = () => {
         profile__owner__id: profileId,
     })
 
+    // Adjust the parameters in the request based on the selected filters
     const handleArtTypeSelect = (eventKey) => {
         setParams((prevData) => {
             const newData = { ...prevData }

@@ -54,9 +54,11 @@ The goal of this site is to create a dedicated space for fibre artists to showca
 -   **Navigation Bar**: at the top of each page, the navigation bar provides all links required to access every part of the site. It is fully responsive and changes its contents depending on whether the user is signed in or not.
 
 **Signed Out**
+
 ![Signed Out Navigation Bar](documentation/navbarloggedout.png)
 
 **Signed In**
+
 ![Signed In Navigation Bar](documentation/navbar.png)
 
 -   **Home Page**: this page greets the user with a brief overview of what Stitch Space is about, provides an easy way to sign up and shows a small section of featured artists to give a preview of the art to prospective users.
@@ -69,11 +71,11 @@ The goal of this site is to create a dedicated space for fibre artists to showca
 
 -   **Feed Page**: this page shows the artwork of all the people you follow, in one convenient place.
 
-![Feed Page]()
+![Feed Page](documentation/thefeed.png)
 
 -   **Explore Page**: this page allows you to explore all artwork on the site and find new artists to follow. There are different filtering options to allow you to easily locate the type of work you are interested in.
 
-![Explore Page]()
+![Explore Page](documentation/explorepage.png)
 
 -   **Notifications Dropdown**: this dropdown is available in the navigation bar and is therefore found on every page across the site. It provides you with a quick view into the interactions relevant to you. If another user follows you, rates your piece or comments on your piece, it will be displayed here for you to view. Rows show in bold if they've not been seen previously and are more greyed out if they have already been viewed.
 
@@ -112,12 +114,12 @@ These are the core user journeys, it is not an exhaustive list of all possible u
 
 ```mermaid
 flowchart LR
-    A[Navigate to \n Stitch Space] --> B[Enter details on \nRegistration form]
-    B --> C[Click Register \n button]
-    C --> D[Log in with email \n and password]
-    D --> E[Navigate to \n My Stitch Space page]
-    E --> F[Click the Edit\n Profile button ]
-    F --> G[Edit details or \n add picture or bio]
+    A[Navigate to Stitch Space] --> B[Enter details on Registration form]
+    B --> C[Click Register button]
+    C --> D[Log in with email and password]
+    D --> E[Navigate to My Stitch Space page]
+    E --> F[Click the Edit Profile button ]
+    F --> G[Edit details or add picture or bio]
     G --> H[Save Changes]
 ```
 
@@ -125,23 +127,23 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[Log In] --> B[Navigate to personal \n Stitch Space page]
-    B --> C[Click 'Add a \nNew Piece' button]
-    C --> D[Fill in New\n Piece form]
-    D --> E[Click 'Create \n Piece' button]
+    A[Log In] --> B[Navigate to personal Stitch Space page]
+    B --> C[Click 'Add a New Piece' button]
+    C --> D[Fill in New Piece form]
+    D --> E[Click 'Create Piece' button]
 ```
 
 3. Browse and Interact with Pieces
 
 ```mermaid
 flowchart TD
-    A[Log In] --> B[Click 'Feed' in\n the navigation bar]
-    A --> C[Click 'Explore' in \n the navigation bar]
-    A --> D[Click 'My Stitch Space' in the \n dropdown from the user \n icon in the navigation bar]
+    A[Log In] --> B[Click 'Feed' in the navigation bar]
+    A --> C[Click 'Explore' in the navigation bar]
+    A --> D[Click 'My Stitch Space' in the dropdown from the user icon in the navigation bar]
     B --> E[Click on any piece]
-    C --> F[Carry out a search, optionally\n adding any filters]
+    C --> F[Carry out a search, optionally adding any filters]
     F --> E
-    D --> G[Click on 'Following' or 'Followers' \n and click on a specific user]
+    D --> G[Click on 'Following' or 'Followers' and click on a specific user]
     G --> E
     E --> H[Comment on the piece or rate it, if not your own]
 ```
@@ -150,24 +152,24 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    A[Log In] --> B[Navigate to personal \n Stitch Space page \n via the profile picture in \n the navigation bar]
-    B --> C[Click on a piece \nthen the 'Edit Piece' button]
-    C --> D[Change details \n in Piece form]
-    D --> E[Click 'Save \n Changes' button]
-    C --> F[Click on 'Delete \n Piece' button]
-    F --> G[Confirm deletion \n on modal]
+    A[Log In] --> B[Navigate to personal Stitch Space page via the profile picture in the navigation bar]
+    B --> C[Click on a piece then the 'Edit Piece' button]
+    C --> D[Change details in Piece form]
+    D --> E[Click 'Save Changes' button]
+    C --> F[Click on 'Delete Piece' button]
+    F --> G[Confirm deletion on modal]
 ```
 
 5. View Followers or Following
 
 ```mermaid
 flowchart TD
-    A[Log In] --> B[Navigate to personal \n Stitch Space page \n via the profile picture in \n the navigation bar]
-    A --> C[Click 'Feed' in \n the navigation bar]
+    A[Log In] --> B[Navigate to personal Stitch Space page via the profile picture in the navigation bar]
+    A --> C[Click 'Feed' in the navigation bar]
     A --> D[Click 'Explore' in the navigation bar]
     B --> E[Click on 'Followers' or 'Following' in the side bar]
     C --> F[Click on any piece then the artist's name]
-    D --> G[Carry out a search search, optionally\n adding any filters]
+    D --> G[Carry out a search search, optionally adding any filters]
     G --> F
     F --> E
 ```
@@ -218,9 +220,9 @@ JSON Web Tokens (JWTs) will be used for token-based authentication.
 CORS will be configured on the Django back-end to allow requests from this React front-end. This will be done using the `django-cors-headers` package which will handle those settings.
 
 **Data Fetching and State Management**
-Axios will be used for making HTTP requests to the DJango REST API back-end.
+Axios is used for making HTTP requests to the DJango REST API back-end.
 
-React Context will be used for simple state management.
+React Context and Hooks are used for simple state management.
 
 ### Data Validation
 
@@ -228,13 +230,7 @@ Comprehensive data format specifications are available in the API repository's R
 
 ### Error Messaging
 
-The Django REST API back end will return meaningful HTTP status codes, enabling this React front end to display clear error messages to users, helping them identify and resolve issues. However, because the front end is defensively programmed to prevent scenarios that trigger 400, 404, or most other errors, only a few error messages will be necessary. The API-side error codes are documented to support potential direct API access or usage by different front ends. From this front end, only the following error messages are required:
-
-| Scenario                                    | HTTP Status Code                                      | Error Message                                                                                                                                         |
-| ------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Add a new user                              | 409 Conflict                                          | A user with this email address already exists. Please log in if you already have an account, or enter a different email address to create a new user. |
-| Edit user details                           | 409 Conflict                                          | It is not possible to change your email address to this value, as this email address is already taken. Please enter a different email address         |
-| All scenarios where there is a server error | 500 Internal Server Error and 503 Service Unavailable | A technical issue occurred, please try again later.                                                                                                   |
+The Django REST API back end will return meaningful HTTP status codes, enabling this React front end to display clear error messages to users, helping them identify and resolve issues. However, because the front end is defensively programmed to prevent scenarios that trigger 400, 404, or most other errors, only a few error messages will be necessary. The API-side error codes are documented to support potential direct API access or usage by different front ends.                                                                                         |
 
 ## 4. User Interface Design
 
@@ -315,7 +311,7 @@ I searched Font Awesome for an icon that could be used that aligns with the them
 
 ### Continuous Testing
 
-Through a combination of automated testing written using Jest for JavaScript, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherence to coding standards and best practices, ultimately aiming for robust and maintainable code.
+Through a combination of automated testing written using `vitest` for JavaScript, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherence to coding standards and best practices, ultimately aiming for robust and maintainable code.
 
 ### Manual Testing
 
