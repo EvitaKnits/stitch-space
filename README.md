@@ -79,16 +79,16 @@ The goal of this site is to create a dedicated space for fibre artists to showca
 
 -   **My Stitch Space Page**: this serves as your personal artist portfolio. The side bar gives an overview of you and the main part of the page is dedicated to displaying your artworks. There is a mini-navigation bar at the top to allow users to view all your pieces or just the pieces of each craft at a time.
 
-![My Stitch Space Page]()
+![My Stitch Space Page](documentation/myss.png)
 
 -   **Followers/Following Sections**: the buttons in the profile side bar allow you to view the users following this artist, or the users this artist is following.
 
-![Followers Section]()
-![Following Section]()
+![Followers Section](documentation/myssfollowers.png)
+![Following Section](documentation/myssfollowing.png)
 
 -   **Profile Editing Section**: it is possible to quickly and easily edit your profile details without leaving your 'My Stitch Space' page.
 
-![Profile Edit Section]()
+![Profile Edit Section](documentation/myssedit.png)
 
 ## 3. Requirement Gathering and Planning
 
